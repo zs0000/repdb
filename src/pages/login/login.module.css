@@ -1,0 +1,18 @@
+.container {
+    @apply flex flex-col items-center justify-center h-full min-h-screen w-full bg-gray-50;
+}
+
+.form {
+    @apply py-8 px-32 bg-white rounded-lg shadow-lg flex flex-row;
+}
+
+.input {
+    @apply bg-gray-100 px-2 py-2 hover:transition-colors hover:bg-white hover:shadow duration-200 focus:outline-blue-50;
+}
+
+.buttonbox{
+    @apply flex flex-row justify-center items-center;
+}
+.button {
+    @apply bg-blue-500 text-white px-4 py-2 rounded-lg rounded-l-none hover:bg-blue-600 hover:shadow duration-200;
+}

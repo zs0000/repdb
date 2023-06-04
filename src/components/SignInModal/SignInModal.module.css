@@ -1,0 +1,14 @@
+.container {
+    @apply w-full h-full ;
+}
+
+.input{
+    @apply px-2 py-1 focus:outline-0 focus:shadow hover:shadow hover:bg-white border;
+}
+.inputcontainer{
+    @apply  rounded-r flex flex-row w-[90%];
+}
+
+.button {
+    @apply bg-blue-500 text-white rounded-r px-1 ;
+}

@@ -1,0 +1,27 @@
+.container{
+    @apply h-[48px] bg-slate-100 w-full flex items-center justify-between px-4;
+}
+
+.leftcontainer{
+   
+    width: 33.333333%;
+}
+.middlecontainer{
+    @apply md:w-[33.333%] ;
+}
+.rightcontainer{
+    @apply flex flex-row justify-evenly h-full md:w-[33.333%] w-[50%];
+
+}
+
+.signincontainer{
+    @apply flex flex-row w-[50%] h-full items-center ;
+}
+
+.svg{
+    @apply  hover:transform hover:scale-125 duration-200 hover:cursor-pointer hover:bg-white hover:rounded-full;
+}
+
+.signinopen{
+    @apply w-full flex flex-row items-center;
+}

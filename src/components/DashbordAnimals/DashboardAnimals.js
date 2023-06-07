@@ -2,20 +2,22 @@ import s from "./DashboardAnimals.module.css"
 import { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
+import AnimalCard from "../AnimalCard/AnimalCard";
+import AnimalFormModal from "../AnimalFormModal/AnimalFormModal";
 
-const DashboardAnimals = () => {
+const DashboardAnimals = ({session}) => {
   const [animals, setAnimals] = useState([]);
-
+  const [isDragActive, setDragActive] = useState(false);
   // Fetch initial data on component mount
- 
+ console.log(session)
 
   const onDrop = (acceptedFiles) => {
     acceptedFiles.forEach((file) => {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('upload_preset', 'YOUR_CLOUDINARY_UPLOAD_PRESET'); // replace with your upload preset
+      formData.append('upload_preset', 'YOUR_CLOUDINARY_UPLOAD_PRESET'); 
 
-      // replace 'your-cloud-name' with your cloud name
+      
       axios.post('https://api.cloudinary.com/v1_1/your-cloud-name/image/upload', formData)
         .then((response) => {
           const data = response.data;
@@ -26,17 +28,26 @@ const DashboardAnimals = () => {
     });
   };
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    onDragEnter: () => setDragActive(true),
+    onDragLeave: () => setDragActive(false),
+    onDropAccepted: () => setDragActive(false),
+    onDropRejected: () => setDragActive(false),
+  });
 
   return (
-    <div {...getRootProps()}>
+    <div {...getRootProps()} className={`p-6 border-2 border-dashed ${isDragActive ? 'border-blue-500 bg-blue-100' : 'border-gray-300 bg-white'}`}>
       <input {...getInputProps()} />
-      <p>Drag and drop some files here, or click to select files</p>
-      <ul>
-        {animals.map((animal, index) => (
-          <li key={index}>{animal}</li>
-        ))}
+      <p className='text-center text-gray-500'>Drag and drop some files here, or click to select files</p>
+      <ul className='grid lg:grid-cols-3 grid-cols-2 gap-1'>
+        <AnimalCard onClick={(e)=>{e.stopPropagation()
+        console.log("I was clicked")}}/>
+        <AnimalCard onClick={(e)=>{e.stopPropagation()}} />
+        <AnimalCard onClick={(e)=>{e.stopPropagation()}}/>
+        <AnimalCard onClick={(e)=>{e.stopPropagation()}}/>
       </ul>
+      <AnimalFormModal onClick={(e)=>{e.stopPropagation()}} session={session}/>
     </div>
   );
 };

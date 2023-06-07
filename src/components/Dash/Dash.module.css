@@ -1,3 +1,7 @@
 .container{
-    @apply w-full h-full min-h-screen flex flex-col items-center;
+    @apply w-full md:w-[90%] lg:w-[65%] xl:w-[50%] h-full min-h-screen flex flex-col items-center bg-white ;
+}
+
+.animalscontainer{
+    @apply w-full h-full flex flex-row flex-wrap justify-evenly items-center;
 }

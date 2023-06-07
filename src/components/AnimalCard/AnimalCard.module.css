@@ -1,0 +1,9 @@
+.container{
+    @apply w-[100%] border rounded-lg ;
+}
+.infocontainer{
+    @apply px-2 pt-1;
+}
+.imagecontainer{
+    @apply w-full h-[200px] rounded-t-lg;
+}

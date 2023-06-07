@@ -3,7 +3,7 @@ import s from "./Navbar.module.css"
 import SignInModal from "../SignInModal/SignInModal"
 import { useRef, useState } from "react";
 
-export default function Navbar() {
+export default function Navbar({session}) {
     const [isOpen, setIsOpen] = useState(false);
     const signInRef = useRef(null);
     const handleSignInOpen = () => {
@@ -27,7 +27,9 @@ export default function Navbar() {
 
         </div>
         <div className={s.rightcontainer}>
-            <div className={s.signincontainer}>
+            {session ? <div className={s.signedincontainer}>
+              <Link href="/dashboard">Dashboard</Link>
+            </div> : <div className={s.signincontainer}>
             {isOpen === false ? <button className={s.button} onClick={()=> setIsOpen(true)}>Sign in</button> : <div className={s.signinopen}><svg
       xmlns="http://www.w3.org/2000/svg"
       width="18"
@@ -44,9 +46,9 @@ export default function Navbar() {
         clipRule="evenodd"
       ></path>
     </svg><SignInModal onClick={handleSignInOpen} /></div>}
-            </div>
-            
-                {isOpen === false ? <button className={s.button} onClick={()=> setIsOpen(true)}>Sign up</button> : <></>}
+            </div>}
+            {}
+                {isOpen === false ? <button className={session ? "hidden":s.button} onClick={()=> setIsOpen(true)}>Sign up</button> : <></>}
       
         </div>
     </div>

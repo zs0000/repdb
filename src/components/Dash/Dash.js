@@ -1,7 +1,7 @@
 import s from "./Dash.module.css"
 import Account from '../Account/Account'
 import DashboardAnimals from "../DashbordAnimals/DashboardAnimals"
-export default function Dash({key, session}) {
+export default function Dash( {session}) {
   console.log(session)
  
   return (
@@ -10,7 +10,7 @@ export default function Dash({key, session}) {
         {session.user.role}
       </div>
       <div className={s.animalscontainer}>
-        <DashboardAnimals/>
+        <DashboardAnimals session={session}/>
       </div>
    
     </div>

@@ -35,7 +35,9 @@ const DashboardAnimals = ({session}) => {
     onDropAccepted: () => setDragActive(false),
     onDropRejected: () => setDragActive(false),
   });
-
+  if(!session){
+  return <></>
+  }
   return (
     <div {...getRootProps()} className={`p-6 border-2 border-dashed ${isDragActive ? 'border-blue-500 bg-blue-100' : 'border-gray-300 bg-white'}`}>
       <input {...getInputProps()} />
@@ -47,7 +49,7 @@ const DashboardAnimals = ({session}) => {
         <AnimalCard onClick={(e)=>{e.stopPropagation()}}/>
         <AnimalCard onClick={(e)=>{e.stopPropagation()}}/>
       </ul>
-      <AnimalFormModal onClick={(e)=>{e.stopPropagation()}} session={session}/>
+      
     </div>
   );
 };

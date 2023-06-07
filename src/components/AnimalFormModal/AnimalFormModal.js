@@ -4,33 +4,34 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import Image from 'next/image'
 import {BsCameraFill} from "react-icons/bs"
+import { supabase } from '@/lib/supabaseClient';
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#__next')
 
-const AnimalFormModal = (props, session) => {
+const AnimalFormModal = ({session}) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [animalName, setAnimalName] = useState('default');
   const [animalType, setAnimalType] = useState('');
+  const [animalGender, setAnimalGender] = useState('unknown');
   const [imageSelected, setImageSelected] = useState("");
   const [postingImage, setPostingImage] = useState("none");
   const [imageUrl, setImageUrl] = useState(null);
   const router = useRouter()
-  console.log({session})
-  
+
+  console.log(session)
 
   const current = new Date();
 
-  const [listingData, setListingData] = useReducer(
-      (data, partialData) => ({
-          ...data,
-          ...partialData
-      }),
-      {listing_condition:"", listing_category:"", listing_local_pickup:false,listing_title:"", listing_description:"", listing_price:"", listing_image_url:""}
-      )
+  
   let inputs={
     animal_name:animalName,
     animal_type:animalType,  
-    animal_added_by_user_id:session.session.user.id,
+    animal_added_by_user_id:session,
+    animal_owned_by_user_id:session,
+    animal_photo_url:imageUrl,
+    animal_gender:animalGender,
+    created_at:current,
+
 
   }
  
@@ -65,23 +66,23 @@ const AnimalFormModal = (props, session) => {
     setIsOpen(false);
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault()
+    try {
+      const {data,error} = await supabase.from('animals').insert([inputs])
+      console.log(data)
+      if(error){
+        console.log(error)
+      }
+      closeModal()
 
-    const formData = new FormData();
-    formData.append('animalName', animalName);
-    formData.append('animalType', animalType);
-
-    axios.post('/api/add-animal', formData)
-      .then((response) => {
-        console.log(response);
-        closeModal();
-      })
-      .catch((err) => console.error(err));
-  }
+    } catch (err) {
+      console.error(err.message)
+    }
+}
 
   return (
-    <div onClick={props.onClick}>
+    <div >
       <button onClick={openModal}>Open Modal</button>
       <Modal
         isOpen={modalIsOpen}
@@ -94,12 +95,12 @@ const AnimalFormModal = (props, session) => {
           <div className='w-full flex flex-row justify-evenly'>
           <label className="block mb-2 w-[50%] mx-1">
             Animal Name:
-            <input className="block w-full mt-1 bg-gray-100 rounded px-1 py-1 hover:bg-gray-50 focus:bg-white border-white border transition-colors duration-200 hover:border-gray-200 focus:outline-0" type="text" value={animalName} onChange={e => setAnimalName(e.target.value)} required />
+            <input className="block w-full mt-1 bg-gray-100 rounded px-1 py-1 hover:bg-gray-50 focus:bg-white border-white border transition-colors duration-200 hover:border-gray-200 focus:outline-0" type="text" value={animalName} onChange={(e) => setAnimalName(e.target.value)} required />
           </label>
 
           <label className="block mb-2 w-[50%] mx-1">
             Animal Type:
-            <select className="block w-full mt-1 hover:cursor-pointer  bg-gray-100 rounded px-1 py-1 hover:bg-gray-50 focus:bg-white border-white border transition-colors duration-200 hover:border-gray-200 focus:outline-0" value={animalType} onChange={e => setAnimalType(e.target.value)} required>
+            <select className="block w-full mt-1 hover:cursor-pointer  bg-gray-100 rounded px-1 py-1 hover:bg-gray-50 focus:bg-white border-white border transition-colors duration-200 hover:border-gray-200 focus:outline-0" value={animalType} onChange={(e) => setAnimalType(e.target.value)} required>
               <option value="Crested Gecko">Crested Gecko</option>
               <option value="Ball Python">Ball Python</option>
             </select>
@@ -149,7 +150,7 @@ const AnimalFormModal = (props, session) => {
 
                     />
                 </div>
-          <button type="submit" className="block w-full mt-4 p-2 text-white bg-blue-500 rounded">Submit</button>
+          <button type="submit" className="block w-full mt-4 p-2 text-white bg-blue-500 rounded" onClick={handleSubmit}>Submit</button>
         </form>
       </Modal>
     </div>

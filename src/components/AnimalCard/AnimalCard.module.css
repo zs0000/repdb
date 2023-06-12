@@ -1,9 +1,42 @@
+
 .container{
-    @apply w-[100%] border rounded-lg ;
+    @apply flex flex-col justify-start items-center w-full md:w-[30%] h-[300px] border rounded-lg bg-white shadow-lg transition-all duration-200 ease-in-out hover:scale-105 hover:cursor-pointer hover:shadow;
+    
+}
+.imagecontainer {
+    width: 100%;
+    height: 80%;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.imageWrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.photo {
+ 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 .infocontainer{
-    @apply px-2 pt-1;
+    @apply px-2 pt-2;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
-.imagecontainer{
-    @apply w-full h-[200px] rounded-t-lg;
+.name {
+    @apply text-lg font-semibold text-gray-800;
+}
+.gender {
+    @apply text-sm font-light text-gray-600;
+}
+.pairingconatiner {
+    @apply mt-2 text-xs font-light text-gray-400;
 }

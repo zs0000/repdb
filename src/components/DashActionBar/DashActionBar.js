@@ -6,7 +6,7 @@ export default function DashActionBar() {
     <div className={s.container}>
         <div className={s.actionscontainer}>
             <div className={s.actioncontainer}>
-                <AnimalFormModal
+                <AnimalFormModal/>
             </div>
         </div>
     </div>

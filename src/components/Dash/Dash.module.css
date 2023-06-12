@@ -5,3 +5,15 @@
 .animalscontainer{
     @apply w-full h-full flex flex-row flex-wrap justify-evenly items-center;
 }
+
+.topcontainer{
+    @apply w-full h-[80px] flex flex-col items-center justify-center;
+}
+
+.actionscontainer{
+    @apply w-full border-b justify-evenly mx-2;
+}
+
+.actioncontainer{
+    @apply flex flex-col items-center justify-center;
+}

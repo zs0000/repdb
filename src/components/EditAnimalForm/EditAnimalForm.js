@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -9,7 +9,8 @@ import { useQueryClient } from '@tanstack/react-query';
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#__next')
 
-const AnimalFormModal = ({session}) => {
+const EditAnimalForm = ({session, animal, testState, setTestState}) => {
+  console.log(animal)
   const [modalIsOpen, setIsOpen] = useState(false);
   const [animalName, setAnimalName] = useState('');
   const [animalType, setAnimalType] = useState('');
@@ -18,7 +19,12 @@ const AnimalFormModal = ({session}) => {
   const [postingImage, setPostingImage] = useState("none");
   const [imageUrl, setImageUrl] = useState(null);
   
- 
+  useEffect(() => {
+    if (testState) {
+      openModal();
+    }
+  }, [testState]);
+
 
   const router = useRouter()
 
@@ -73,8 +79,9 @@ const AnimalFormModal = ({session}) => {
     setImageSelected('')
     setPostingImage("none")
     setImageUrl(null)
+    setTestState(false)
     setIsOpen(false);
-    
+  
   }
 
   async function handleSubmit(e) {
@@ -99,27 +106,30 @@ const AnimalFormModal = ({session}) => {
       console.error(err.message)
     }
 }
-
+if(!animal){
+  return <>error</>
+}
   return (
-    <div >
-      <button onClick={openModal}>Open Modal</button>
+    <div onClick={e=>e.stopPropagation()} >
+     
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Animal Form"
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded shadow-lg h-90% md:w-[50%] w-[80%]"
         overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+       
       >
         <form className='flex flex-col items-center' onSubmit={handleSubmit}>
           <div className='w-full flex flex-row justify-evenly'>
           <label className="block mb-2 w-[50%] mx-1">
             Animal Name:
-            <input className="block w-full mt-1 bg-gray-100 rounded px-1 py-1 hover:bg-gray-50 focus:bg-white border-white border transition-colors duration-200 hover:border-gray-200 focus:outline-0" type="text" value={animalName} onChange={(e) => setAnimalName(e.target.value)} required />
+            <input className="block w-full mt-1 bg-gray-100 rounded px-1 py-1 hover:bg-gray-50 focus:bg-white border-white border transition-colors duration-200 hover:border-gray-200 focus:outline-0" type="text" value={animal.animal_name} onChange={(e) => setAnimalName(e.target.value)} required />
           </label>
 
           <label className="block mb-2 w-[50%] mx-1">
             Animal Type:
-            <select className="block w-full mt-1 hover:cursor-pointer  bg-gray-100 rounded px-1 py-1 hover:bg-gray-50 focus:bg-white border-white border transition-colors duration-200 hover:border-gray-200 focus:outline-0" onChange={(e) => setAnimalType(e.target.value)} required>
+            <select className="block w-full mt-1 hover:cursor-pointer  bg-gray-100 rounded px-1 py-1 hover:bg-gray-50 focus:bg-white border-white border transition-colors duration-200 hover:border-gray-200 focus:outline-0" onChange={(e) => setAnimalType(e.target.value)} value={animal.animal_type} required>
             <option  selected disabled hidden>Choose reptile</option>
               <option value="Crested Gecko">Crested Gecko</option>
               <option value="Ball Python">Ball Python</option>
@@ -128,7 +138,7 @@ const AnimalFormModal = ({session}) => {
           </div>
           <div className=" w-full h-[40vh] flex flex-col items-center bg-zinc-100">
                     <div className={"w-[50%] h-full flex justify-center items-center"}>
-                    { postingImage == "uploaded" ? <Image src={imageUrl ? imageUrl : ""} alt="listing photo" width={200} height={200} className={"w-[100%] h-[100%] object-cover object-center"} /> :<BsCameraFill className={"w-[20vw] h-[20vh] text-zinc-300 hover:cursor-pointer"} onClick={(e)=> handleImageSelect(e)}/>}
+                    { animal.animal_photo_url ? <Image src={animal.animal_photo_url ? animal.animal_photo_url : ""} alt="listing photo" width={200} height={200} className={"w-[100%] h-[100%] object-cover object-center"} /> :<BsCameraFill className={"w-[20vw] h-[20vh] text-zinc-300 hover:cursor-pointer"} onClick={(e)=> handleImageSelect(e)}/>}
                     </div>
                 </div>
           <div className="w-[90%]">
@@ -177,4 +187,4 @@ const AnimalFormModal = ({session}) => {
   );
 }
 
-export default AnimalFormModal;
+export default EditAnimalForm;

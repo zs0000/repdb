@@ -1,0 +1,22 @@
+.bannerContainer {
+    @apply flex flex-col items-center justify-center border-b p-8 rounded-lg rounded-b-none w-full;
+}
+
+.welcomeText {
+    @apply text-2xl font-bold text-gray-800 mb-2;
+}
+
+.subtitle {
+    @apply text-lg text-gray-600 mb-4;
+}
+
+.actionBar {
+    @apply flex justify-around w-full;
+}
+
+.actionButton {
+    @apply bg-blue-500 text-white px-4 py-2 rounded shadow;
+    transition: all 0.3s ease;
+    
+
+}

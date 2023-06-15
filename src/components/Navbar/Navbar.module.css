@@ -1,5 +1,5 @@
 .container{
-    @apply h-[48px] bg-slate-100 w-full flex items-center justify-between px-4;
+    @apply h-[48px] border-b w-full flex items-center justify-between px-4;
 }
 
 .leftcontainer{

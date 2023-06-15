@@ -23,17 +23,19 @@ export default function Dash( {session}) {
       
       <div className={s.topcontainer}>
        
-
+     
         <div className={s.actionscontainer}>
+          <label className={s.componentlabel}>My Animals</label>
             <div className={s.actioncontainer}>
                 <AnimalFormModal session={session.user.id}/> 
             </div>
         </div>
-    </div>
-      
-      <div className={s.animalscontainer}>
+        <div className={s.animalscontainer}>
         {session ? <DashboardAnimalsComponent session={session}/> : <>No login session found.</>}
       </div>
+    </div>
+      
+      
     </div>
   )
 }

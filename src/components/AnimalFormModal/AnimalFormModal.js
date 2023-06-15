@@ -65,7 +65,73 @@ const AnimalFormModal = ({session}) => {
     "Spark",
     "Yellowbelly",
     "Gravel",])
-  const [crestedGenes, setCrestedGenes] = useState([])
+  const [crestedGenes, setCrestedGenes] = useState(["Axanthic",
+   "Bi-Color",
+    "Black",
+     "Black Base",
+      "Blonde",
+       "Blushing",
+        "Bold Stripe Tigers",
+         "Brindle",
+          "Buckskin",
+           "Bullseye",
+            "Cappuccino",
+             "Chevron",
+              "Cluster Spots",
+               "Cold Fusion",
+                "Cream",
+                 "Creamsicle",
+                  "Crowned",
+                   "Dalmatian",
+                    "Dark",
+                     "Drippy",
+                      "Empty Back",
+                       "Extreme Harlequin",
+                        "Flame",
+                         "Fringing",
+                          "Furred",
+                           "Halloween",
+                            "Harlequin",
+                             "Hypo",
+                              "Ink Spot",
+                               "Kneecaps",
+                                "Lavender",
+                                 "Lilly White",
+                                  "Mocha",
+                                   "Monochrome",
+                                    "Normal",
+                                     "Oil Spot",
+                                      "Olive",
+                                       "Orange",
+                                        "Orange Patterning",
+                                         "Orange Tip",
+                                          "Partial Pinstripe",
+                                           "Patternless",
+                                            "Peppered",
+                                             "Pet Only",
+                                              "Phantom",
+                                               "Pin-Dashed",
+                                                "Pinstripe",
+                                                 "Portholes",
+                                                  "Quad-Stripe",
+                                                   "Red",
+                                                    "Red Base",
+                                                     "Red Spot",
+                                                      "Reverse Pinstripe",
+                                                       "Snowflake",
+                                                        "Soft Scale",
+                                                         "Solid Back",
+                                                          "Super Dalmatian",
+                                                           "Super Stripe",
+                                                            "Tailless",
+                                                             "Tangerine",
+                                                              "Tiger",
+                                                               "Tri-Color",
+                                                                "White Out",
+                                                                  "White Tip",
+                                                                   "White Wall",
+                                                                    "Yellow",
+                                                                     "Yellow Base"])
 
 
 const genesMap = {
@@ -74,12 +140,7 @@ const genesMap = {
   // add other animal types and their genes here
 };
 
-const filterGenes = () => {
-  const genes = genesMap[animalType] || [];
-  return genes.filter((gene) =>
-    gene.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-};
+
 
 const handleSearchChange = async(e) => {
   const newSearchTerm = e.target.value;
@@ -113,6 +174,7 @@ const handleSearchChange = async(e) => {
     animal_owned_by_user_id:session,
     animal_photo_url:imageUrl,
     animal_gender:animalGender,
+    animal_gene_traits:animalGenes,
     created_at:current,
 
 
@@ -172,6 +234,7 @@ const handleSearchChange = async(e) => {
     setAnimalGender('unknown')
     setImageSelected('')
     setPostingImage("none")
+    setAnimalGenes([])
     setImageUrl(null)
     queryClient.invalidateQueries("animals")
       closeModal()
@@ -184,7 +247,7 @@ const handleSearchChange = async(e) => {
 
   return (
     <div >
-      <button onClick={openModal}>Open Modal</button>
+      <button className='mb-2 px-2 py-1 bg-slate-300 border border-gray-300 rounded underline hover:bg-white transition-colors duration-200' onClick={openModal}>Add Animal</button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -195,12 +258,19 @@ const handleSearchChange = async(e) => {
         <form className='flex flex-row justify-center' onSubmit={handleSubmit}>
           <div className='flex flex-col items-center w-full'>
           <div className='w-full flex flex-row justify-evenly'>
-          <label className="block w-[50%] mb-1 ">
+          <label className="block w-[33%] mb-1 ">
             Animal Name:
             <input className="block w-full mt-1 bg-gray-100 rounded px-1 py-1 hover:bg-gray-50 focus:bg-white border-white border transition-colors duration-200 hover:border-gray-200 focus:outline-0" type="text" value={animalName} onChange={(e) => setAnimalName(e.target.value)}  />
           </label>
-
-          <label className="block w-[50%] mb-0">
+          <label className="block w-[33%] mb-1 ">
+            Animal Gender:
+            <select className="block w-full mt-1 bg-gray-100 rounded px-1 py-1 hover:bg-gray-50 focus:bg-white border-white border transition-colors duration-200 hover:border-gray-200 focus:outline-0"  value={animalGender} onChange={(e) => setAnimalGender(e.target.value)}  >
+              <option value="Unknown">Unknown</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              </select>
+          </label>
+          <label className="block w-[33%] mb-0">
             Animal Type:*
             <select className="block w-full mt-1 hover:cursor-pointer  bg-gray-100 rounded px-1 py-1 hover:bg-gray-50 focus:bg-white border-white border transition-colors duration-200 hover:border-gray-200 focus:outline-0" onChange={(e) => {
               setAnimalType(e.target.value)
@@ -215,7 +285,19 @@ const handleSearchChange = async(e) => {
           </label>
           </div>
           <div className="w-full flex flex-col items-start min-h-[5vh] mb-1 border rounded p-1">
-  <label className="pl-1 pb-1">Select genes:</label>
+  <label className="pl-1 pb-1">{animalGenes.length > 0 ? 'Selected genes:' : 'Select genes:'}</label>{animalGenes.length > 0 && (
+    <div className="flex flex-row flex-wrap w-full">
+      {animalGenes.map((gene) => (
+        <span 
+          key={gene}
+          onClick={() => handleGeneSelect(gene)} 
+          className="bg-sky-100 px-2 py-1 mx-[2px] mb-2 border border-slate-300 rounded hover:cursor-pointer hover:bg-sky-200 hover:transition-colors duration-200"
+        >
+          {gene}
+        </span>
+      ))}
+    </div>
+  )}
   <input
     type="text"
     className="block rounded rounded-b-none shadow-sm w-full px-2 py-1 hover:bg-gray-50 border border-b-0 focus:bg-white transition-colors duration-200 hover:border-gray-200 focus:outline-none"
@@ -227,18 +309,20 @@ const handleSearchChange = async(e) => {
     value={searchTerm}
     onChange={(e)=>handleSearchChange(e)}
   />
-  <div className="flex flex-col bg-zinc-200 overflow-y-scroll max-h-32 w-[100%] mt-2 ">
+  <div className="flex flex-col bg-zinc-200 overflow-y-scroll max-h-32 w-[100%] mt-2">
     {searchTerm.length > 0 && searchResults.map((gene) => (
       <div 
         key={gene} 
-        className={`cursor-pointer p-1  ${animalGenes.includes(gene) ? "bg-sky-100 m-[2px] border border-slate-300  rounded hover:bg-sky-50" : " bg-zinc-50 m-[2px] border rounded hover:bg-white"}`}
+        className={`cursor-pointer p-1 ${animalGenes.includes(gene) ? "bg-sky-100 m-[2px] border border-slate-300 rounded hover:bg-sky-50" : " bg-zinc-50 m-[2px] border rounded hover:bg-white"}`}
         onClick={() => handleGeneSelect(gene)}
       >
         {gene}
       </div>
     ))}
   </div>
+  
 </div>
+
 
           <div className=" w-full h-[40vh] flex flex-col items-center bg-zinc-100">
                     <div className={"w-[50%] h-full flex justify-center items-center"}>
@@ -261,11 +345,7 @@ const handleSearchChange = async(e) => {
                             (click here to change selection.)
                         </button> : <></> }
                     </div>
-                    <div className={"w-full  flex justify-center"}>
-                        <button type="submit" onClick={()=> {console.log("test")}} disabled={postingImage == "uploaded" ? "w-full py-4 rounded  font-bold text-zinc-200 transition-colors duration-200  bg-[#8e3551]" : " w-full py-4 rounded  font-bold text-zinc-200  bg-[#8d767d]"}>
-                            Create
-                        </button>
-                    </div>
+                   
                     <input
                     type="file"
                     id="file_input"

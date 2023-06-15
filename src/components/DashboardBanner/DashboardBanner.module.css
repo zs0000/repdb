@@ -1,5 +1,5 @@
 .bannerContainer {
-    @apply flex flex-col items-center justify-center border-b p-8 rounded-lg rounded-b-none w-full;
+    @apply flex flex-col items-center justify-center shadow bg-gray-100 p-8 rounded-xl w-full;
 }
 
 .welcomeText {

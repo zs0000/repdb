@@ -2,5 +2,5 @@
     @apply w-full h-full flex flex-col items-center justify-center;
 }
 .content{
-    @apply flex justify-evenly items-center m-1 h-full gap-1;
+    @apply grid md:grid-cols-4 grid-cols-2 justify-evenly items-center w-full h-full gap-2;
 }

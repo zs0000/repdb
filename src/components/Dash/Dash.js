@@ -1,13 +1,17 @@
 import s from "./Dash.module.css"
-import Account from '../Account/Account'
-import DashboardAnimals from "../DashbordAnimals/DashboardAnimals"
 import AnimalFormModal from "../AnimalFormModal/AnimalFormModal"
 import { useEffect, useState } from "react"
 import DashboardAnimalsComponent from "../DashboardAnimalsComponent/DashboardAnimalsComponent"
 import DashboardBanner from "../DashboardBanner/DashboardBanner"
+import Link from "next/link"
 export default function Dash( {session}) {
-  console.log(session)
+  
   const [loading, setLoading] = useState(true)
+  const [animalType, setAnimalType] = useState("all")
+
+  
+
+
   useEffect(()=>{
     if(session && session !== null || session !== undefined){
       setLoading(false)
@@ -26,12 +30,21 @@ export default function Dash( {session}) {
      
         <div className={s.actionscontainer}>
           <label className={s.componentlabel}>My Animals</label>
+          
             <div className={s.actioncontainer}>
+              <div className={s.filtercontainer}>
+                <select className={s.filter} onChange={(e)=>setAnimalType(e.target.value)}>
+                  <option value="all">All</option>
+                  <option value="Crested Gecko">Crested Geckos</option>
+                  <option value="Ball Python">Ball Pythons</option>
+                  </select>
+              </div>
+              
                 <AnimalFormModal session={session.user.id}/> 
             </div>
         </div>
         <div className={s.animalscontainer}>
-        {session ? <DashboardAnimalsComponent session={session}/> : <>No login session found.</>}
+        {session ? <DashboardAnimalsComponent animalType={animalType} session={session}/> : <>No login session found.</>}
       </div>
     </div>
       

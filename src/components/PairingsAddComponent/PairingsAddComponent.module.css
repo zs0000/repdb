@@ -1,0 +1,11 @@
+.container{
+    @apply w-full h-full min-h-screen flex flex-col items-center
+}
+
+.content{
+    @apply w-full md:w-[90%] lg:w-[65%] xl:w-[55%]  h-full flex flex-col items-center
+}
+
+.topcontainer{
+    @apply bg-gray-100 shadow rounded mt-2 w-full py-2 flex flex-col items-center justify-center;
+}

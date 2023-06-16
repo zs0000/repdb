@@ -15,7 +15,7 @@
 }
 
 .actionButton {
-    @apply bg-blue-500 text-white px-4 py-2 rounded shadow;
+    @apply bg-gray-400 text-white px-4 py-2 rounded shadow;
     transition: all 0.3s ease;
     
 

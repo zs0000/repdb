@@ -17,7 +17,7 @@ export default function Navbar({session}) {
     const handleClickSvg = (e) => {
         setIsOpen(false)
     }
-    console.log(session)
+   
   return (
     <div className={s.container}>
         

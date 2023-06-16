@@ -42,9 +42,22 @@
 }
 
 .gene{
-    @apply text-xs font-light text-gray-500 mx-[2px] px-[2px] py-[1px] border bg-slate-100;
+    @apply text-xs font-light tracking-tight text-gray-500 mx-[2px] px-[2px] py-[1px] border bg-slate-100;
 }
 
 .label{
     @apply flex flex-row justify-center items-center  mx-[2px] px-[2px] py-[1px] ;
+}
+
+.gecko{
+    @apply text-xs font-light tracking-tight text-gray-500 mx-[2px] px-[2px] py-[1px] border border-gray-200 bg-emerald-100;
+}
+.snake{
+    @apply text-xs font-light tracking-tight text-gray-500 mx-[2px] px-[2px] py-[1px] border border-gray-200 bg-amber-100;
+}
+
+.pairing{
+    @apply tracking-tight text-slate-400 mx-[2px];
+    font-size: 0.70rem/* 12px */;
+    line-height: 1rem/* 16px */;
 }

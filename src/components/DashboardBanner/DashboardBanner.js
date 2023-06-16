@@ -8,6 +8,8 @@ export default function DashboardBanner() {
             <div className={s.actionBar}>
                 <button className={s.actionButton}>Action 1</button>
                 <button className={s.actionButton}>Action 2</button>
+                <button className={s.actionButton}>Action 3</button>
+                <button className={s.actionButton}>Action 4</button>
             </div>
         </div>
     )

@@ -6,26 +6,28 @@ import { supabase } from '../../lib/supabaseClient'
 import Account from "@/components/Account/Account"
 import Layout from "@/components/Layout/Layout"
 import { useRouter } from "next/router"
+import { revalidatePath } from "next/cache"
+import { useQuery } from "@tanstack/react-query"
 export default function Dashboard() {
   const [session, setSession] = useState(null)
   const [fetching, setFetching] = useState(true)
   const router = useRouter()
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-    setFetching(false)
-  }, [])
-  if(fetching){
-    return<></>
+  const handleFetchSession = async () => {
+    const {data, error} = await supabase.auth.getSession()
+    if (data) {
+      setSession(data.session)
+    }
+    return data
   }
+
+  const {data, error, isLoading} = useQuery({queryKey:['sessiondata'], queryFn:handleFetchSession})
+
+  if(!session || isLoading) return <div>Loading...</div>
+
   return (
    <Layout session={session}>
-    {session ? <Dash session={session} /> : <>Please log in.</>}
+    {session && session !== null || session !== undefined ? <Dash session={session} /> : <>Please log in.</>}
    </Layout>
   )
 }

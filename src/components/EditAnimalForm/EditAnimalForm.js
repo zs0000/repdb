@@ -431,7 +431,7 @@ if(!animal){
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Animal Form"
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded shadow-lg h-90% md:w-[60%] "
+        className="absolute top-1/2 left-1/2 transform  -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded shadow-lg h-90% md:w-[60%] "
         overlayClassName="fixed inset-0 bg-black bg-opacity-50"
        
       >

@@ -19,54 +19,7 @@ export default function AnimalCard({animal,session}) {
   const [animalRelationships, setAnimalRelationships] = useState([]); // [pairings, offspring
   const current = new Date();
 
-  const handleFetchRelationships = async () => {
-    let pairings = null;
-    let offspring = null;
-    let genderKey = animal.animal_gender === 'Female' ? 'mother' : 'father';
-
-    try {
-      const {data: pairingsData, error: pairingsError} = await supabase
-        .from("pairings")
-        .select("*")
-        .eq(`${genderKey}`, animal.animal_id);
-        
-      if (pairingsError) throw pairingsError;
-      pairings = pairingsData;
-
-      const {data: offspringData, error: offspringError} = await supabase
-        .from("offspring")
-        .select("*")
-        .eq(`${genderKey}`, animal.animal_id);
-    
-      if (offspringError) throw offspringError;
-      offspring = offspringData;
-      return { pairings, offspring };
-    } catch (err) {
-      console.error(err.message);
-      // Here you should manage the error as you prefer, for example by setting some state variable
-    }
-
-    // Updating state should be done outside of try-catch block
-    setAnimalPairings(pairings);
-    setAnimalOffspring(offspring);
-
-    // Return the results as an object
-    return { pairings, offspring };
-}
-  
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey:["relationships"], 
-    queryFn:handleFetchRelationships});
-  console.log(data)
-  if(!animal){
-    return <></>
-  }
-  if (isLoading) {
-    return <></>
-  }
-  if (isError) {
-    return <div>{error.message}</div>
-  }
+ 
   return (
     <div  className={s.container}  onClick={() => {
       setTestState(true);
@@ -75,7 +28,7 @@ export default function AnimalCard({animal,session}) {
       <EditAnimalForm key={modalKey} animal={animal} session={session} testState={testState} setTestState={setTestState} />
         <div className={s.imagecontainer}>
  
-            <Image loading="lazy" src={animal.animal_photo_url} alt="Picture of the animal"
+            <Image priority src={animal.photos[0].img_url} alt="Picture of the animal"
   width={200} height={200}
 
  className={s.photo}  />
@@ -147,24 +100,14 @@ export default function AnimalCard({animal,session}) {
             </div>
             <div className={s.genescontainer}>
               {animal.animal_gene_traits ? animal.animal_gene_traits.map((gene)=>(
-                <span className={s.gene} key={gene.gene_id}>
+                <span className={s.gene} key={gene}>
                   {gene}
                 </span>
               )) : <span className={s.gene}>
                 No genes added
                 </span>}
             </div>
-            <div className={s.pairingconatiner  }>
-             {data ? data.pairings.map((pairing)=>(
-                
-                <span className={s.pairing} key={pairing.pairing_id}>
-                  gaaa
-                </span>
-              )) : <span className={s.pairing}>
-                No pairings added
-                </span>}
-
-            </div>
+            
         </div>
         
     </div>

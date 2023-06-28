@@ -2,10 +2,12 @@ import Link from "next/link"
 import s from "./Navbar.module.css"
 import SignInModal from "../SignInModal/SignInModal"
 import { useRef, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Navbar({session}) {
     const [isOpen, setIsOpen] = useState(false);
     const signInRef = useRef(null);
+    const router = useRouter();
     const handleSignInOpen = () => {
       if (isOpen){
         setIsOpen(false)
@@ -28,7 +30,9 @@ export default function Navbar({session}) {
         </div>
         <div className={s.rightcontainer}>
             {session ? <div className={s.signedincontainer}>
-              <Link href="/dashboard">Dashboard</Link>
+              <button onClick={()=>{
+                router.push('/dashboard')
+              }}>Dashboard</button>
             </div> : <div className={s.signincontainer}>
             {isOpen === false ? <button className={s.button} onClick={()=> setIsOpen(true)}>Sign in</button> : <div className={s.signinopen}><svg
       xmlns="http://www.w3.org/2000/svg"

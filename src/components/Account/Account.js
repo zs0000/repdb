@@ -3,9 +3,11 @@ import { supabase } from '../../lib/supabaseClient'
 
 export default function Account({ session }) {
   const [loading, setLoading] = useState(true)
+  const [fullName, setFullName] = useState(null)
   const [username, setUsername] = useState(null)
   const [website, setWebsite] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
+  const [email, setEmail] = useState(null)
 
   useEffect(() => {
     async function getProfile() {
@@ -14,13 +16,15 @@ export default function Account({ session }) {
 
       let { data, error } = await supabase
         .from('profiles')
-        .select(`username, website, avatar_url`)
+        .select(`*`)
         .eq('id', user.id)
         .single()
 
       if (error) {
         console.warn(error)
       } else if (data) {
+        setEmail(session.user.email)
+        setFullName(data.full_name)
         setUsername(data.username)
         setWebsite(data.website)
         setAvatarUrl(data.avatar_url)
@@ -37,9 +41,11 @@ export default function Account({ session }) {
 
     setLoading(true)
     const { user } = session
-
+    
     const updates = {
       id: user.id,
+      email,
+      full_name: fullName,
       username,
       website,
       avatar_url,
@@ -58,7 +64,17 @@ export default function Account({ session }) {
     <form onSubmit={updateProfile} className="form-widget">
       <div>
         <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
+        <input id="email" type="text" onChange={(e)=> setEmail(e.target.value)} value={session.user.email} disabled />
+      </div>
+      <div>
+        <label htmlFor="name">Name</label>
+        <input
+          id="name"
+          type="text"
+          required
+          value={fullName || ''}
+          onChange={(e) => setFullName(e.target.value)}
+        />
       </div>
       <div>
         <label htmlFor="username">Name</label>
@@ -74,7 +90,7 @@ export default function Account({ session }) {
         <label htmlFor="website">Website</label>
         <input
           id="website"
-          type="url"
+          type="text"
           value={website || ''}
           onChange={(e) => setWebsite(e.target.value)}
         />

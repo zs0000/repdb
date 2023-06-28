@@ -12,18 +12,14 @@ export default function Dash( {session}) {
   
 
 
-  useEffect(()=>{
-    if(session && session !== null || session !== undefined){
-      setLoading(false)
-    }
-  },[session])
-  if(!session || loading){
+  
+  if(session === null || session === undefined){
     return <></>
   }
 
   return (
     <div className={s.container}>
-      <DashboardBanner/>
+      {session && session !== null || session !== undefined ? <DashboardBanner session={session}/> : <>No login session found.</>}
       
       <div className={s.topcontainer}>
        
@@ -33,18 +29,20 @@ export default function Dash( {session}) {
           
             <div className={s.actioncontainer}>
               <div className={s.filtercontainer}>
-                <select className={s.filter} onChange={(e)=>setAnimalType(e.target.value)}>
-                  <option value="all">All</option>
+                <select defaultValue={"all"} className={s.filter} onChange={(e)=>setAnimalType(e.target.value)}>
+                  <option  value="all">All</option>
                   <option value="Crested Gecko">Crested Geckos</option>
                   <option value="Ball Python">Ball Pythons</option>
                   </select>
               </div>
-              
-                <AnimalFormModal session={session.user.id}/> 
+              <div className={s.pairingscontainer}>
+              <Link className={s.pairings} href="/pairings/add">Add</Link>
+              </div>
+                {session && session !== null || session !== undefined  ? <AnimalFormModal session={session.user.id}/> : <>No login session found.</> }
             </div>
         </div>
         <div className={s.animalscontainer}>
-        {session ? <DashboardAnimalsComponent animalType={animalType} session={session}/> : <>No login session found.</>}
+        {session && session !== null || session !== undefined ? <DashboardAnimalsComponent animalType={animalType} session={session}/> : <>No login session found.</>}
       </div>
     </div>
       

@@ -1,31 +1,23 @@
 
 import s from "./index.module.css"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { supabase } from '@/lib/supabaseClient'
 
 import Layout from "@/components/Layout/Layout"
 import { useRouter } from "next/router"
 import PairingsAddComponent from "@/components/PairingsAddComponent/PairingsAddComponent"
+import { useQuery } from "@tanstack/react-query"
+import { SessionContext } from "@/context/SessionContext"
+import Link from "next/link"
 export default function Index() {
-  const [session, setSession] = useState(null)
-  const [fetching, setFetching] = useState(true)
-  const router = useRouter()
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-    setFetching(false)
-  }, [])
-  if(fetching){
-    return<></>
-  }
+  const session = useContext(SessionContext);
+if (!session) {
+  return <div>Please log in.</div> // replace with a redirect to your login page or similar if you like
+}
   return (
    <Layout session={session}>
-    {session ? <PairingsAddComponent session={session} /> : <>Please log in.</>}
+    {session ? <Link href="/dashboard">
+    </Link> : <>Please log in.</>}
    </Layout>
   )
 }

@@ -1,31 +1,40 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getImageData, useS3Upload } from "next-s3-upload";
-import Modal from 'react-modal';
-import axios from 'axios';
+import getCroppedImg from '@/utils/cropImage'
 import { useRouter } from 'next/router';
 import Image from 'next/image'
 import {BsCameraFill} from "react-icons/bs"
 import { supabase } from '@/lib/supabaseClient';
 import { useQueryClient } from '@tanstack/react-query';
+import Cropper from 'react-easy-crop';
 
 export default function UploadAnimalForm({session}) {
+  {/*States: Upload & Crop Image */}
   const [preview, setPreview] = useState()
   const [fileForPreview, setFileForPreview] = useState(null)
+  const [croppingImage, setCroppingImage] = useState(false)
+  const [crop, setCrop] = useState({ x: 0, y: 0 })
+  const [rotation, setRotation] = useState(0)
+  const [zoom, setZoom] = useState(1)
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
+  const [croppedImage, setCroppedImage] = useState(null)
+  const [selectedImage, setSelectedImage] = useState(null)
   const [uploadMethod, setUploadMethod] = useState("none")
-    const [imageUrl, setImageUrl] = useState(null);
+  const [usePreuploaded, setUsePreuploaded] = useState(false)
+  const [imageUrl, setImageUrl] = useState(null);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
-  const [modalIsOpen, setIsOpen] = useState(false);
+
+  {/*States: Animal Form Values */}
+  const [formCanSubmit, setFormCanSubmit] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(0);
   const [animalName, setAnimalName] = useState('');
   const [animalType, setAnimalType] = useState('');
   const [animalGenes, setAnimalGenes] = useState([]);
-  const [animalGender, setAnimalGender] = useState('unknown');
-  const [imageSelected, setImageSelected] = useState("");
-  const [holdFile, setHoldFile] = useState(null);
+  const [animalGender, setAnimalGender] = useState('Unknown');
   const [postingImage, setPostingImage] = useState("none");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [selectedGenes, setSelectedGenes] = useState([]);
   const [snakeGenes, setSnakeGenes] = useState([
     "Pinstripe",
     "Pastel",
@@ -144,6 +153,10 @@ const genesMap = {
   // add other animal types and their genes here
 };
 
+const router = useRouter()
+const current = new Date();
+
+{/*Functions: Search, Filter, and Select genes*/}
 const handleSearchChange = async(e) => {
   const newSearchTerm = e.target.value;
   setSearchTerm(newSearchTerm);
@@ -155,8 +168,7 @@ const handleSearchChange = async(e) => {
 
   setSearchResults(newSearchResults);
 };
-  const router = useRouter()
-  const current = new Date();
+
 
   const handleGeneSelect = (gene) => {
     if (animalGenes.includes(gene)) {
@@ -166,50 +178,55 @@ const handleSearchChange = async(e) => {
     }
   };
 
-  const queryClient = useQueryClient()
-  
-  const handleImageSelect = (e) => {
-      e.stopPropagation()
-      document.getElementById('file_input')?.click();
-      
-  }
-  let inputs={
-    animal_name:animalName,
-    animal_type:animalType,  
-    animal_owned_by_user_id:session.user.id,
-    animal_gender:animalGender,
-    animal_gene_traits:animalGenes,
-    created_at:current,
+{/*Functions: Image Select, Crop, Upload*/}
+const handleImageSelect = (e) => {
+  e.stopPropagation()
+  document.getElementById('file_input')?.click(); 
+}
+const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+  setCroppedAreaPixels(croppedAreaPixels)
+}, [])
 
+const showCroppedImage = useCallback(async () => {
+  try {
+    const croppedImage = await getCroppedImg(
+      preview,
+      croppedAreaPixels,
+      rotation
+    )
+    console.log('donee', { croppedImage })
+    
+    const file = await fetch(croppedImage).then(r => r.blob())
+    //convert the blob file to a file object
+    file.name = fileForPreview.name
+    file.lastModified = fileForPreview.lastModified
+    file.lastModifiedDate = fileForPreview.lastModifiedDate
+    file.webkitRelativePath = fileForPreview.webkitRelativePath
 
+    console.log(file)
+    setFileForPreview(file)
+    setCroppedImage(croppedImage)
+   
+  } catch (e) {
+    console.error(e)
   }
-  async function handleSubmit(e) {
-    e.preventDefault()
-    try {
-      const {data,error} = await supabase.from('animals').insert([inputs]).select()
-      console.log(data)
-      if(error){
-        alert(error)
-        console.log(error)
-      }
-      if(data[0]?.animal_id){
-        let getS3ImageURL = await handleUploadToS3()
-        if(getS3ImageURL){
-          const uploadPhotoURLtoDatabase = await supabase.from('photos').insert([{user_id:data[0].animal_owned_by_user_id, animal_id:data[0].animal_id, img_url:getS3ImageURL}]).select()
-          if(uploadPhotoURLtoDatabase && uploadPhotoURLtoDatabase.status == 201){
-            alert("Successfully uploaded!")
-            router.push(`/dashboard`)
-        }
-      }
-    }
-    } catch (err) {
-      console.error(err.message)
-    }
+}, [croppedAreaPixels, rotation, preview])
+
+const onClose = useCallback(() => {
+  setCroppedImage(null)
+}, [])
+
+const handleHideUploadControls = (e) => {
+  e.stopPropagation()
+  document.getElementById('upload-controls')?.classList.add('hidden')
 }
 
+
 const handleImageChange = e => {
+  
   const file = e.target.files[0];
   setFileForPreview(e.target.files[0]);
+  console.log(file)
   previewFile(file);
 };
 
@@ -218,6 +235,7 @@ const previewFile = (file) => {
   reader.readAsDataURL(file);
   reader.onloadend = () => {
       setPreview(reader.result);
+      setCroppingImage(true)
   };
 };
 
@@ -225,6 +243,8 @@ const previewFile = (file) => {
 
   async function handleUploadToS3(){
     try {
+   
+   
     let { url } = await uploadToS3(fileForPreview);
     let { height, width } = await getImageData(fileForPreview);
     setWidth(width);
@@ -237,8 +257,73 @@ const previewFile = (file) => {
     } catch (err) {
       console.error(err.message)
     }
+    
   }
+  
+{/*Functions:Form Submission, Image upload first, then database*/}
 
+const checkFormCanSubmit = () => {
+  if (
+    animalName.length > 0 &&
+    animalType.length > 0 &&
+    animalGender.length > 0 &&
+    croppedImage || usePreuploaded
+  ) {
+    setFormCanSubmit(true);
+  } else {
+    setFormCanSubmit(false);
+  }
+};
+
+//useEffect to check if form can submit on every change
+useEffect(() => {
+  checkFormCanSubmit();
+}, [animalName, animalType, animalGenes, animalGender, croppedImage]); // dependencies
+  
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    try {
+      if(formCanSubmit){
+        setFormSubmitted(formSubmitted + 1)
+        let inputs={
+          animal_name:animalName,
+          animal_type:animalType,  
+          animal_owned_by_user_id:session.user.id,
+          animal_gender:animalGender,
+          animal_gene_traits:animalGenes,
+          created_at:current,
+        }
+
+        if(animalGenes.length == 0){
+          inputs.animal_gene_traits = ["None"]
+        }
+        
+        const {data,error} = await supabase.from('animals').insert([inputs]).select()
+        console.log(data)
+        if(error){
+          alert(error)
+          console.log(error)
+        }
+        if(data[0]?.animal_id){
+          let getS3ImageURL = await handleUploadToS3()
+          if(getS3ImageURL){
+            setPostingImage("uploading")
+            const uploadPhotoURLtoDatabase = await supabase.from('photos').insert([{user_id:data[0].animal_owned_by_user_id, animal_id:data[0].animal_id, img_url:getS3ImageURL}]).select()
+            if(uploadPhotoURLtoDatabase && uploadPhotoURLtoDatabase.status == 201){
+              setPostingImage("uploaded")
+              alert("Successfully uploaded!")
+              router.push(`/dashboard`)
+          }
+        }
+      }
+      } else{
+        alert("Please fill out all required fields.")
+      }
+    } catch (err) {
+      console.error(err.message)
+    }
+}
   return (
     <form className='flex flex-row justify-center w-full h-full md:w-[90%] lg:w-[65%] xl:w-[55%]' onSubmit={handleSubmit}>
           <div className='flex flex-col items-center w-full'>
@@ -310,11 +395,28 @@ const previewFile = (file) => {
 
 
           <div className=" w-full h-[40vh] md:h-[50vh] flex flex-col items-center bg-zinc-100">
-                    <div className={"w-[50%] h-full flex justify-center items-center"}>
+                    <div className={"w-full h-full flex justify-center items-center"}>
                     
-                    { preview ? <Image src={preview} alt="listing photo" width={width} height={height} className={"w-[100%] h-[100%] object-cover object-center"} /> : <BsCameraFill className={"w-[20vw] h-[20vh] text-zinc-300 hover:cursor-pointer"} onClick={(e)=> handleImageSelect(e)}/>}
+                    { preview ?
+                    croppedImage ? 
+                    <Image src={croppedImage} alt="listing photo" width={500} height={500} className={"w-[100%] h-[100%] object-cover object-center"} />
+                    :
+                    <div className="relative w-full h-full">
+                      <Cropper
+                    image={preview || ''}
+                    crop={crop}
+                    zoom={zoom}
+                    aspect={4/3}
+                    onCropChange={setCrop}
+                    onCropComplete={onCropComplete}
+                    onZoomChange={setZoom}
+                  />
                     </div>
-                    <>{height}x{width}</>
+                     : <BsCameraFill className={"w-[20vw] h-[20vh] text-gray-300 "} />}
+                    </div>
+                    <span>
+                      {height == 0 && width == 0 ? "" : `${width} x ${height}`}
+                    </span>
                 </div>
           <div className="w-[100%]">
           <div>
@@ -347,16 +449,33 @@ const previewFile = (file) => {
 
           </div>
           : uploadMethod == "new-upload" ?
+          <div id='upload-controls' className='w-full flex flex-col justify-evenly items-center'>
+            {croppingImage ? 
+            <div className='w-full py-1 flex flex-row justify-evenly'>
+            <button type="button" onClick={(e)=>{
+              setCroppingImage(false)
+              showCroppedImage()
+              handleHideUploadControls(e)
+             
+            }} className='w-full py-1 bg-gray-100'>
+              Confirm Crop
+            </button>
+          </div>
+          :
+          <></>}
           <div className='w-full flex flex-row justify-evenly items-center'>
+            
             <input type="file" name="image" onChange={handleImageChange} />
             <button type='button' onClick={(e)=> {
               setUploadMethod("none")
               setPreview(null)
+              setCroppingImage(false)
             }}
             className="block w-[30%] mx-2  mt-2 p-2 border border-blue-300 text-blue-700 bg-blue-200 rounded" >
               Go Back
               </button>
 
+          </div>
           </div>
           : <></>
           }
@@ -370,16 +489,8 @@ const previewFile = (file) => {
                         <span className="font-bold text-xs">
                         {"Status: "}
                         </span>
-                        <span className={"text-sm underline"}>{postingImage ==  "none" ? "Please select a photo by clicking the camera above." : postingImage=="uploading" ? "Uploading..." : "Photo has been selected. Please note this is just a preview. "}</span>
-                        {postingImage == "uploaded" ? 
-                        <button
-                        onClick={(e)=> {
-
-                            handleImageSelect(e)
-                        }}
-                         className="font-bold tracking-tight">
-                            (click here to change selection.)
-                        </button> : <></> }
+                        <span className={"text-sm underline"}>{postingImage ==  "none" ? "Please finish filling out the form, then click submit." : postingImage=="uploading" ? "Uploading Image..." : "Image Uploaded "}</span>
+                        
                     </div>
                         
                     <input
@@ -398,7 +509,7 @@ const previewFile = (file) => {
 
                     />
                 </div>
-          <button type="submit" className="block w-full mt-4 p-2 text-white bg-blue-500 rounded" >Submit</button>
+          <button type="submit" disabled={formSubmitted == 0 || !formCanSubmit ? false : true} className={formCanSubmit ? "block w-full mt-4 p-2 text-white bg-blue-500 rounded" : "block w-full mt-4 p-2 text-white bg-gray-500 rounded"} >Submit</button>
           </div>
           
         </form>

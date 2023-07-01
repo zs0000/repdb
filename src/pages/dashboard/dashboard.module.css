@@ -1,0 +1,7 @@
+.content{
+    @apply w-full h-full min-h-screen flex flex-row justify-center pr-2;
+}
+
+.sidebar{
+    @apply w-[30%] lg:w-[15%] xl:w-[10%] h-full flex  border-r mr-2;
+}

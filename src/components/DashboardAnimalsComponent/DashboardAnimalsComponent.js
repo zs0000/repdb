@@ -10,60 +10,30 @@ import { BsCameraFill } from "react-icons/bs"
 import EditAnimalForm from "../EditAnimalForm/EditAnimalForm"
 import { SessionContext } from "@/context/SessionContext"
 import Loader from "../Loader/Loader"
+import { useUserAnimalData } from "@/hooks/useUserAnimals"
 
-export default function DashboardAnimalsComponent({ animalType}) {
+export default function DashboardAnimalsComponent({session, animalType}) {
   const [animals, setAnimals] = useState([])
   const [filteredAnimals, setFilteredAnimals] = useState([])
+  const [animalsSet, setAnimalsSet] = useState(false)
   const [loading, setLoading] = useState(true)
-  const session = useContext(SessionContext);
-  
-  const fetchAnimals = async () => {
-    try {
-      if(session === null || session === undefined){
-        return
-      }
-      // select the animals from the supabase database where the animal_owned_by_user_id is equal to the session.user.id
-      const { data, error } = await supabase
-  .from('animals')
-  .select(`
-    *,
-    photos (
-      img_url
-    )
-  `)
-  .eq('animal_owned_by_user_id', session.user.id);
+  const {data, status} = useUserAnimalData(session.user.id)
 
-      if (error) {
-        alert(error.message)
-      }
-      if(data){
-      console.log(data)
-       setAnimals(data)
-      }
-      return animals
-    } catch (err) {
-      console.error(err.message)
-    }
-
-    return animals
-  }
-
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey:["animals"],
-    queryFn: fetchAnimals,
-  })
-
+ 
   //write a function to filter by animal type
   const handleAnimalFilter = useCallback((animalType) => {
-    if(animalType == "all"){
-      setFilteredAnimals(animals)
-      setLoading(false)
-    } else {
-      const filteredList = animals.filter((animal)=>animal.animal_type === animalType)
-      setFilteredAnimals(filteredList)
-      setLoading(false)
-    }  
-  }, [animals]) // Here you need to define the dependencies of `handleAnimalFilter`. If it uses other state or props in its definition, include them here. I've included `animals` as an example.
+    if(data){
+      if(animalType == "all"){
+        setFilteredAnimals(data)
+        setLoading(false)
+        
+      } else {
+        const filteredList = data.filter((animal)=>animal.animal_type === animalType)
+        setFilteredAnimals(filteredList)
+        setLoading(false)
+      }  
+    }
+  }, [data]) // Here you need to define the dependencies of `handleAnimalFilter`. If it uses other state or props in its definition, include them here. I've included `animals` as an example.
   
   useEffect(() => {
     if (animalType){
@@ -72,13 +42,15 @@ export default function DashboardAnimalsComponent({ animalType}) {
   }, [animalType, handleAnimalFilter]) // Now `handleAnimalFilter` is memoized and won't cause your effect to run excessively.
   
 
-  if (isLoading) {
+  if(status === "loading"){
     return <Loader/>
   }
-  if (isError) {
-    return <div>{error.message}</div>
+  if(status === "error"){
+    return <div>error</div>
   }
+
   
+  console.log(data)
   return (
     <div className={s.container}>
       <div className={s.content}>
@@ -87,7 +59,7 @@ export default function DashboardAnimalsComponent({ animalType}) {
             setTestState(true)
             
           }} key={animal.animal_id} animal={animal} session={session}/>
-        )) : <>no</>}
+        )): <></>}
       </div>
     </div>
   )

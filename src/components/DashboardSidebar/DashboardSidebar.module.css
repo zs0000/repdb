@@ -1,0 +1,21 @@
+.container{
+    @apply w-full h-full p-4 min-h-screen flex flex-col items-end;
+}
+.topcontainer{
+    @apply w-full h-full flex justify-center;
+}
+
+.items{
+    @apply w-[80%] h-full   flex flex-col    ;
+}
+
+.item{
+    @apply w-full py-2;
+}
+
+.itemlink{
+    @apply transform hover:underline hover:text-blue-600 ;
+}
+.spacer{
+    @apply border-b
+}

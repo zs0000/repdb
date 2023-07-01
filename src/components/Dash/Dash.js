@@ -35,10 +35,7 @@ export default function Dash( {session}) {
                   <option value="Ball Python">Ball Pythons</option>
                   </select>
               </div>
-              <div className={s.pairingscontainer}>
-              <Link className={s.pairings} href="/pairings/add">Add</Link>
-              </div>
-                {session && session !== null || session !== undefined  ? <AnimalFormModal session={session.user.id}/> : <>No login session found.</> }
+              
             </div>
         </div>
         <div className={s.animalscontainer}>

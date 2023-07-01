@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import EditAnimalForm from "../EditAnimalForm/EditAnimalForm";
 import { supabase } from "@/lib/supabaseClient";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 
 export default function AnimalCard({animal,session}) {
 
@@ -21,14 +22,11 @@ export default function AnimalCard({animal,session}) {
 
  
   return (
-    <div  className={s.container}  onClick={() => {
-      setTestState(true);
-      setModalKey(prevKey => prevKey + 1);  // update key on each click
-    }} >
-      <EditAnimalForm key={modalKey} animal={animal} session={session} testState={testState} setTestState={setTestState} />
+    <Link href={`/animals/${animal.animal_id}`}  className={s.container} >
+     
         <div className={s.imagecontainer}>
  
-            <Image priority src={animal.photos[0].img_url} alt="Picture of the animal"
+            <Image priority src={animal.photos[0] ? animal.photos[0].img_url : ""} alt="Picture of the animal"
   width={200} height={200}
 
  className={s.photo}  />
@@ -110,6 +108,6 @@ export default function AnimalCard({animal,session}) {
             
         </div>
         
-    </div>
+    </Link>
   )
 }

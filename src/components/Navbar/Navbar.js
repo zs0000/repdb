@@ -30,9 +30,7 @@ export default function Navbar({session}) {
         </div>
         <div className={s.rightcontainer}>
             {session ? <div className={s.signedincontainer}>
-              <button onClick={()=>{
-                router.push('/dashboard')
-              }}>Dashboard</button>
+              <Link href='/dashboard'>Dashboard</Link>
             </div> : <div className={s.signincontainer}>
             {isOpen === false ? <button className={s.button} onClick={()=> setIsOpen(true)}>Sign in</button> : <div className={s.signinopen}><svg
       xmlns="http://www.w3.org/2000/svg"

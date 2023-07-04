@@ -10,7 +10,8 @@ async function getUserAnimalData(id) {
         img_url
       )
     `)
-    .eq('animal_owned_by_user_id', id);
+    .eq('animal_owned_by_user_id', id)
+    .eq('marked_for_deletion', false)
 
   if (error) throw error;
   else{

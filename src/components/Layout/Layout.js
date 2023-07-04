@@ -3,6 +3,7 @@ import { Arimo } from 'next/font/google'
 import s from "./Layout.module.css"
 import Navbar from '../Navbar/Navbar'
 import { supabase } from '@/lib/supabaseClient'
+import MobileBar from '../MobileBar/MobileBar'
 
 const inter = Arimo({ subsets: ['latin'] })
 export default function Layout({children, session}) {
@@ -11,6 +12,7 @@ export default function Layout({children, session}) {
     <div className={`${inter.className} w-full h-full min-h-screen flex flex-col items-center justify-center bg-white`} style={{padding: "0px", margin: "0px", width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
         <Navbar session={session}/>
         {children}
+        
     </div>
   )
 }

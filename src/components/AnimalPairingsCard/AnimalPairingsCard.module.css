@@ -1,0 +1,38 @@
+.container {
+    @apply w-full flex flex-col items-center justify-center bg-white shadow-md rounded-lg overflow-hidden;
+    
+}
+.content {
+    @apply flex flex-row w-full md:h-40 h-32 ;
+    
+}
+.photocontainer {
+    @apply w-full flex flex-col items-center justify-center border-r md:border-b-0 border-gray-200;
+}
+.photo {
+    @apply w-full h-full object-cover object-center;
+}
+.panelcontainer {
+    @apply w-full h-full flex flex-col items-start p-2;
+}
+.panel {
+    @apply w-full h-full flex flex-col items-start;
+}
+.paneltitle {
+    @apply w-full flex flex-row  items-center gap-1;
+}
+.name {
+    @apply text-3xl font-semibold text-gray-800;
+}
+.panelanimal {
+    @apply w-full mt-2;
+}
+.animal {
+    @apply text-2xl font-medium text-gray-700;
+}
+.panelgenes {
+    @apply w-full flex flex-wrap gap-4 mt-5;
+}
+.gene {
+    @apply text-lg text-gray-600 mb-1 tracking-tight border border-gray-300 bg-gray-100 rounded-md px-4 py-2;
+}

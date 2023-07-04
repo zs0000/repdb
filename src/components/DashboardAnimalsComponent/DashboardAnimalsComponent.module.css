@@ -1,6 +1,77 @@
 .container {
-    @apply w-full h-full flex flex-col items-center justify-center;
+    @apply w-full h-full flex flex-col items-center justify-center border-b ;
 }
 .content{
-    @apply grid md:grid-cols-4 grid-cols-2 justify-evenly items-center w-full h-full gap-2;
+    @apply grid md:grid-cols-3 grid-cols-2 justify-evenly items-center w-full h-full p-2 gap-2;
 }
+
+
+.actionscontainer{
+    @apply w-full h-full border-b flex flex-row items-center justify-evenly;
+}
+.actioncontainer{
+    @apply flex flex-row items-center justify-end gap-1 pr-1 w-[50%] mx-2;
+}
+.componentlabel{
+    @apply flex pt-1 md:pl-2 h-full w-full  tracking-tight text-gray-600 text-lg font-semibold;
+}
+
+.pairingsbutton{
+    @apply mb-2 px-2 py-1 bg-zinc-300 border border-gray-300 rounded underline hover:bg-white transition-colors duration-200;
+}
+
+.searchbar{
+    @apply w-full h-full flex flex-row items-center justify-center;
+}
+
+.searchinput{
+    @apply w-full h-full flex flex-row items-center justify-center py-1 px-2 m-1 bg-gray-200 hover:bg-gray-100 focus:bg-white focus:outline-gray-400 transition-colors duration-200
+}
+
+.actionButton{
+    @apply  px-2 py-1 block bg-zinc-300 border border-gray-300 rounded underline hover:bg-white text-xs transition-colors duration-200;
+}
+
+
+.moreActionContainer {
+    @apply flex flex-col items-end w-[50%];
+    position: relative; 
+  }
+  
+  .dropdownContainer {
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+  }
+  
+  .dropdownHidden {
+    display: none;
+  }
+  
+  .dropdownItems {
+    display: block; 
+    background: #fff; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  }
+  
+  .dropdownItem {
+    border-bottom: 1px solid #ddd; 
+  }
+  
+  .dropdownItem:last-child {
+    border-bottom: 0;
+  }
+  
+  .dropdownButton {
+    background: none; 
+    border: none; 
+    padding: 10px 20px; 
+    width: 100%; 
+    text-align: left;
+  }
+  
+  .dropdownButton:hover {
+    background: #f5f5f5;
+  }

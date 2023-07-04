@@ -7,11 +7,11 @@
 }
 
 .topcontainer{
-    @apply w-full flex flex-col md:flex-row md:items-center mt-10;
+    @apply w-full h-full flex flex-col md:flex-row md:items-center mt-10;
 }
 
 .photocontainer{
-    @apply w-full md:w-[50%]  h-full flex flex-col items-center  justify-center p-4 border-r md:border-b-0 border-gray-200;
+    @apply w-full md:w-[50%]  h-full flex flex-col items-center  justify-center p-4 md:border-r md:border-b-0 border-b border-r-0 border-gray-200;
 }
 
 .panelcontainer{
@@ -46,6 +46,10 @@
     @apply text-lg text-gray-600 mb-1 tracking-tight border border-gray-300 bg-gray-100 rounded-md px-2 py-1;
 }
 
+.ownercardcontainer {
+    @apply w-full h-full flex flex-col items-center justify-center mt-10;
+}
+
 .bottomcontainer{
-    @apply w-full h-20 flex items-center justify-center mt-10;
+    @apply w-full h-full p-2 flex items-center justify-center mt-10;
 }

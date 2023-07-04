@@ -24,20 +24,7 @@ export default function Dash( {session}) {
       <div className={s.topcontainer}>
        
      
-        <div className={s.actionscontainer}>
-          <label className={s.componentlabel}>My Animals</label>
-          
-            <div className={s.actioncontainer}>
-              <div className={s.filtercontainer}>
-                <select defaultValue={"all"} className={s.filter} onChange={(e)=>setAnimalType(e.target.value)}>
-                  <option  value="all">All</option>
-                  <option value="Crested Gecko">Crested Geckos</option>
-                  <option value="Ball Python">Ball Pythons</option>
-                  </select>
-              </div>
-              
-            </div>
-        </div>
+        
         <div className={s.animalscontainer}>
         {session && session !== null || session !== undefined ? <DashboardAnimalsComponent animalType={animalType} session={session}/> : <>No login session found.</>}
       </div>

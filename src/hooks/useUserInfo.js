@@ -1,25 +1,28 @@
-
 import { supabase } from '@/lib/supabaseClient';
 import { useQuery } from '@tanstack/react-query';
 
-async function getAnimalData(id) {
+async function getUserInfo(id) {
   const { data, error } = await supabase
-    .from('animals')
+    .from('profiles')
     .select(`
-      *,
-      photos (
-        img_url
-      )
+      full_name,
+      username,
+      website,
+      avatar_url,
+      bio
     `)
-    .eq('animal_id', id)
-    .eq('marked_for_deletion', false)
+    .eq('id', id)
+
 
   if (error) throw error;
+  else{
+    
+  }
   return data;
 }
 
-export function useAnimalData(id) {
-    return useQuery(['animalData', id], () => getAnimalData(id), {
+export function useUserInfo(id) {
+    return useQuery([`${id}-user-card-data`, id], () => getUserInfo(id), {
       enabled: !!id, // Only run the query if the `id` is not `null` or `undefined`
     });
   }

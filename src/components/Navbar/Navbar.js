@@ -24,6 +24,9 @@ export default function Navbar({session}) {
     <div className={s.container}>
         
         <div className={s.leftcontainer}>
+            <Link href='/'>
+                <img className={s.logo} src="/logo.png" alt="logo" />
+            </Link>
         </div>
         <div className={s.middlecontainer}>
 

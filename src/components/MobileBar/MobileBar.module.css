@@ -1,0 +1,21 @@
+.container{
+    @apply w-full h-full flex flex-row items-end justify-end border bg-gray-100;
+}
+.topcontainer{
+    @apply w-full h-full flex justify-center;
+}
+
+.items{
+    @apply h-full  flex flex-row w-full   ;
+}
+
+.item{
+    @apply w-full  flex flex-row justify-center  h-full;
+}
+
+.itemlink{
+    @apply transform hover:underline hover:text-blue-600 w-full border border-t-0 border-b-0 justify-center h-full flex flex-row gap-1 items-center py-4 ;
+}
+.text{
+    @apply md:block hidden;
+}

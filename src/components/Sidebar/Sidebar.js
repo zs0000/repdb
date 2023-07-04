@@ -1,9 +1,12 @@
-import Link from 'next/link';
-import s from './DashboardSidebar.module.css';
-import Image from 'next/image';
-
-
-export default function DashboardSidebar() {
+import React from 'react'
+import s from "./Sidebar.module.css"
+import Link from 'next/link'
+import { GiReptileTail } from 'react-icons/gi'
+import { CgProfile } from 'react-icons/cg'
+import { BsGrid } from 'react-icons/bs'
+import { MdJoinRight } from 'react-icons/md'
+import { AiOutlinePlusCircle, AiOutlineSearch } from 'react-icons/ai'
+export default function Sidebar() {
   return (
     <div className={s.container}>
             <div className={s.topcontainer}>
@@ -40,25 +43,41 @@ export default function DashboardSidebar() {
             <div className={s.items}>
                 <div className={s.item}>
                     <Link href="/dashboard" className={s.itemlink}>
+                      <BsGrid className={s.icon}/>
+                    <span className={s.text}>
                     Dashboard
+                    </span>
+                    </Link>
+                </div>
+                <div className={s.item}>
+                    <Link href="/search" className={s.itemlink}>
+                      <AiOutlineSearch className={s.icon}/>
+                      <span className={s.text}>Search</span>
                     </Link>
                 </div>
                 <div className={s.spacer}>
                   
                 </div>
                 <div className={s.item}>
-                    <Link href="/dashboard" className={s.itemlink}>
-                    My Profile
+                    <Link href="/profile" className={s.itemlink}>
+                      <CgProfile className={s.icon}/>
+                      <span className={s.text}>
+                      My Profile
+                      </span>
                     </Link>
                 </div>
                 <div className={s.item}>
                     <Link href="/animals" className={s.itemlink}>
-                    My Reptiles
+                      <GiReptileTail className={s.icon}/>
+                      <span className={s.text}>My Reptiles</span>
                     </Link>
                 </div>
                 <div className={s.item}>
                     <Link href="/animals/pairings" className={s.itemlink}>
+                      <MdJoinRight className={s.icon}/>
+                    <span className={s.text}>
                     My Pairings
+                    </span>
                     </Link>
                 </div>
                 <div className={s.spacer}>
@@ -66,16 +85,15 @@ export default function DashboardSidebar() {
                 </div>
                 <div className={s.item}>
                     <Link href="/animals/upload" className={s.itemlink}>
+                      <AiOutlinePlusCircle className={s.icon}/>
+                      <span className={s.text}>
                     New Reptile
+
+                    </span>
                     </Link>
                 </div>
-                <div className={s.item}>
-                    <Link href="/animals/upload" className={s.itemlink}>
-                    New Pairing
-                    </Link>
-                </div>
+                
             </div>
-   
-    </div>
+   </div>
   )
 }

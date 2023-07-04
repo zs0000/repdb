@@ -1,0 +1,43 @@
+.container{
+    @apply w-full h-full flex flex-col items-center;
+}
+.content{
+    @apply w-full h-full flex flex-col items-center bg-gray-100 px-4 pt-8 shadow-lg;
+}
+.topcontainer{
+    @apply w-full h-full   flex flex-row pb-8;
+}
+.bottomcontainer{
+    @apply w-full h-full flex flex-row items-center justify-evenly pb-4 ;
+}
+
+
+.imagecontainer{
+    @apply w-32 h-24 flex flex-col items-start justify-center ;
+}
+.image{
+    @apply  rounded-full object-cover object-center w-full h-full;
+}
+.textcontainer{
+    @apply w-full h-full flex flex-col items-start p-2;
+}
+
+.name{
+    @apply text-2xl font-semibold text-gray-800 hover:text-blue-600 hover:underline transition-colors duration-200 leading-none;
+}
+.location{
+    @apply text-sm font-semibold text-gray-500 ml-1;
+}
+.biocontainer{
+    @apply w-full h-full flex flex-col items-start p-2;
+}
+.bio{
+    @apply  tracking-tight font-semibold text-gray-600;
+}
+
+.itemcontainer{
+    @apply w-full h-full flex flex-col items-center justify-center truncate mx-1;
+}
+.item{
+    @apply px-2 py-1 rounded bg-gray-300 shadow-sm text-gray-700 text-center m-1 h-full w-full;
+}

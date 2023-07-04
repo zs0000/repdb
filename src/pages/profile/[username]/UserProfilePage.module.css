@@ -1,0 +1,15 @@
+.container{
+    @apply w-full h-full flex flex-row justify-center;
+}
+
+.content{
+    @apply w-full md:w-[90%] lg:w-[65%] xl:w-[50%]  h-full min-h-screen flex flex-col items-center py-1;
+}
+
+.sidebar{
+    @apply md:w-[30%] lg:w-[15%] xl:w-[10%] hidden  min-h-screen h-full md:flex bg-gray-100 border-r;
+}
+
+.topcontainer{
+    @apply w-full h-full flex flex-row items-center justify-center;
+}

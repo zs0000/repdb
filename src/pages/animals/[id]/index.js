@@ -1,10 +1,9 @@
 import AnimalProfile from '@/components/AnimalProfile/AnimalProfile'
 import Layout from '@/components/Layout/Layout'
-import { useAnimalData } from '@/hooks/useAnimalData'
+
 import { useSessionData } from '@/hooks/useSessionData'
 
-import { supabase } from '@/lib/supabaseClient'
-import { useQuery } from '@tanstack/react-query'
+
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 

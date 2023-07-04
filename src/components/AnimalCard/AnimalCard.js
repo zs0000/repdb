@@ -1,28 +1,13 @@
+import { useRouter } from "next/router"
 import s from "./AnimalCard.module.css"
 import Image from "next/image"
-import { useEffect, useState } from "react";
-import EditAnimalForm from "../EditAnimalForm/EditAnimalForm";
-import { supabase } from "@/lib/supabaseClient";
-import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
 
-export default function AnimalCard({animal,session}) {
 
-  const [animalName, setAnimalName] = useState('');
-  const [animalType, setAnimalType] = useState('');
-  const [animalGender, setAnimalGender] = useState('');
-  const [imageUrl, setImageUrl] = useState(null);
-  const [testState, setTestState] = useState(false);
-  const [modalKey, setModalKey] = useState(0);  // new state
-  
-  const [animalPairings, setAnimalPairings] = useState([]);
-  const [animaloffspring, setAnimalOffspring] = useState([]);
-  const [animalRelationships, setAnimalRelationships] = useState([]); // [pairings, offspring
-  const current = new Date();
-
+export default function AnimalCard({animal, handleSelectAnimal, selectedAnimals, actionState}) {
+  const router=useRouter()
  
   return (
-    <Link href={`/animals/${animal.animal_id}`}  className={s.container} >
+    <div onClick={actionState == null ? () => router.push(`/animals/${animal.animal_id}`) : ()=> handleSelectAnimal(animal)}  className={s.container} >
      
         <div className={s.imagecontainer}>
  
@@ -108,6 +93,6 @@ export default function AnimalCard({animal,session}) {
             
         </div>
         
-    </Link>
+    </div>
   )
 }

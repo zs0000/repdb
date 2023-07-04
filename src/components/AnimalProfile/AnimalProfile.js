@@ -2,6 +2,8 @@ import { useAnimalData } from '@/hooks/useAnimalData';
 import s from './AnimalProfile.module.css';
 import Image from 'next/image';
 import { BsGenderFemale, BsQuestionCircle } from 'react-icons/bs';
+import AnimalPairings from '../AnimalPairings/AnimalPairings';
+import AnimalOwnerCard from '../AnimalOwnerCard/AnimalOwnerCard';
 
 export default function AnimalProfile({id}) {
   const { data, status } = useAnimalData(id);
@@ -39,8 +41,11 @@ export default function AnimalProfile({id}) {
         </div>
         
         </div>
+        <div className={s.ownercardcontainer}>
+          <AnimalOwnerCard id={data[0].animal_owned_by_user_id}/>
+        </div>
         <div className={s.bottomcontainer}>
-
+            {data ? <AnimalPairings animal={data[0]}/> : null}
         </div>
       </div>
     </div>

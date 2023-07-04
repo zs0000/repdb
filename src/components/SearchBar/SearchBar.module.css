@@ -1,0 +1,12 @@
+.searchForm {
+    @apply flex flex-wrap w-full max-w-sm mx-auto;
+  }
+  
+  .searchInput {
+    @apply flex-grow w-full sm:w-auto rounded-md p-2 border-2 border-gray-200 focus:border-blue-500 m-1;
+  }
+  
+  .searchButton {
+    @apply px-4 rounded-md bg-blue-500 text-white m-1;
+  }
+  

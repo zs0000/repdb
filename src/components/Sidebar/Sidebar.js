@@ -5,8 +5,17 @@ import { GiReptileTail } from 'react-icons/gi'
 import { CgProfile } from 'react-icons/cg'
 import { BsGrid } from 'react-icons/bs'
 import { MdJoinRight } from 'react-icons/md'
-import { AiOutlinePlusCircle, AiOutlineSearch } from 'react-icons/ai'
+import { AiOutlineLogout, AiOutlinePlusCircle, AiOutlineSearch } from 'react-icons/ai'
+import { supabase } from '@/lib/supabaseClient'
+import { useRouter } from 'next/router'
 export default function Sidebar() {
+
+  const router = useRouter()
+  async function handleSignout() {
+    supabase.auth.signOut()
+    router.push('/')
+  }
+
   return (
     <div className={s.container}>
             <div className={s.topcontainer}>
@@ -91,6 +100,15 @@ export default function Sidebar() {
 
                     </span>
                     </Link>
+                </div>
+                <div className={s.item}>
+                    <button onClick={()=>supabase.auth.signOut()} className={s.itemlink}>
+                      <AiOutlineLogout className={s.icon}/>
+                      <span className={s.text}>
+                    Sign out
+
+                    </span>
+                    </button>
                 </div>
                 
             </div>

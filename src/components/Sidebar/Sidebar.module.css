@@ -1,5 +1,5 @@
 .container{
-    @apply w-full h-full p-4 min-h-screen flex flex-col items-end;
+    @apply w-full h-full p-4 min-h-screen flex flex-col items-end bg-gray-100;
 }
 .topcontainer{
     @apply w-full h-full flex justify-center;

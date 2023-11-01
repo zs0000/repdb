@@ -4,7 +4,7 @@ import s from './AnimalPairingsCard2.module.css'
 import Image from 'next/image'
 export default function AnimalPairingsCard2({animal}) {
   return (
-    <Link href={`/animal/${animal.animal_id}`} className={s.container}>
+    <Link href={`/animals/${animal.animal_id}`} className={s.container}>
     <div className={s.content}>
         <div className={s.photocontainer}>
             <Image className={s.photo} src={animal.photos[0].img_url} alt={animal.animal_type} width={200} height={150} />

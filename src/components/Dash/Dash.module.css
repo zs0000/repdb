@@ -1,5 +1,5 @@
 .container{
-    @apply w-full md:w-[90%] lg:w-[65%] xl:w-[50%] h-full min-h-screen flex flex-col items-center bg-white pt-4;
+    @apply w-full  h-full min-h-screen flex flex-col items-center bg-white pt-4;
 }
 
 .animalscontainer{

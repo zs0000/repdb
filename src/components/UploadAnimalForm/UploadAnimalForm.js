@@ -325,7 +325,7 @@ useEffect(() => {
     }
 }
   return (
-    <form className='flex flex-row justify-center w-full h-full md:w-[90%] lg:w-[65%] xl:w-[55%]' onSubmit={handleSubmit}>
+    <form className='flex flex-row justify-center w-full h-full ' onSubmit={handleSubmit}>
           <div className='flex flex-col items-center w-full'>
           <div className='w-full flex flex-row justify-evenly md:mb-2'>
           <label className="block w-[33%]  ">

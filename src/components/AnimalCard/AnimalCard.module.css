@@ -1,11 +1,11 @@
 
 .container{
-    @apply flex flex-col justify-start items-center w-full  h-[300px]  rounded-lg bg-white shadow transition-all duration-200 ease-in-out hover:scale-105 hover:cursor-pointer hover:shadow;
+    @apply flex flex-col justify-start items-center w-full  h-[250px]  rounded-lg bg-white transition-all duration-200 ease-in-out hover:scale-105 hover:cursor-pointer shadow-lg hover:shadow;
     
 }
 .imagecontainer {
     width: 100%;
-    height: 80%;
+    height: 70%;
     overflow: hidden;
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
@@ -22,17 +22,20 @@
     object-position: center;
 }
 .infocontainer{
-    @apply px-2 pt-2;
+    @apply p-1;
     width: 100%;
     height: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+
+
+}
+
+.titlecontainer{
+    @apply flex flex-row justify-center items-center w-full border-b border-gray-100;
 }
 .name {
-    @apply text-lg font-semibold text-gray-800;
+    @apply text-xl tracking-tight font-semibold text-gray-800  ;
 }
 .gender {
     @apply text-sm font-light text-gray-600 px-1;
@@ -42,18 +45,22 @@
 }
 
 .gene{
-    @apply text-xs font-light tracking-tight text-gray-500 mx-[2px] px-[2px] py-[1px] border bg-slate-100;
+    @apply text-xs  font-light tracking-tight text-gray-500 px-[6px] py-[2px] bg-gray-100;
+}
+
+.genescontainer{
+    @apply px-2 w-full  flex flex-wrap gap-1 ;
 }
 
 .label{
-    @apply flex flex-row justify-center items-center  mx-[2px] px-[2px] py-[1px] ;
+    @apply flex flex-row items-center w-full  mx-[2px] px-[2px] py-[1px] ;
 }
 
 .gecko{
-    @apply text-xs font-light tracking-tight text-gray-500 mx-[2px] px-[2px] py-[1px] border border-gray-200 bg-emerald-100;
+    @apply text-xs font-light tracking-tight text-gray-500 mx-[2px] px-[2px] py-[1px];
 }
 .snake{
-    @apply text-xs font-light tracking-tight text-gray-500 mx-[2px] px-[2px] py-[1px] border border-gray-200 bg-amber-100;
+    @apply text-xs font-light tracking-tight text-gray-500 mx-[2px] px-[2px] py-[1px];
 }
 
 .pairing{

@@ -1,7 +1,11 @@
+.container{
+    @apply w-full h-full min-h-screen flex flex-row justify-center bg-gray-100;
+}
+
 .content{
-    @apply w-full h-full min-h-screen flex flex-row justify-center pr-2;
+    @apply w-full md:w-[90%] lg:w-[65%] xl:w-[50%] px-2  h-[100%] min-h-screen shadow-2xl flex flex-col items-center border-l py-1 bg-white;
 }
 
 .sidebar{
-    @apply w-[30%] lg:w-[15%] xl:w-[10%] h-full flex  border-r mr-2;
+    @apply md:w-[30%] lg:w-[15%] xl:w-[10%] hidden  min-h-screen h-[100%] md:flex;
 }

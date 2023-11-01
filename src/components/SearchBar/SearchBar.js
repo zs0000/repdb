@@ -133,7 +133,7 @@ const genesMap = {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={s.searchForm}>
       <input
         type="text"
         placeholder="Search for an animal"
@@ -167,7 +167,7 @@ className={s.searchInput}
 ))}
 {/* ... */}
 </select>
-      <button type="submit">Search</button>
+      <button className={s.searchButton} type="submit">Search</button>
     </form>
   );
 }

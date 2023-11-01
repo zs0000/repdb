@@ -3,9 +3,10 @@ import Layout from '@/components/Layout/Layout'
 
 import { useSessionData } from '@/hooks/useSessionData'
 
-
+import s from "./AnimalProfilePage.module.css"
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
+import Sidebar from '@/components/Sidebar/Sidebar'
 
 export default function AnimalProfilePage() {
   const router = useRouter()
@@ -17,7 +18,14 @@ export default function AnimalProfilePage() {
 
   return (
     <Layout session={data}>
-      <AnimalProfile id={id}/>
+      <div className={s.container}>
+        <div className={s.sidebar}>
+          <Sidebar/>
+        </div>
+        <div className={s.content}>
+        <AnimalProfile id={id}/>
+        </div>
+      </div>
     </Layout>
   )
 }

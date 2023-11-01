@@ -1,0 +1,16 @@
+.container{
+    @apply w-full h-[15%] flex flex-col justify-center items-center;
+}
+.content{
+    @apply w-full h-full flex flex-col justify-center items-center;
+}
+.topverticalconnector{
+    @apply px-[1px] h-[60%] w-[1px] bg-gray-300;
+}
+.bottomverticalconnector{
+    @apply px-[1px] h-[40%] w-[1px] bg-gray-300;
+}
+
+.node{
+    @apply w-[50px] h-[50px] flex flex-col text-base bg-[#e0f4ff] items-center justify-center border rounded border-gray-400;
+}

@@ -1,5 +1,5 @@
 .searchForm {
-    @apply flex flex-wrap w-full max-w-sm mx-auto;
+    @apply flex flex-wrap w-full  mx-auto border-b border-gray-300;
   }
   
   .searchInput {
@@ -7,6 +7,6 @@
   }
   
   .searchButton {
-    @apply px-4 rounded-md bg-blue-500 text-white m-1;
+    @apply px-4 py-1 rounded-md block w-full bg-blue-500 text-white m-1;
   }
   

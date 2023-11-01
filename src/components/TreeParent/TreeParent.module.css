@@ -1,0 +1,26 @@
+.container{
+    @apply w-full flex flex-col;
+}
+.content{
+    @apply w-full flex flex-row justify-center;
+}
+.othercontent{
+    @apply w-full h-full flex flex-col items-center;
+}
+
+.parentone{
+    @apply h-[150px] w-[150px] flex flex-col items-center justify-center border rounded border-gray-400;
+}
+.parenttwo{
+    @apply h-[150px] w-[150px] flex flex-col items-center justify-center border rounded border-gray-400;
+}
+.connector{
+    @apply w-[20%] h-full flex flex-col justify-center items-center;
+}
+.horizontalconnector{
+    @apply py-[1px] w-full bg-gray-300 mt-8;
+}
+
+.verticalconnector{
+    @apply px-[1px] h-full w-[1px] bg-gray-300;
+}

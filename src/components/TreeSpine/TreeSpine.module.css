@@ -1,0 +1,15 @@
+.container{
+    @apply w-full flex flex-col justify-center items-center;
+}
+
+.content{
+    @apply h-full w-full flex flex-row justify-evenly gap-4;
+}
+
+.horizontalconnector{
+    @apply w-full h-[1px] bg-gray-700;
+}
+
+.branch{
+    @apply w-full;
+}

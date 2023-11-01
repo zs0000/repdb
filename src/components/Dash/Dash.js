@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import DashboardAnimalsComponent from "../DashboardAnimalsComponent/DashboardAnimalsComponent"
 import DashboardBanner from "../DashboardBanner/DashboardBanner"
 import Link from "next/link"
+import DashboardRecentlyAdded from "../DashboardRecentlyAdded/DashboardRecentlyAdded"
 export default function Dash( {session}) {
   
   const [loading, setLoading] = useState(true)
@@ -26,7 +27,7 @@ export default function Dash( {session}) {
      
         
         <div className={s.animalscontainer}>
-        {session && session !== null || session !== undefined ? <DashboardAnimalsComponent animalType={animalType} session={session}/> : <>No login session found.</>}
+        {session && session !== null || session !== undefined ? <DashboardRecentlyAdded session={session} /> : <>No login session found.</>}
       </div>
     </div>
       

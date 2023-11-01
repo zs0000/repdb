@@ -5,6 +5,7 @@ import DashboardSidebar from "@/components/DashboardSidebar/DashboardSidebar"
 import { useUserAnimalData } from "@/hooks/useUserAnimals"
 import { useSessionData } from "@/hooks/useSessionData"
 import { useRouter } from "next/router"
+import Sidebar from "@/components/Sidebar/Sidebar"
 
 export default function Dashboard() {
   const router = useRouter()
@@ -19,13 +20,15 @@ export default function Dashboard() {
   }
   return (
    <Layout session={data.session}>
-   
-    <div className={s.content}>
-      <div className={s.sidebar}>
-        <DashboardSidebar/>
+   <div className={s.container}>
+   <div className={s.sidebar}>
+        <Sidebar/>
       </div>
+    <div className={s.content}>
+      
       <Dash session={data.session} />
     </div>
+   </div>
    
    </Layout>
   )

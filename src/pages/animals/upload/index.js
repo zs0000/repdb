@@ -8,6 +8,7 @@ import { useEffect, useReducer, useState } from 'react';
 import { getImageData, useS3Upload } from "next-s3-upload";
 import UploadAnimalForm from '@/components/UploadAnimalForm/UploadAnimalForm';
 import s from "./upload.module.css"
+import Sidebar from '@/components/Sidebar/Sidebar';
 export default function UploadPage() {
     const [session, setSession] = useState(null)
     const [fetching, setFetching] = useState(true)
@@ -27,9 +28,14 @@ export default function UploadPage() {
     if(session===null || session=== undefined) return router.push('/login')
   return (
     <Layout session={session}>
-        <div className={s.content}>
+       <div className={s.container}>
+        <div className={s.sidebar}>
+          <Sidebar/>
+        </div>
+       <div className={s.content}>
         {session && <UploadAnimalForm session={session}/>}
         </div>
+       </div>
     </Layout>
   )
 }

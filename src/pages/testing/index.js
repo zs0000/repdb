@@ -1,4 +1,4 @@
-import Test from "@/components/Test/Test"
+import Test from "@/components/Test2/Test2"
 
 export default function Home() {
   const lineageData = [

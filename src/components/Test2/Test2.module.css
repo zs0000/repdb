@@ -1,0 +1,65 @@
+.lineageTree {
+    position: relative;
+    padding: 2rem;
+}
+
+.spine {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: black;
+}
+
+.verticalConnector {
+    position: absolute;
+    top: 50%;
+    bottom: 0;
+    width: 1px;
+    background-color: black;
+    z-index: -1;
+}
+
+.generation {
+    
+    position: absolute;
+    
+    
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    z-index: 1;
+}
+
+.branch {
+
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.node {
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mateConnector {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1px;
+    background-color: black;
+    align-self: center;
+    position: relative;
+    z-index: 1;
+}
+
+.individual {
+    width: 20px;
+    height: 20px;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+/* Individual gender styles can be added as required */

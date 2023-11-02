@@ -1,54 +1,54 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Test.module.css';
 
 export default function LineageTree({ data }) {
-    console.log(data)
-    const totalGenerations = data.length;
-    return (
+  return (
       <div className={styles.lineageTree}>
-        <div className={styles.spine}></div>
-        {data.map((generation, genIdx) => (
-          <Generation 
-            generation={generation.nodes} 
-            key={genIdx} 
-            position={`${(genIdx / (totalGenerations - 1)) * 100}%`} 
-          />
-        ))}
+          <div className={styles.spine}></div>
+          {data.map((generation, genIdx) => (
+              <Generation
+                  generation={generation}
+                  key={genIdx}
+                  position={`${(genIdx / (data.length - 1)) * 100}%`}
+              />
+          ))}
       </div>
-    );
-  }
-  
-  function Generation({ generation, position }) {
+  );
+}
 
-    const totalNodes = generation.length;
-    return (
+function Generation({ generation, position }) {
+  return (
       <div className={styles.generation} style={{ top: position }}>
-        {generation.map((node, nodeIdx) => (
-          <div 
-          key={nodeIdx}
-            className={styles.branch} 
-            style={{ left: `${(nodeIdx / (totalNodes - 1)) * 100}%` }}
-          >
-            <div className={styles.nodeConnector}></div>
-            <Node node={node} />
-          </div>
-        ))}
+          {generation.branches?.map((branch, branchIdx) => (
+              <Branch
+                  branch={branch}
+                  key={branchIdx}
+                  position={`${(branchIdx / (generation.branches.length - 1)) * 100}%`}
+              />
+          ))}
+          <div className={styles.verticalConnector}></div>
+          <div className={styles.horizontalConnector}></div>  {/* New horizontal connector */}
       </div>
-    );
-  }
-  
-  // ... rest of the code remains the same
-  
-  
-  function Branch({ branch, totalNodes, position }) {
-    return (
-      <div className={styles.branch} style={{ left: `${(position / (totalNodes - 1)) * 100}%` }}>
-        <div className={styles.nodeConnector}></div>
-        <Node node={branch.nodes[0]} />
-        {branch.nodes[1] && <Node node={branch.nodes[1]} />}
+  );
+}
+
+Generation.propTypes = {
+  generation: PropTypes.object.isRequired,
+  position: PropTypes.string.isRequired,
+};
+
+function Branch({ branch, position }) {
+  return (
+      <div className={styles.branch} style={{ left: position }}>
+          <div className={styles.nodeConnector}></div>
+          {branch.nodes?.map((node, nodeIdx) => (
+              <Node node={node} key={nodeIdx} />
+          ))}
+          <div className={styles.branchSpine}></div>
       </div>
-    );
-  }
+  );
+}
 
 function Node({ node }) {
   return (
@@ -56,6 +56,7 @@ function Node({ node }) {
       <div
         className={`${styles.individual} ${styles[node.gender]}`}
         style={{ backgroundColor: node.color }}
+        role="presentation"
       />
       {node.mate && (
         <>
@@ -63,9 +64,15 @@ function Node({ node }) {
           <div
             className={`${styles.individual} ${styles[node.mate.gender]}`}
             style={{ backgroundColor: node.mate.color }}
+            role="presentation"
           />
         </>
       )}
     </div>
   );
 }
+
+Node.propTypes = {
+  node: PropTypes.object.isRequired,
+};
+

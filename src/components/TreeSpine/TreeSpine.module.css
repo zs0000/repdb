@@ -2,14 +2,20 @@
     @apply w-full flex flex-col justify-center items-center;
 }
 
-.content{
-    @apply h-full w-full flex flex-row justify-evenly gap-4;
+.content {
+    @apply h-full w-full flex flex-row gap-10;
+    justify-content: space-between;
 }
 
+
+.branchcontainer{
+    @apply flex flex-col items-end justify-end w-full;
+
+}
+.finalbranchcontainer{
+    @apply flex flex-col justify-end w-full;
+
+}
 .horizontalconnector{
-    @apply w-full h-[1px] bg-gray-700;
-}
-
-.branch{
-    @apply w-full;
+    @apply h-[1px] bg-gray-300 w-1/2 -mb-[1px];
 }

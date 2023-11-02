@@ -1,7 +1,7 @@
 .lineageTree {
     position: relative;
     padding: 2rem;
-    height: 400px;  /* Can be adjusted based on your needs */
+    height: auto;
 }
 
 .spine {
@@ -11,7 +11,6 @@
     bottom: 0;
     width: 1px;
     background-color: black;
-
 }
 
 .verticalConnector {
@@ -21,6 +20,14 @@
     width: 1px;
     background-color: black;
     z-index: -1;
+}
+.horizontalConnector {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;  /* Position at the top */
+    height: 1px;
+    background-color: black;
 }
 
 .generation {
@@ -33,6 +40,7 @@
 
 .branchSpine {
     position: absolute;
+    left: 50%;
     top: 0;
     bottom: 0;
     width: 1px;
@@ -48,25 +56,29 @@
 }
 
 .nodeConnector {
-    flex: 1;
+    position: absolute;
+    top: 0;
+    height: 2rem;  /* Adjusted height */
     width: 1px;
     background-color: black;
+    left: 50%;  
     z-index: -1;
 }
 
 .node {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    position: relative;
+    margin-top: 2rem;  /* Adjusted margin */
 }
 
 .mateConnector {
-    flex-shrink: 0;
+    position: absolute;
+    top: 50%;
+    left: 100%;
     width: 1rem;
     height: 1px;
     background-color: black;
-    align-self: center;
-    position: relative;
     z-index: 1;
 }
 
@@ -74,6 +86,7 @@
     width: 20px;
     height: 20px;
     clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    /* border-radius: 50%; removed to allow clip-path to take effect */
 }
 
 /* Individual gender styles can be added as required */

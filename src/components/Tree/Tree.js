@@ -1,10 +1,12 @@
+import { useTreeData } from "@/hooks/useTreeData"
 import TreeBranch from "../TreeBranch/TreeBranch"
 import TreeNode from "../TreeNode/TreeNode"
 import TreeParent from "../TreeParent/TreeParent"
 import TreeSpine from "../TreeSpine/TreeSpine"
 import s from "./Tree.module.css"
+import { useState } from "react"
 
-export default function Tree({generations}) {
+export default function Tree({id}) {
   const exampleParents = [
     {
       name: "John Doe",
@@ -62,11 +64,19 @@ export default function Tree({generations}) {
 
     
   ]
+  const [parents, setParents] = useState([])
+  const [children, setChildren] = useState([])
+  const {data, status} = useTreeData(id)
+  if(status === "loading") return <div>Loading...</div>
+  if(status === "error") return <div>Error...</div>
+
+  console.log(data, "data")
+
   return (
     <div className={s.container}>
         <div className={s.content}>
-            <TreeParent/>
-            <TreeSpine generations={exampleChildren}/>
+            <TreeParent id={id} parents={data.parents}/>
+            <TreeSpine id={id} generations={data.generations}/>
         </div>
     </div>
   )

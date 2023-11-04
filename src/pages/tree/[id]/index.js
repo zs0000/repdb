@@ -4,10 +4,12 @@ import Tree from '@/components/Tree/Tree'
 import TreeAnimalSelector from '@/components/TreeAnimalSelector/TreeAnimalSelector'
 import { useSessionData } from '@/hooks/useSessionData'
 import { useRouter } from 'next/router'
+import s from "./CustomTreePage.module.css"
 import React from 'react'
 
 export default function CustomTreePage() {
   const router = useRouter()
+  const {id} = router.query
   const {data, status} = useSessionData()
 
   if(status === "loading") return <div>Loading...</div>
@@ -25,8 +27,8 @@ return (
           <Sidebar />
       </div>
       <div className={s.content}>
-          <TreeAnimalSelector session={data.session} />
-          <Tree>
+         
+          <Tree id={id}>
 
           </Tree>
       </div>

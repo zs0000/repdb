@@ -1,20 +1,17 @@
 import { useState } from "react"
 import s from "./TreeParent.module.css"
+import TreeLeaf from "../TreeLeaf/TreeLeaf"
 
-export default function TreeParent() {
+export default function TreeParent({parents}) {
+    console.log(parents)
     const [twoParents, setTwoParents] = useState(true)
   return (
     <div className={s.container}>
-        <div className={s.buttoncontainer}>
-            <button className={s.button} onClick={(e)=> setTwoParents(!twoParents)}>
-                Toggle Parent(s)
-            </button>
-        </div>
-        <div className={twoParents ? s.content : s.othercontent}>
+        
+        <div className={ s.content}>
             <div className={s.parentone}>
-            Parent 1
+                <TreeLeaf animal={parents.mom} />
             </div>
-            {twoParents ? <>
             <div className={s.connector}>
                 <div className={s.horizontalconnector}>
 
@@ -24,17 +21,10 @@ export default function TreeParent() {
                 </div>
             </div>
             <div className={s.parenttwo}>
-                Parent 2
+                <TreeLeaf animal={parents.dad} />
             </div> 
-            </>
-            : 
-            <>
-            <div className={s.connector}>
-                <div className={s.verticalconnector}>
-
-                </div>
-                </div>
-            </>}
+           
+            
         </div>
     </div>
   )

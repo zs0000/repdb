@@ -3,8 +3,8 @@ import React from 'react';
 import s from "./TreeSpine.module.css";
 import TreeBranch from '../TreeBranch/TreeBranch';
 
-export default function TreeSpine({ generations }) {
-
+export default function TreeSpine({ id, generations }) {
+  console.log(generations)
   return (
     <div className={s.container}>
       <span className={s.horizontalconnector}></span>
@@ -15,7 +15,7 @@ export default function TreeSpine({ generations }) {
             </div>
   
            <TreeBranch generation={generation} />
-       
+            
             
           </div>
         ))}

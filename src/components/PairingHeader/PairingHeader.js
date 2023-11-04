@@ -22,7 +22,6 @@ export default function PairingHeader({id, animals}) {
 
     if(status === "loading") return <div>Loading...</div>
     if(status === "error") return <div>Error...</div>
-    console.log(data)
 
 
 

@@ -3,27 +3,33 @@ import s from './ChildrenComponent.module.css'
 import { usePairingsChildren } from '@/hooks/usePairingChildren'
 import BasicAnimalCard from '../BasicAnimalCard/BasicAnimalCard'
 import { supabase } from '@/lib/supabaseClient'
+import GenerationComponent from '../GenerationComponent/GenerationComponent'
 export default function ChildrenComponent({id, animals}) {
 
     const {data, status} = usePairingsChildren({id})
-   
-    const grabGenerationsAnimals = () => {
-        const generationsAnimals = []
+
+     function grabGenerationsAnimals(generation){
+        console.log(generation)
+        const generationAnimals = []
+        generation.forEach((animal) => {
+            generationAnimals.push(animals.find((item) => item.animal_id === animal))
+        })
+        return generationAnimals
     }
-        
+   
+  
 
     if(status === "loading") return <div>Loading...</div>
     if(status === "error") return <div>Error...</div>
-
     console.log(data)
   return (
     <div className={s.container}>
         <div className={s.content}>
             {data.length ===0 ? 
                 <NoChildren id={id} animals={animals} />
-     : data.map((child) => (
-                <div key={child.animal_id} className={s.generations}>
-                    {/* Generation component*/}
+     : data.map((generation, generationIDX) => (
+                <div key={generationIDX}  className={s.generations}>
+                    <GenerationComponent generationIDX={generationIDX} generation={grabGenerationsAnimals(generation)} />
                 </div>
                 )) }
         </div>

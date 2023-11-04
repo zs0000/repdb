@@ -22,3 +22,7 @@
 .nochildcontainer{
     @apply w-full h-full flex flex-col items-center;
 }
+
+.generations{
+    @apply w-full h-full ;
+}

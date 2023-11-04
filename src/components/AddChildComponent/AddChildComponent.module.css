@@ -1,0 +1,15 @@
+.container{
+    @apply w-full h-full flex flex-col items-center;
+}
+
+.content{
+    @apply w-full h-full flex flex-col items-center;
+}
+
+.header{
+    @apply w-full h-[20%] flex flex-row justify-center items-center;
+}
+
+.childrencontainer{
+    @apply w-full flex flex-col items-center h-full py-2;
+}

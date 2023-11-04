@@ -1,0 +1,15 @@
+.labelcontainer{
+    @apply w-full font-bold text-xl tracking-tight;
+}
+
+.animaltype{
+    @apply tracking-wider text-gray-400 text-sm;
+}
+
+.trait{
+    @apply tracking-tighter text-sm text-gray-500 truncate; 
+}
+
+.traits{
+    @apply w-full grid grid-cols-3 truncate;
+}

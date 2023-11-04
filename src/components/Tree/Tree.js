@@ -4,58 +4,69 @@ import TreeParent from "../TreeParent/TreeParent"
 import TreeSpine from "../TreeSpine/TreeSpine"
 import s from "./Tree.module.css"
 
-export default function Tree() {
-  const generations = [
-   
-      [
-        {
-          name: "Child 1",
-          color: "blue",
-          mate:{
-            name: "Mate 1",
-            color: "pink",
-          }
-        },
-        {
-          name: "Child 2",
-          color: "blue",
-          mate:{
-            name: "Mate 2",
-            color: "pink",
-          }
-        },
-        {
-          name: "Child 3",
-          color: "blue",
-          mate:{
-            name: "Mate 3",
-            color: "pink",
-          }
-        },
-      ] 
-    ,
+export default function Tree({generations}) {
+  const exampleParents = [
+    {
+      name: "John Doe",
+      id: 1,
+      image_url:"https://static-cdn.jtvnw.net/ttv-boxart/509658-188x250.jpg",
+    },
+    {
+      name: "Mary Doe",
+      id: 2,
+      image_url:"https://static-cdn.jtvnw.net/ttv-boxart/2009321156_IGDB-188x250.jpg",
+    }
+  ]
+  const exampleChildren = [
+    
+      
+        [{
+      name: "Jane Doe",
+      id: 3,
+      image_url:"https://static-cdn.jtvnw.net/ttv-boxart/509658-188x250.jpg",
+    },
+    {
+      name: "John Doe Jr.",
+      id: 4,
+      image_url:"https://static-cdn.jtvnw.net/ttv-boxart/2009321156_IGDB-188x250.jpg",
+    },
+    {
+      name: "Jane Doe",
+      id: 5,
+      image_url:"https://static-cdn.jtvnw.net/ttv-boxart/509658-188x250.jpg",
+    },],
     [
-        {
-          name: "Child 5",
-          color: "blue",
-          mate:{
-            name: "Mate 3",
-            color: "pink",
-          }
-        },
-        {
-          name: "Child 6",
-          color: "blue",
-          mate:{}
-        },
-      ] 
-  
+      {
+        name: "John Doe Jr.",
+        id: 65,
+        image_url:"https://static-cdn.jtvnw.net/ttv-boxart/2009321156_IGDB-188x250.jpg",
+      },
+      {
+        name: "John Doe Jr.",
+        id: 65,
+        image_url:"https://static-cdn.jtvnw.net/ttv-boxart/2009321156_IGDB-188x250.jpg",
+      }],
+    [
+      {
+        name: "John Doe Jr.",
+        id: 65,
+        image_url:"https://static-cdn.jtvnw.net/ttv-boxart/2009321156_IGDB-188x250.jpg",
+      },
+ 
+    {
+      name: "John Doe Jr.",
+      id: 75,
+      image_url:"https://static-cdn.jtvnw.net/ttv-boxart/2009321156_IGDB-188x250.jpg",
+    }],
+    
+
+    
   ]
   return (
     <div className={s.container}>
         <div className={s.content}>
             <TreeParent/>
-            <TreeSpine generations={generations}/>
+            <TreeSpine generations={exampleChildren}/>
         </div>
     </div>
   )

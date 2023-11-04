@@ -7,7 +7,7 @@
 }
 
 .child {
-    @apply flex flex-col items-center text-center justify-center border border-gray-400 w-auto;
+    @apply flex flex-col items-center text-center justify-center shadow-lg border border-gray-300 text-sm flex-wrap w-[80px] h-[55px];
 
 }
 

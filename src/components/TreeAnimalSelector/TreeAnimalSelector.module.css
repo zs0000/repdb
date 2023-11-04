@@ -1,0 +1,31 @@
+.container{
+    @apply w-full h-full flex flex-col items-center;
+}
+
+.content{
+    @apply w-full h-[20vh] flex flex-col items-center;
+}
+
+.carousel {
+    @apply w-[80%] h-[80%] flex flex-col items-center border border-r-0 border-l-0;
+}
+
+.items{ 
+    @apply w-full h-full flex gap-2 flex-row justify-center items-center;
+}
+
+.item{
+    @apply border border-gray-300 w-[20%] h-[80%] flex flex-col items-center justify-center hover:transition-colors duration-200 hover:border-gray-400 hover:shadow-lg hover:cursor-pointer; 
+}
+
+.activeitem{
+    @apply border border-green-600 shadow-xl w-[20%] h-[80%] flex flex-col items-center justify-center hover:transition-colors duration-200 hover:border-green-400 hover:shadow-lg hover:cursor-pointer; 
+}
+
+.statuslabel{
+    @apply text-gray-500 mr-2
+}
+
+.status{
+    @apply tracking-tight font-semibold text-blue-800;
+}

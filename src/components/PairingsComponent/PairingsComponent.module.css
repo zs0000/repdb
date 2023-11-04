@@ -1,0 +1,11 @@
+.item{
+    @apply w-[20vw] h-[14vh] border border-gray-300 ;
+}
+
+.itemcontent{
+    @apply w-full h-full flex flex-col justify-center items-center;
+}
+
+.name{
+    @apply text-lg font-semibold tracking-tight underline;
+}

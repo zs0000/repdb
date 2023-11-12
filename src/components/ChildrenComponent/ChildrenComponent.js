@@ -27,40 +27,41 @@ export default function ChildrenComponent({id, animals}) {
         <div className={s.content}>
             {data.length ===0 ? 
                 <NoChildren id={id} animals={animals} />
-     : data.map((generation, generationIDX) => (
+     : 
+    <div className={s.hasanimals}>
+        <div>
+            <SearchBar animals={animals} id={id} />
+        </div>
+        {data.map((generation, generationIDX) => (
                 <div key={generationIDX}  className={s.generations}>
                     <GenerationComponent generationIDX={generationIDX} generation={grabGenerationsAnimals(generation)} />
                 </div>
-                )) }
+                ))}
+    </div> }
         </div>
     </div>
   )
 }
 
-
-const NoChildren = ({animals, id}) => {
-    console.log(animals)
-    const [selectedAnimals, setSelectedAnimals] = useState([])
-    const [generation, setGeneration] = useState(1)
-    const [filteredAnimals, setFilteredAnimals] = useState(animals)
+const SearchBar = ({animals, id, data}) => {
     const [searchValue, setSearchValue] = useState("")
     const [searchResults, setSearchResults] = useState([])
+    const [filteredAnimals, setFilteredAnimals] = useState(animals)
+    const [selectedAnimals, setSelectedAnimals] = useState([])
+    const [generation, setGeneration] = useState(1)
 
-
-  
-    const handleSearch = (e) => {
-        const searchValue = e.target.value
-        setSearchValue(searchValue)
-        const filteredAnimals = animals.filter((animal) => {
-            return animal.animal_name.toLowerCase().includes(searchValue.toLowerCase())
-        })
-        setFilteredAnimals(filteredAnimals)
+    const filterViableAnimals = (animals) => {
+    //filter out parents, and animals that are already children of the pairing
+    const viableChildren = []
+    
     }
+
 
     const handleSelectChild = (animal) => {
         if(selectedAnimals.includes(animal)){
             setSelectedAnimals(selectedAnimals.filter((item) => item !== animal))
         } else
+      
         setSelectedAnimals([...selectedAnimals, animal])
     }
 
@@ -84,9 +85,17 @@ const NoChildren = ({animals, id}) => {
               console.log(err.message)
        }
     }
-    return(
-        <div className={s.nochildcontainer}>
-            <div>
+    const handleSearch = (e) => {
+        const searchValue = e.target.value
+        setSearchValue(searchValue)
+        const filteredAnimals = animals.filter((animal) => {
+            return animal.animal_name.toLowerCase().includes(searchValue.toLowerCase())
+        })
+        setFilteredAnimals(filteredAnimals)
+    }
+return(
+    <div className={s.searchcontainer}>
+        <div>
                 <h3>Select offspring for Clutch/Generation #{generation}</h3>
            
             </div>
@@ -95,17 +104,35 @@ const NoChildren = ({animals, id}) => {
                 add
             </button>
         </div>
-        <div className={s.searchcontainer}>
-        <input placeholder="search" type="text" onChange={(e)=> handleSearch(e)} />
-        </div>
-        <div className={s.animals}>
-            {filteredAnimals ? filteredAnimals.map((animal) => (
-            <div onClick={()=>handleSelectChild(animal)} className={selectedAnimals.includes(animal) ? s.selectedanimal : s.animal} key={animal.animal_id}>
+    <div className={s.inputcontainer}>
+    <input placeholder="search" type="text" onChange={(e)=> handleSearch(e)} />
+    </div>
+    <div className={s.results}>
+        {filteredAnimals ? filteredAnimals.map((animal) => (
+            <div className={selectedAnimals.includes(animal) ? s.selectedanimal : s.animal} onClick={()=>handleSelectChild(animal)} key={animal.animal_id}>
                 <BasicAnimalCard animal={animal} />
             </div>
-            )) : <div>No animals</div>    
-            }
-        </div>
+        )) : <div>No animals</div>
+        }
+
+
+    </div>
+    </div>
+)
+}
+
+
+const NoChildren = ({animals, id}) => {
+
+
+    
+    return(
+        <div className={s.nochildcontainer}>
+            
+        
+       
+            <SearchBar animals={animals} id={id} />
+   
         
         </div>
         

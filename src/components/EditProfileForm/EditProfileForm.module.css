@@ -1,0 +1,34 @@
+.container{
+    @apply w-full h-full flex flex-col items-center;
+}
+.form{
+    @apply  grid grid-cols-1 md:gap-4 gap-2 px-1 w-full;
+}
+
+.inputlabel{
+    @apply text-sm md:text-base font-semibold text-gray-500 pl-1; 
+}
+.inputcontainer{
+    @apply w-full h-full flex flex-col;
+}
+
+.input{
+    @apply border p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-200;
+}
+
+.biocontainer{
+    @apply w-full h-full flex flex-col;
+}
+
+.textarea{
+    @apply w-full pt-4 resize-none flex justify-center p-4 border rounded-lg
+}
+
+
+.buttoncontainer{
+    @apply w-full h-full ;
+}
+
+.button{
+    @apply w-full h-full bg-blue-500 py-2 text-white font-semibold rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-200;
+}

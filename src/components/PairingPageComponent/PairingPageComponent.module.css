@@ -1,0 +1,21 @@
+.container{
+    @apply w-full h-full flex flex-col ;
+}
+
+.content{
+    @apply w-full h-full flex flex-col;
+}
+.topcontainer{
+    @apply w-full h-full grid grid-cols-1 md:grid-cols-2 border-b md:mb-10;
+}
+
+.item{
+    @apply w-full h-full;
+}
+
+.labelcontainer{
+    @apply w-full px-2 py-2 text-center md:text-left;
+}
+.label{
+    @apply text-gray-700 font-semibold text-xl;
+}

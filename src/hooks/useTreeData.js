@@ -108,7 +108,10 @@ async function fetchTreeData(pairing_id){
     console.log(idArray, " id array")
     const {data, error} = await supabase
     .from('animals')
-    .select('*')
+    .select(`*,
+    photos(
+        *
+    )`)
     .in('animal_id', idArray[0])
 
     if(error) console.log(error.message)

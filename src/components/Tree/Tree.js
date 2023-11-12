@@ -1,4 +1,4 @@
-import { useTreeData } from "@/hooks/useTreeData"
+import { useTreeData } from "@/hooks/useOptimizedTreeData"
 import TreeBranch from "../TreeBranch/TreeBranch"
 import TreeNode from "../TreeNode/TreeNode"
 import TreeParent from "../TreeParent/TreeParent"

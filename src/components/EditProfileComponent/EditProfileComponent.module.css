@@ -1,0 +1,6 @@
+.container{
+    @apply w-full h-full flex flex-col items-center justify-center;
+}
+.content{
+    @apply w-full md:w-[90%] lg:w-[70%] xl:w-[60%] flex flex-col justify-center items-center bg-white;
+}

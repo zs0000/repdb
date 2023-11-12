@@ -1,60 +1,58 @@
-import React from 'react';
+// React/Next.js component using Tailwind CSS
 
-export default function TreeDiagram() {
+const LayoutComponent = () => {
   return (
-    <div className="flex flex-col items-center mt-10 space-y-8">
-      {/* Top row */}
-      <div className="flex space-x-4">
-        <div className="bg-pink-400 w-24 h-24 rounded-full"></div>
-        <div className="bg-pink-400 w-24 h-24 rounded-full"></div>
+    <div className="flex flex-col items-center justify-center p-4">
+      {/* Top-level pink blocks */}
+      <div className="flex space-x-2 mb-4">
+        <div className="w-16 h-16 bg-pink-300"></div>
+        <div className="w-16 h-16 bg-pink-300"></div>
       </div>
-      
-      {/* Connector line */}
-      <div className="border-l-2 border-black h-16 ml-32"></div>
-      
-      {/* Second row */}
-      <div className="flex space-x-10">
-        <SubTree />
-        <div className="flex space-x-4">
-          <SubTree />
-          <SubTree />
+
+      {/* Middle structure with pink and blue blocks */}
+      <div className="flex justify-between w-full">
+        {/* Left branch */}
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-12 bg-pink-300 mb-2"></div>
+          <div className="flex space-x-1">
+            <div className="w-6 h-6 bg-blue-300"></div>
+            <div className="w-6 h-6 bg-blue-300"></div>
+            <div className="w-6 h-6 bg-blue-300"></div>
+          </div>
         </div>
-        <Branch />
-      </div>
-    </div>
-  );
-}
 
-const SubTree = () => {
-  return (
-    <div className="flex flex-col items-center">
-      <div className="bg-pink-400 w-20 h-20 rounded-full mb-4"></div>
-      <div className="border-l-2 border-black h-12"></div>
-      <div className="flex space-x-4">
-        <Leaf color="pink" />
-        <Leaf color="blue" />
-        <Leaf color="pink" />
+        {/* Middle branch */}
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-12 bg-pink-300 mb-2"></div>
+          <div className="flex space-x-1">
+            <div className="w-6 h-6 bg-blue-300"></div>
+            <div className="w-6 h-6 bg-blue-300"></div>
+          </div>
+        </div>
+
+        {/* Right branch */}
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-12 bg-pink-300 mb-2"></div>
+          <div className="flex space-x-1">
+            <div className="w-6 h-6 bg-blue-300"></div>
+            <div className="w-6 h-6 bg-blue-300"></div>
+            <div className="w-6 h-6 bg-blue-300"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom structure with pink and blue blocks */}
+      <div className="flex justify-center w-full mt-4">
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-12 bg-pink-300 mb-2"></div>
+          <div className="flex space-x-1">
+            <div className="w-6 h-6 bg-blue-300"></div>
+            <div className="w-6 h-6 bg-blue-300"></div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-const Branch = () => {
-  return (
-    <div className="flex flex-col items-center">
-      <div className="bg-blue-400 w-20 h-20 rounded-full mb-4"></div>
-      <div className="border-l-2 border-black h-12"></div>
-      <div className="flex space-x-4">
-        <Leaf color="pink" />
-        <Leaf color="pink" />
-      </div>
-    </div>
-  );
-};
-
-const Leaf = ({ color }) => {
-  const bgColor = color === 'blue' ? 'bg-blue-400' : 'bg-pink-400';
-  return (
-    <div className={`${bgColor} w-12 h-12 rounded-full`}></div>
-  );
-};
+export default LayoutComponent;

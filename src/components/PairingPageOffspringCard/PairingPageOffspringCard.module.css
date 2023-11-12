@@ -1,0 +1,46 @@
+.container {
+    @apply w-full h-full flex flex-col md:rounded-lg border hover:cursor-pointer transition-shadow hover:shadow-lg;
+  }
+  
+  .content {
+    @apply w-full h-full grid grid-rows-1; /* Adjusted to flex-col for stacking children */
+  }
+  
+  .infocontainer {
+    @apply flex-grow; /* This allows the info container to grow and may push the photo container to take remaining space */
+  }
+  
+  .photocontainer {
+    @apply relative w-full grid overflow-hidden rounded-t-lg; /* removed h-full */
+    height: 125px; /* Example fixed height, adjust as needed */
+  }
+  
+  .photo {
+    @apply duration-300 hover:scale-105;
+    /* Class might not be necessary as styles are being applied inline via props on the Image component */
+  }
+  
+  .namecontainer {
+    @apply absolute bottom-0 left-0 bg-black bg-opacity-50 px-2 py-1;
+  }
+  
+  .name {
+    @apply text-white text-sm;
+  }
+  
+  
+  .genes{
+    @apply h-full grid grid-cols-3 p-2  truncate  ;
+  }
+  
+  .gene{
+    @apply w-full h-full flex flex-col truncate items-center  text-xs tracking-tight font-semibold text-gray-600;
+  }
+  
+  .genebubble{
+    @apply w-10 h-10 rounded-full flex justify-center items-center  text-black bg-gray-200;
+  }
+  
+  .genelabel{
+    @apply pt-1 truncate text-[0.6rem] md:text-xs;
+  }

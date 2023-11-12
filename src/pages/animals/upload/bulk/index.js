@@ -36,7 +36,9 @@ export default function BulkUploadPage() {
     return (
     <Layout session={data.session}>
     <div className={s.container}>
-        <Sidebar />
+       <div className={s.sidebar}>
+       <Sidebar />
+       </div>
         <div className={s.content}>
           <div className={s.uploadcontainer}>
             <div
@@ -49,8 +51,13 @@ export default function BulkUploadPage() {
               </div>
             </div>
             <div>
+              {files.length > 0 &&  files.length}
               {files.map((file) => (
-                <div key={file.name}>{file.name}</div>
+                <div key={file.name}>{file.name}
+                <div>
+                  <img src={URL.createObjectURL(file)} alt={file.name} />
+                </div>
+                </div>
               ))}
             </div>
           </div>

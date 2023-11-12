@@ -82,7 +82,7 @@ export default function Sidebar() {
                     </Link>
                 </div>
                 <div className={s.item}>
-                    <Link href="/animals/pairings" className={s.itemlink}>
+                    <Link href="/pairings" className={s.itemlink}>
                       <MdJoinRight className={s.icon}/>
                     <span className={s.text}>
                     My Pairings

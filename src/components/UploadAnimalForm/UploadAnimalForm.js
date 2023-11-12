@@ -169,6 +169,12 @@ const handleSearchChange = async(e) => {
   setSearchResults(newSearchResults);
 };
 
+  {/*Create a function to alert whenver a gene is pressed*/}
+  const handleGenePress = (gene) => {
+    alert(gene);
+  };
+  
+
 
   const handleGeneSelect = (gene) => {
     if (animalGenes.includes(gene)) {

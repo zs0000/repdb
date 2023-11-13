@@ -2,10 +2,10 @@
     @apply w-full h-full flex flex-col items-center;
 }
 .content{
-    @apply w-full h-full flex flex-col items-center bg-gray-100 px-4 pt-8 shadow-lg;
+    @apply w-full h-full flex flex-col items-center  px-4 pt-4 md:pt-8 border border-gray-300 rounded-lg;
 }
 .topcontainer{
-    @apply w-full h-full   flex flex-row pb-8;
+    @apply w-full h-full   flex flex-row pb-4;
 }
 .bottomcontainer{
     @apply w-full h-full flex flex-row items-center justify-evenly pb-4 ;
@@ -29,15 +29,15 @@
     @apply text-sm font-semibold text-gray-500 ml-1;
 }
 .biocontainer{
-    @apply w-full h-full flex flex-col items-start p-2;
+    @apply w-full h-full flex flex-col items-start bg-gray-100 rounded-xl p-4 mt-2;
 }
 .bio{
-    @apply  tracking-tight font-semibold text-gray-600;
+    @apply  tracking-tight;
 }
 
 .itemcontainer{
     @apply w-full h-full flex flex-col items-center justify-center truncate mx-1;
 }
 .item{
-    @apply px-2 py-1 rounded bg-gray-300 shadow-sm text-gray-700 text-center m-1 h-full w-full;
+    @apply px-2 py-1 rounded-xl border-gray-300 border tracking-tight text-sm text-center m-1 h-full w-full;
 }

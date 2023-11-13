@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Arimo } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import s from "./Layout.module.css"
 import Navbar from '../Navbar/Navbar'
 import { supabase } from '@/lib/supabaseClient'
 import MobileBar from '../MobileBar/MobileBar'
 
-const inter = Arimo({ subsets: ['latin'] })
+const inter = Montserrat({ subsets: ['latin'] })
 export default function Layout({children, session}) {
  
   return (

@@ -30,5 +30,5 @@
 }
 
 .button{
-    @apply w-full h-full bg-blue-500 py-2 text-white font-semibold rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-200;
+    @apply w-full h-full bg-primary py-2 text-white font-semibold rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-200;
 }

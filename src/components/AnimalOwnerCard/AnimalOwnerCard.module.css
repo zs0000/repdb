@@ -1,11 +1,11 @@
 .container{
-    @apply w-full h-full flex flex-col items-center;
+    @apply w-full h-full flex flex-col items-center bg-white rounded-xl;
 }
 .content{
-    @apply w-full h-full flex flex-col items-center  px-4 pt-4 md:pt-8 border border-gray-300 rounded-lg;
+    @apply w-full h-full flex flex-col items-center  px-4 pt-4 md:pt-8 border border-gray-200 rounded-lg;
 }
 .topcontainer{
-    @apply w-full h-full   flex flex-row pb-4;
+    @apply w-full h-full   flex flex-row pb-4 items-center;
 }
 .bottomcontainer{
     @apply w-full h-full flex flex-row items-center justify-evenly pb-4 ;
@@ -19,7 +19,7 @@
     @apply  rounded-full object-cover object-center w-full h-full;
 }
 .textcontainer{
-    @apply w-full h-full flex flex-col items-start p-2;
+    @apply w-full h-full flex flex-col items-start justify-center p-4;
 }
 
 .name{
@@ -29,7 +29,7 @@
     @apply text-sm font-semibold text-gray-500 ml-1;
 }
 .biocontainer{
-    @apply w-full h-full flex flex-col items-start bg-gray-100 rounded-xl p-4 mt-2;
+    @apply w-full h-full flex flex-col items-start bg-gray-100 rounded-xl p-4 mb-2;
 }
 .bio{
     @apply  tracking-tight;

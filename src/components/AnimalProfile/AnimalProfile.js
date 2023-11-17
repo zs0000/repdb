@@ -33,7 +33,7 @@ export default function AnimalProfile({id}) {
         </div>
         <div className={s.topcontainer}>
         <div className={s.photocontainer}>
-        <Image src={data[0].photos[0].img_url} alt={data[0].animal_type} width={500} height={500} />
+        <Image src={data[0].photos[0].img_url} alt={data[0].animal_type} className={s.photo} fill />
         </div>
         <div className={s.panelcontainer}>
           <div className={s.panel}>
@@ -52,16 +52,15 @@ export default function AnimalProfile({id}) {
                       </div>
                   ))}
                 </div>
-                <div>
-                  <AnimalFavoritesComponent animal_id={data[0].animal_id}/>
-                </div>
+               
           </div>
+          <div className={s.ownercardcontainer}>
+          <AnimalOwnerCard id={data[0].animal_owned_by_user_id}/>
+        </div>
         </div>
         
         </div>
-        <div className={s.ownercardcontainer}>
-          <AnimalOwnerCard id={data[0].animal_owned_by_user_id}/>
-        </div>
+        
         <div className={s.bottomcontainer}>
             {data ? <AnimalPairings animal={data[0]}/> : null}
         </div>

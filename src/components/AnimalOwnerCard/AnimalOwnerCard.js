@@ -23,14 +23,15 @@ export default function AnimalOwnerCard({id}) {
                     <span className={s.location}>
                        Sample, Location
                     </span>
-                    <div className={s.biocontainer}>
+                    
+            </div>
+            </div>
+            <div className={s.biocontainer}>
                     <span className={s.bio}>
                         
                         {data[0].bio}
                     </span>
                     </div>
-            </div>
-            </div>
             <div className={s.bottomcontainer}>
                 <div className={s.itemcontainer}>
                     <Link rel='no-follow' className={s.item} href='https://instagram.com/'>

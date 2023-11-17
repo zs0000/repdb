@@ -1,9 +1,9 @@
 .container{
-    @apply w-full h-full flex flex-col items-center justify-center;
+    @apply w-full h-full flex flex-col items-center justify-center  p-4 my-4 rounded-xl bg-white;
 }
 
 .content{
-    @apply w-full h-full flex flex-row items-center justify-center;
+    @apply w-full h-full flex flex-row items-center justify-center  ;
 }
 
 .items{
@@ -12,6 +12,14 @@
 
 .item{
     @apply w-full h-full flex flex-col;
+}
+
+.title{
+    @apply w-full pl-4 text-gray-600 font-bold text-lg;
+}
+
+.titlecontainer{
+    @apply w-full text-left py-2; 
 }
 
 .itemnamecontainer{

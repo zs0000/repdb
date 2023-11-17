@@ -12,13 +12,15 @@ export default function AnimalCard({animal, handleSelectAnimal, selectedAnimals,
         <div className={s.imagecontainer}>
  
             <Image priority src={animal.photos[0] ? animal.photos[0].img_url : ""} alt="Picture of the animal"
-  width={200} height={200}
+        fill
+        style={{objectFit: "cover", objectPosition: "center"}}
 
  className={s.photo}  />
 
           
         </div>
         <div className={s.infocontainer}>
+            <div className={s.topcontainer}>
             <div className={s.titlecontainer}>
               <span className={s.label}>
                 <span className={s.name}>
@@ -27,7 +29,8 @@ export default function AnimalCard({animal, handleSelectAnimal, selectedAnimals,
                 
                 <span className={s.gender}>
                 {animal.animal_gender == "Male" 
-                ? <svg
+                ? 
+                <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -35,7 +38,7 @@ export default function AnimalCard({animal, handleSelectAnimal, selectedAnimals,
                 shapeRendering="geometricPrecision"
                 textRendering="geometricPrecision"
                 viewBox="0 0 512 511.01"
-                className="w-4 h-4 text-sky-500 bg-sky-100 rounded-full p-[2px]"
+                className="w-4 h-4 text-sky-500 bg-sky-200 rounded-full p-[3px]"
               >
                 <path
                   fillRule="nonzero"
@@ -51,7 +54,7 @@ export default function AnimalCard({animal, handleSelectAnimal, selectedAnimals,
                 shapeRendering="geometricPrecision"
                 textRendering="geometricPrecision"
                 viewBox="0 0 361 511.42"
-                className="w-4 h-4 text-pink-500 bg-pink-100 rounded-full p-[2px]"
+                className="w-4 h-4 text-pink-500 bg-pink-300 rounded-full p-[3px]"
               >
                 <path
                   fillRule="nonzero"
@@ -66,7 +69,7 @@ export default function AnimalCard({animal, handleSelectAnimal, selectedAnimals,
                 shapeRendering="geometricPrecision"
                 textRendering="geometricPrecision"
                 viewBox="0 0 512 512"
-                className="w-4 h-4 text-gray-300 bg-gray-300 rounded-full p-[2px]"
+                className="w-4 h-4 text-gray-300 bg-gray-300 rounded-full p-[3px]"
               >
                 <path
                   fillRule="nonzero"
@@ -81,8 +84,10 @@ export default function AnimalCard({animal, handleSelectAnimal, selectedAnimals,
                 {animal.animal_type}
             </span>
             </div>
+            </div>
+            
             <div className={s.genescontainer}>
-              {animal.animal_gene_traits ? animal.animal_gene_traits.map((gene)=>(
+              {animal.animal_gene_traits ? animal.animal_gene_traits.slice(0,3).map((gene)=>(
                 <span className={s.gene} key={gene}>
                   {gene}
                 </span>

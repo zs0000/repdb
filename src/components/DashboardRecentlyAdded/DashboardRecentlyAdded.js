@@ -37,7 +37,7 @@ function DashboardRecentlyAdded({session}) {
         </div>
         <div className={s.content}>
             <div className={s.items}>
-                {data.map((animal) => (
+                {data.slice(0,3).map((animal) => (
                      <AnimalCard 
                      handleSelectAnimal={handleSelectAnimal}
                      

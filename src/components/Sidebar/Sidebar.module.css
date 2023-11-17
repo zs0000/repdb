@@ -1,5 +1,5 @@
 .container{
-    @apply w-full h-full p-4 min-h-screen flex flex-col items-end bg-gray-100;
+    @apply w-full h-full p-4 min-h-screen flex flex-col items-end bg-white;
 }
 .topcontainer{
     @apply w-full h-full flex justify-center;
@@ -10,14 +10,18 @@
 }
 
 .item{
-    @apply w-full py-2 flex flex-row;
+    @apply w-full py-2 flex flex-row truncate justify-center;
+}
+
+.icon{
+    @apply w-full h-full flex flex-row items-center;
 }
 
 .itemlink{
     @apply transform hover:underline hover:text-blue-600 flex flex-row gap-1 items-center ;
 }
 .text{
-    @apply md:block hidden;
+    @apply lg:block hidden text-xs md:text-sm truncate;
 }
 .spacer{
     @apply border-b border-gray-300

@@ -14,7 +14,7 @@
 }
 
 .icon{
-    @apply w-full h-full flex flex-row items-center;
+    @apply h-[2rem] w-[1rem] flex flex-row items-center;
 }
 
 .itemlink{

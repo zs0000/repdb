@@ -18,19 +18,14 @@ export default function UserProfilePage() {
    
   return (
     <Layout session={data.session}>
-        <div className={s.container}>
-            <div className={s.sidebar}>
-                <Sidebar />
-            </div>
+        
             <div className={s.content}>
                 <div className={s.topcontainer}>
                     <ProfileCard username={username}/>
                 </div>
-                <div className={s.bottomcontainer}>
-                    
-                </div>
+                
             </div>
-        </div>
+        
         <div className='md:hidden fixed  w-full flex flex-col justify-end bottom-0 '>
         <MobileBar />
         </div>

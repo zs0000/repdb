@@ -333,7 +333,7 @@ useEffect(() => {
   return (
     <form className='flex flex-row justify-center w-full h-full ' onSubmit={handleSubmit}>
           <div className='flex flex-col items-center w-full'>
-          <div className='w-full flex flex-row justify-evenly md:mb-2'>
+          <div className='w-full bg-white p-1 rounded flex flex-row justify-evenly md:mb-2'>
           <label className="block w-[33%]  ">
             Animal Name:
             <input className="block w-full  bg-gray-100 rounded px-1 py-1 hover:bg-gray-50 focus:bg-white border-white border transition-colors duration-200 hover:border-gray-200 focus:outline-0" type="text" value={animalName} onChange={(e) => setAnimalName(e.target.value)}  />
@@ -360,7 +360,7 @@ useEffect(() => {
             </select>
           </label>
           </div>
-          <div className="w-full flex flex-col items-start min-h-[5vh] md:mb-4 mb-1 border rounded p-1">
+          <div className="w-full flex flex-col items-start min-h-[5vh] md:mb-4 mb-1 border rounded p-1 bg-white">
   <label className="pl-1 pb-1">{animalGenes.length > 0 ? 'Selected genes:' : 'Select genes:'}</label>{animalGenes.length > 0 && (
     <div className="flex flex-row flex-wrap w-full">
       {animalGenes.map((gene) => (

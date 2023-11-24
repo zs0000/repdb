@@ -20,16 +20,10 @@ export default function Dashboard() {
   }
   return (
    <Layout session={data.session}>
-   <div className={s.container}>
-   <div className={s.sidebar}>
-        <Sidebar/>
-      </div>
     <div className={s.content}>
       
       <Dash session={data.session} />
-    </div>
-   </div>
-   
+    </div> 
    </Layout>
   )
 }

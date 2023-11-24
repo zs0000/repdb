@@ -17,14 +17,10 @@ export default function ProfilePage() {
     console.log(data.session.user.id)
   return (
     <Layout session={data.session}>
-        <div className={s.container}>
-            <div className={s.sidebar}>
-                <Sidebar />
-            </div>
+        
             <div className={s.content}>
                 <MyProfileCard id={data.session.user.id}/>
             </div>
-        </div>
     </Layout>
   )
 }

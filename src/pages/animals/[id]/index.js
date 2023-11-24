@@ -18,14 +18,11 @@ export default function AnimalProfilePage() {
 
   return (
     <Layout session={data}>
-      <div className={s.container}>
-        <div className={s.sidebar}>
-          <Sidebar/>
-        </div>
+      
         <div className={s.content}>
         <AnimalProfile id={id}/>
         </div>
-      </div>
+      
     </Layout>
   )
 }

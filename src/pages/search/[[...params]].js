@@ -99,10 +99,7 @@ export default function Search(props) {
 
   return (
     <Layout session={data.session}>
-        <div className={s.container}>
-            <div className={s.sidebar}>
-                <Sidebar />
-            </div>
+        
             <div className={s.content}>
         <SearchBar />
             <div className={s.resultscontainer}>
@@ -116,7 +113,7 @@ export default function Search(props) {
             
             </div> 
         </div>
-        </div>
+        
     </Layout>
   );
 }

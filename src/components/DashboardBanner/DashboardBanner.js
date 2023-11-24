@@ -5,13 +5,12 @@ import { supabase } from "@/lib/supabaseClient";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
-export default function DashboardBanner({session}) {
-      console.log(session)
-  
+export default function DashboardBanner() {
+
     return (
         <div className={s.bannerContainer}>
-            <h1 className={s.welcomeText}>Welcome {session.user.username}!</h1>
-            <p className={s.subtitle}>Sample text for now. Placeholder design!</p>
+            <h1 className={s.welcomeText}>{`Welcome!`}</h1>
+            <p className={s.subtitle}>{`We're glad that you're here!.`}</p>
             
         </div>
     )

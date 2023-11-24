@@ -1,11 +1,4 @@
-.container{
-    @apply w-full h-full min-h-screen flex flex-row justify-center;
-}
 
 .content{
-    @apply w-full md:w-[90%] lg:w-[65%] xl:w-[50%] px-2  h-[100%] min-h-screen flex flex-col items-center border-l py-1 bg-gray-100;
-}
-
-.sidebar{
-    @apply md:w-[30%] lg:w-[15%] xl:w-[10%] hidden  min-h-screen h-[100%] md:flex bg-white;
+    @apply w-full  px-2  h-[100%] min-h-screen flex flex-col items-center py-1 bg-gray-100;
 }

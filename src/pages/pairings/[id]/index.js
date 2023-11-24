@@ -20,14 +20,11 @@ export default function PairingsPage() {
 
     return (
     <Layout session={data.session}>
-    <div className={s.container}>
-        <div className={s.sidebar}>
-            <Sidebar/>
-        </div>
+    
         <div className={s.content}>
         <PairingPageComponent id={id} session={data.session}/>
         </div>
-    </div>
+
     </Layout>
   )
 }

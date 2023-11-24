@@ -28,14 +28,11 @@ export default function UploadPage() {
     if(session===null || session=== undefined) return router.push('/login')
   return (
     <Layout session={session}>
-       <div className={s.container}>
-        <div className={s.sidebar}>
-          <Sidebar/>
-        </div>
+       
        <div className={s.content}>
         {session && <UploadAnimalForm session={session}/>}
         </div>
-       </div>
+      
     </Layout>
   )
 }

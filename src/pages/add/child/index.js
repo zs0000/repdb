@@ -19,14 +19,9 @@ export default function AddChildrenPage() {
 
   return (
     <Layout session={data.session}>
-    <div className={s.container}>
-        <div className={s.sidebar}>
-            <Sidebar />
-        </div>
         <div className={s.content}>
             <PairingsComponent session={data.session} />
         </div>
-    </div>
     </Layout>
   )
 }

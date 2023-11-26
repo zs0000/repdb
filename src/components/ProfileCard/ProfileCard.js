@@ -5,12 +5,15 @@ import Loader from '../Loader/Loader'
 import Image from 'next/image'
 import Link from 'next/link'
 import DashboardAnimalsComponent from '../DashboardAnimalsComponent/DashboardAnimalsComponent'
+import ProfileAnimals from '../ProfileAnimals/ProfileAnimals'
 
 export default function ProfileCard({username}) {
+
   let userData = {}
   const {data, status} = useProfileData(username)
   if(status === "loading") return <Loader/>
   if(status === "error") return <>error</>
+  console.log(data)
   if(status === "success"){
     userData.user = {}
     userData.user.id = data[0].id
@@ -57,7 +60,7 @@ export default function ProfileCard({username}) {
       </div>
     </div>
     <div className={s.animalscontainer}>
-      <DashboardAnimalsComponent session={userData}/>
+      <ProfileAnimals id={data[0].id}/>
     </div>
   </div>
   

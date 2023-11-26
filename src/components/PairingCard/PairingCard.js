@@ -2,6 +2,7 @@ import React from 'react'
 import s from "./PairingCard.module.css"
 import BasicAnimalCard from '../BasicAnimalCard/BasicAnimalCard'
 import Link from 'next/link'
+import PairingCardContextMenu from '../PairingCardContextMenu/PairingCardContextMenu'
 
 {/*
 export default function PairingCard(pairing) {
@@ -39,8 +40,9 @@ export default function PairingCard({animal, pair_id}) {
 
 
   return (
-    <Link href={`/pairings/${pair_id}`} className={s.container}>
-        <div className={s.content}>
+    <div className={s.container}>
+        <PairingCardContextMenu   pair_id={pair_id}/>
+        <div  className={s.content}>
             <div className={s.item}>
             <BasicAnimalCard animal={animal[0]}/>
             </div>
@@ -49,6 +51,6 @@ export default function PairingCard({animal, pair_id}) {
             </div>
             
         </div>
-    </Link>
+    </div>
   )
 }

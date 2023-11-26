@@ -2,5 +2,9 @@
     @apply w-full h-full flex flex-col items-center justify-center;
 }
 .content{
-    @apply w-full md:w-[90%] lg:w-[70%] xl:w-[60%] flex flex-col justify-center items-center bg-white;
+    @apply w-full md:w-[90%] lg:w-[70%] xl:w-[60%] flex flex-col justify-center items-center bg-white px-4 pb-4 rounded-lg shadow;
+}
+
+.link{
+    @apply w-full pt-4 px-2 text-xs text-blue-500 hover:text-blue-700 underline
 }

@@ -3,6 +3,7 @@ import s from "./EditProfileComponent.module.css"
 import { useUserInfo } from '@/hooks/useUserInfo'
 import EditProfileCard from '../EditProfileCard/EditProfileCard'
 import EditProfileForm from '../EditProfileForm/EditProfileForm'
+import Link from 'next/link'
 
 export default function EditProfileComponent({session}) {
 
@@ -18,6 +19,11 @@ export default function EditProfileComponent({session}) {
   return (
     <div className={s.container}>
         <div className={s.content}>
+          <div className={s.link}>
+            <Link href='/profile' >
+            Back to profile.
+            </Link>
+          </div>
                     <EditProfileCard userId={session.user.id} user={data[0]}/>
                     <EditProfileForm userId={session.user.id} user={data[0]}/>
         </div>

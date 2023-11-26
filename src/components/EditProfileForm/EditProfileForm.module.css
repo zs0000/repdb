@@ -32,3 +32,7 @@
 .button{
     @apply w-full h-full bg-primary py-2 text-white font-semibold rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-200;
 }
+
+.disabledbutton{
+    @apply w-full h-full bg-gray-300 py-2 text-white font-semibold rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-200;
+}

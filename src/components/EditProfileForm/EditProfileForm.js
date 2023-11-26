@@ -1,8 +1,10 @@
-import React, { useReducer } from 'react'
+import React, { use, useEffect, useReducer, useState } from 'react'
 import s from './EditProfileForm.module.css'
 import { supabase } from '@/lib/supabaseClient';
+import { useRouter } from 'next/router';
 export default function EditProfileForm({user, userId}) {
-
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const router = useRouter()
   const initialState = {
     username: user.username || '',
     full_name: user.full_name || '',
@@ -37,25 +39,43 @@ export default function EditProfileForm({user, userId}) {
     try {
       const updatedData = getUpdatedFields();
       if (Object.keys(updatedData).length > 0) {
+        setButtonDisabled(true);
         const { data, error, status } = await supabase
           .from('profiles')
           .update(updatedData)
           .eq('id', userId);
         if (error) {
+          setButtonDisabled(false);
           throw new Error(error.message);
-        }
-
-        if(status === 'success'){
+        } else{
           alert('Profile updated successfully');
-        }
-        if(status === 'error'){
-          alert('Profile update failed');
+          router.push('/profile');
         }
       }
     } catch (error) {
       alert(error.message);
     } 
   };
+
+  const checkIfFormChanged = () => {
+    for (const key in form) {
+      if (form[key] !== initialState[key]) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  useEffect(() => {
+    const formChanged = checkIfFormChanged();
+    if (formChanged) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }
+  , [form]);
+
 
 
   return (
@@ -102,7 +122,7 @@ export default function EditProfileForm({user, userId}) {
                         </div>
                         </div>
                         <div className={s.buttoncontainer}>
-                          <button className={s.button} type='submit'>
+                          <button disabled={buttonDisabled} className={buttonDisabled === false ?  s.button : s.disabledbutton} type='submit'>
                             Submit
                           </button>
                         </div>

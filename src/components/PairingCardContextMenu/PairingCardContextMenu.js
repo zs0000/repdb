@@ -1,45 +1,41 @@
 import React, { useState } from 'react'
 import s from './PairingCardContextMenu.module.css'
-export default function PairingCardContextMenu() {
-  
-    const [showMenu, setShowMenu] = useState(false);
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const handleContextMenu = (event) => {
-        event.preventDefault();
-        setShowMenu(true);
-        setMousePosition({ x: event.clientX, y: event.clientY });
+export default function PairingCardContextMenu({menuOpen, setMenuOpen, pair_id, menuRef}) {
+    const handleOpen = (e) => {
+        e.preventDefault()
+        
+        setMenuOpen(true)
     }
-    const handleClick = () => {
-        setShowMenu(false);
+    const handleClose = (e) => {
+        e.preventDefault()
+        setMenuOpen(false)
     }
-    const handleMouseDown = () => {
-        setShowMenu(false);
+
+    if(!menuOpen){
+        return(
+            <div className={s.closedcontainer} onClick={(e) => handleOpen(e)}>
+               
+            </div>
+        )
     }
-    const handleMouseLeave = () => {
-        setShowMenu(false);
-    }
-    const handleScroll = () => {
-        setShowMenu(false);
-    }
-    const menu = showMenu ? (
-        <div
-            className={s.menu}
-            style={{ top: mousePosition.y, left: mousePosition.x }}
-        >
-            <div className={s.menuItem}>Add offspring</div>
-            <div className={s.menuItem}>Delete pairing</div>
-        </div>
-    ) : null;
-    return (
-        <div
-            className={s.container}
-            onContextMenu={handleContextMenu}
-            onMouseDown={handleMouseDown}
-            onMouseLeave={handleMouseLeave}
-            onScroll={handleScroll}
-            onClick={handleClick}
-        >
-            {menu} dkmsadk
+    return(
+        <div ref={menuRef} className={s.container}>
+            <div className={s.clickarea}>
+                <div className={s.menu}>
+                   <div className={s.menuitem}>
+                    View Tree
+                    </div>
+                    <div className={s.menuitem}>
+                        View Pairing
+                    </div>
+                    <div className={s.menuitem}>
+                        Add Children
+                    </div>
+                    <div className={s.menuitem}>
+                        Delete Pairing
+                    </div>
+                </div>
+            </div>
         </div>
     )
 

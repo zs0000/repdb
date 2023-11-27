@@ -1,0 +1,22 @@
+.container{
+    @apply w-[1rem] bg-secondary relative ;
+}
+.clickarea{
+    @apply h-[auto]  right-0  absolute flex justify-center items-center;
+}
+
+.menu{
+    @apply  w-[95%] h-[95%] z-40 bg-white p-2 shadow-xl  rounded-lg;
+}
+
+.closedcontainer{
+    @apply w-[1rem] bg-accent hover:bg-white hover:cursor-pointer rounded-r-lg;
+}
+
+.menuitem{
+    @apply  py-4 px-2 tracking-tighter text-sm border-b hover:underline hover:text-blue-500
+}
+
+.menuitem:last-child{
+    @apply border-b-0;
+}

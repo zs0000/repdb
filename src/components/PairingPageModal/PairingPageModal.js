@@ -18,7 +18,7 @@ export default function PairingPageModal({ showModal, imageSrc, onClose }) {
 
   return (
     <div onClick={onClose} className="fixed inset-0 z-50 bg-black bg-opacity-40 flex justify-center items-center p-4">
-      <div className='w-full lg:w-[60%] h-[70%] flex flex-col items-center justify-center overflow-hidden bg-white p-4'>
+      <div className='w-full lg:w-[60%] h-[70%] flex flex-col items-center justify-center overflow-hidden bg-white p-2 md:p-4'>
    
         <div className="flex justify-between items-center">
           <h3 className="text-2xl">Image Preview</h3>
@@ -29,7 +29,7 @@ export default function PairingPageModal({ showModal, imageSrc, onClose }) {
             &times;
           </button>
         </div>
-        <div className=' relative w-full grid h-full'>
+        <div className=' relative  w-full h-full'>
         <Image src={imageSrc} alt="animal" fill style={{objectFit:'cover', objectPosition:'center'}}/>
         </div>
  

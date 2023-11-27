@@ -1,11 +1,29 @@
 .container{
-    @apply w-full h-full flex justify-center p-1;
+    @apply w-full h-full flex justify-center  bg-white rounded-lg border;
 }
 
 .content{
-    @apply w-full h-full grid grid-cols-2 border p-1;
+    @apply w-full h-full flex flex-col;
+}
+.items{
+    @apply w-full h-full flex flex-row justify-center items-center;
+}
+.photocontainer{
+    @apply h-[100px] w-full relative;
 }
 
 .item{
     @apply w-full flex flex-col justify-center items-center;
+}
+
+.names{
+    @apply w-full flex flex-row justify-center py-1 items-center;
+}
+
+.name{
+    @apply w-full tracking-tight text-center; 
+}
+
+.photo{
+    @apply rounded-tl-lg
 }

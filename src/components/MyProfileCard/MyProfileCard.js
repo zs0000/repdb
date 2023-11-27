@@ -17,6 +17,7 @@ export default function MyProfileCard({id}) {
     userData.user = {}
     userData.user.id = data[0].id
   }
+ 
   return (
     <div className={s.container}>
     <div className={s.bannercontainer}>

@@ -8,7 +8,7 @@ import { MdJoinRight } from 'react-icons/md'
 import { AiOutlineLogout, AiOutlinePlusCircle, AiOutlineSearch } from 'react-icons/ai'
 import { supabase } from '@/lib/supabaseClient'
 import { useRouter } from 'next/router'
-export default function Sidebar() {
+export default function Sidebar({session}) {
 
   const router = useRouter()
   async function handleSignout() {
@@ -38,7 +38,7 @@ export default function Sidebar() {
                   
                 </div>
                 <div className={s.item}>
-                    <Link href="/profile" className={s.itemlink}>
+                    <Link href={`/profile/${session.user.username}`} className={s.itemlink}>
                       <CgProfile className={s.icon}/>
                       <span className={s.text}>
                       My Profile

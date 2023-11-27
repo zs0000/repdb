@@ -50,7 +50,7 @@ export default function PairingPageCard({animal, onImageClick}) {
                     return(
                         <div key={animal.animal_id + gene} className={s.gene} >
                         <div  style={animal.animal_gender == "Male" ? {backgroundColor:colors[4]} : {backgroundColor:colors[9]}} className={s.genebubble}>
-                            {gene.substring(0,1)}
+                            {gene.substring(0,2)}
                         </div>
                         <div className={s.genelabel}>
                         {gene}

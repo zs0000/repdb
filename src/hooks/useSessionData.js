@@ -2,11 +2,23 @@
 import { supabase } from '@/lib/supabaseClient';
 import { useQuery } from '@tanstack/react-query';
 
+async function getUsername(id){
+
+    const {data, error} = await supabase
+    .from('profiles')
+    .select('username')
+    .eq('id', id)
+    .single()
+    if(error) console.log(error)
+
+    return data
+
+}
+
 async function getSessionData() {
     const {data, error} = await supabase.auth.getSession()
-    const username  = await supabase.auth.getUser()
-   
-
+    const {username} = await getUsername(data.session.user.id)
+    data.session.user.username = username
     return data
 }
 

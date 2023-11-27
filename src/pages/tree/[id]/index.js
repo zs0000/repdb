@@ -22,17 +22,15 @@ export default function CustomTreePage() {
 
 return (
   <Layout session={data.session}>
-  <div className={s.container}>
-      <div className={s.sidebar}>
-          <Sidebar />
-      </div>
+  
+    
       <div className={s.content}>
          
           <Tree id={id}>
 
           </Tree>
       </div>
-  </div>
+
   </Layout>
 )
 }

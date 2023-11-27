@@ -58,13 +58,20 @@ function ProfileAnimals({id}) {
         </div>
         </div>
         <div className={s.content}>
-            {!filtered ? data.map(animal => (
-                <AnimalCard key={animal.id} animal={animal}/>
+            {!filtered ? data?.map(animal => (
+                <div key={animal.id} className={s.item}>
+                    <AnimalCard  animal={animal}/>
+                </div>
             ))
-        :
-        filteredAnimals.map(animal => (
-            <AnimalCard key={animal.id} animal={animal}/>
+        : filteredAnimals.length > 0?
+        filteredAnimals?.map(animal => (
+            <div className={s.item} key={animal.id}>
+            <AnimalCard animal={animal}/>
+            </div>
+        
         ))
+        :
+        <span className={s.item}>No animals found.</span>
         }
 
         </div>

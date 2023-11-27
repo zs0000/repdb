@@ -1,13 +1,13 @@
 .container {
-    @apply w-full h-full flex flex-col md:rounded-lg border hover:cursor-pointer transition-shadow hover:shadow-lg;
+    @apply w-full h-full flex flex-col truncate md:rounded-lg border hover:cursor-pointer transition-shadow hover:shadow-lg;
   }
   
   .content {
-    @apply w-full h-full grid grid-rows-1; /* Adjusted to flex-col for stacking children */
+    @apply w-full h-full grid grid-rows-1 truncate; /* Adjusted to flex-col for stacking children */
   }
   
   .infocontainer {
-    @apply flex-grow; /* This allows the info container to grow and may push the photo container to take remaining space */
+    @apply flex-grow truncate; /* This allows the info container to grow and may push the photo container to take remaining space */
   }
   
   .photocontainer {
@@ -34,13 +34,13 @@
   }
   
   .gene{
-    @apply w-full h-full flex flex-col truncate items-center  text-xs tracking-tight font-semibold text-gray-600;
+    @apply w-full h-full items-center flex flex-col truncate text-xs tracking-tight font-semibold text-gray-600;
   }
   
   .genebubble{
-    @apply w-10 h-10 rounded-full flex justify-center items-center  text-black bg-gray-200;
+    @apply w-10 h-10 rounded-full flex  justify-center items-center  text-black bg-gray-200;
   }
   
   .genelabel{
-    @apply pt-1 truncate text-[0.6rem] md:text-xs;
+    @apply pt-1 truncate text-[0.6rem] lg:text-xs;
   }

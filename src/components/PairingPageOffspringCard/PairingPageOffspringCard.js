@@ -42,7 +42,7 @@ export default function PairingPageOffspringCard({kid, onImageClick }) {
                 {kid.animal_gene_traits.slice(0,3).map((gene)=>(
                   <div key={kid.animal_name + gene} className={s.gene}>
                     <div  className={s.genebubble}>
-                      {gene[0]}
+                      {gene[0]+gene[1]}
                     </div>
                     <div  className={s.genelabel}>
                     {gene}

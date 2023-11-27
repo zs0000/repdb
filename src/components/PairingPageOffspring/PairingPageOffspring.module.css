@@ -1,5 +1,5 @@
 .container{
-    @apply w-full flex flex-col;
+    @apply w-full flex flex-col bg-white p-2 rounded-lg;
 }
 
 .content{

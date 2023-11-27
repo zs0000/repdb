@@ -3,7 +3,7 @@
 }
 
 .content {
-  @apply flex flex-col h-full; /* Adjusted to flex-col for stacking children */
+  @apply flex flex-col h-full ; /* Adjusted to flex-col for stacking children */
 }
 
 .infocontainer {
@@ -30,7 +30,7 @@
 
 
 .genes{
-  @apply w-full h-full grid grid-cols-3 p-2  md:py-6;
+  @apply w-full h-full grid grid-cols-3 p-2 bg-white md:py-6;
 }
 
 .gene{

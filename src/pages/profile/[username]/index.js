@@ -21,7 +21,7 @@ export default function UserProfilePage() {
         
             <div className={s.content}>
                 <div className={s.topcontainer}>
-                    <ProfileCard username={username}/>
+                    <ProfileCard session={data.session} username={username}/>
                 </div>
                 
             </div>

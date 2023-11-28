@@ -17,5 +17,5 @@
 
 }
 .horizontalconnector{
-    @apply h-[1px] bg-gray-300 w-1/2 -mb-[1px];
+    @apply h-[1px] bg-primary w-1/2 -mb-[1px];
 }

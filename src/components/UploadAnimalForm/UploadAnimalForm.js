@@ -5,8 +5,9 @@ import { useRouter } from 'next/router';
 import Image from 'next/image'
 import {BsCameraFill} from "react-icons/bs"
 import { supabase } from '@/lib/supabaseClient';
-import { useQueryClient } from '@tanstack/react-query';
+
 import Cropper from 'react-easy-crop';
+import { UploadButton } from '@/utils/uploadthing';
 
 export default function UploadAnimalForm({session}) {
   {/*States: Upload & Crop Image */}
@@ -156,6 +157,10 @@ const genesMap = {
 const router = useRouter()
 const current = new Date();
 
+
+
+
+
 {/*Functions: Search, Filter, and Select genes*/}
 const handleSearchChange = async(e) => {
   const newSearchTerm = e.target.value;
@@ -286,6 +291,32 @@ useEffect(() => {
   checkFormCanSubmit();
 }, [animalName, animalType, animalGenes, animalGender, croppedImage]); // dependencies
   
+  const [readyToUpload, setReadyToUpload] = useState(false)
+
+  
+
+  async function handleUploadPhotoUrlToDatabase(id) {
+    e.preventDefault();
+    try {
+      const { data, error } = await supabase
+        .from('photos')
+        .insert([{ user_id: session.user.id, animal_id: id, img_url: imageUrl }])
+        .single()
+
+
+      if (error) {
+        alert(error)
+        console.log(error)
+      }
+      if (data[0]?.img_url) {
+        alert("Successfully uploaded!")
+        router.push(`/dashboard`)
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -462,6 +493,7 @@ useEffect(() => {
               setCroppingImage(false)
               showCroppedImage()
               handleHideUploadControls(e)
+              setReadyToUpload(true)
              
             }} className='w-full py-1 bg-gray-100'>
               Confirm Crop
@@ -471,7 +503,26 @@ useEffect(() => {
           <></>}
           <div className='w-full flex flex-row justify-evenly items-center'>
             
-            <input type="file" name="image" onChange={handleImageChange} />
+          <UploadButton 
+                      id='upload-button'
+                      
+                      endpoint="imageUploader"
+                      input={croppedImage}
+                      onBeforeUploadBegin={(file) => {
+                       setFileForPreview(file[0])
+                       previewFile(file[0])
+                      }}
+                      onClientUploadComplete={(res) => {
+                        // Do something with the response
+                        console.log("Files: ", res);
+                        
+                        alert("Upload Completed");
+                      }}
+                      onUploadError={(error) => {
+                        // Do something with the error.
+                        alert(`ERROR! ${error.message}`);
+                      }}
+                      />
             <button type='button' onClick={(e)=> {
               setUploadMethod("none")
               setPreview(null)
@@ -514,6 +565,11 @@ useEffect(() => {
                     className={"hidden"}
 
                     />
+
+                    
+                </div>
+                <div className={croppedImage ? "block" : "hidden"} id='upload-button-container' >
+                     
                 </div>
           <button type="submit" disabled={formSubmitted == 0 || !formCanSubmit ? false : true} className={formCanSubmit ? "block w-full mt-4 p-2 text-white bg-blue-500 rounded" : "block w-full mt-4 p-2 text-white bg-gray-500 rounded"} >Submit</button>
           </div>

@@ -38,7 +38,7 @@ export default function Sidebar({session}) {
                   
                 </div>
                 <div className={s.item}>
-                    <Link href={`/profile/${session.user.username}`} className={s.itemlink}>
+                    <Link href={`/profile/${session?.user?.username}`} className={s.itemlink}>
                       <CgProfile className={s.icon}/>
                       <span className={s.text}>
                       My Profile

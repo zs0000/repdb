@@ -17,7 +17,7 @@ export default function AnimalProfilePage() {
   if (status === 'error') return <div>Error user</div>;
 
   return (
-    <Layout session={data}>
+    <Layout session={data.session}>
       
         <div className={s.content}>
         <AnimalProfile id={id}/>

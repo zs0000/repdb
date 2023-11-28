@@ -19,7 +19,7 @@ console.log(generation)
           <div className={(index == 0 ||  index +1 == generation.length) && generation.length > 1? s.horizontalconnector : "hidden"}></div>
           <div className={index != 0 && index + 1 != generation.length ? s.middlehorizontalconnector : "hidden"}></div>
           <span className={generation.length ==1 ? "flex justify-center w-full" : "hidden"}>
-            <span className="bg-gray-300 p-[1px]" >
+            <span className="bg-primary p-[1px]" >
             </span>
           </span>
           </div>

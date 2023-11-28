@@ -9,18 +9,18 @@
 }
 
 .parentone{
-    @apply h-[100px] w-[150px] flex flex-col items-center justify-center border rounded border-gray-400;
+    @apply h-[100px] w-[150px] flex flex-col items-center justify-center border rounded 
 }
 .parenttwo{
-    @apply h-[100px] w-[150px] flex flex-col items-center justify-center border rounded border-gray-400;
+    @apply h-[100px] w-[150px] flex flex-col items-center justify-center border rounded
 }
 .connector{
     @apply w-[20%] h-[120px] flex flex-col justify-center items-center;
 }
 .horizontalconnector{
-    @apply py-[1px] w-full bg-gray-300 mt-8;
+    @apply py-[1px] w-full bg-primary mt-12;
 }
 
 .verticalconnector{
-    @apply px-[1px] h-full w-[1px] bg-gray-300;
+    @apply px-[1px] h-full w-[1px] bg-primary;
 }

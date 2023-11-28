@@ -7,7 +7,7 @@
 }
 
 .child {
-    @apply flex flex-col items-center text-center justify-center shadow-lg border border-gray-300 text-sm flex-wrap w-[80px] h-[55px];
+    @apply flex flex-col items-center text-center justify-center  text-sm flex-wrap w-[5rem] h-[4rem] md:w-[6rem] md:h-[6rem] lg:w-[7rem] lg:h-[7rem] xl:w-[8rem] xl:h-[8rem];
 
 }
 
@@ -23,11 +23,11 @@
     @apply w-full flex justify-start; 
  }
 .horizontalconnector {
-    @apply py-[1px] w-1/2 bg-gray-300;
+    @apply py-[1px] px-1  w-1/2 bg-primary
 }
 .middlehorizontalconnector {
-    @apply py-[1px] w-full bg-gray-300;
+    @apply py-[1px]  w-full bg-primary;
 }
 .verticalconnector {
-    @apply px-[1px] h-[20px] w-[1px] bg-gray-300;
+    @apply px-[1px] h-[20px] w-[1px]  bg-primary;
 }

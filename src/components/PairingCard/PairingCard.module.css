@@ -9,7 +9,7 @@
     @apply w-full h-full flex flex-row justify-center items-center;
 }
 .photocontainer{
-    @apply h-[100px] w-full relative;
+    @apply h-[120px] w-full relative;
 }
 
 .item{
@@ -17,7 +17,7 @@
 }
 
 .names{
-    @apply w-full flex flex-row justify-center py-1 items-center;
+    @apply w-full flex flex-row justify-center py-3 items-center;
 }
 
 .name{

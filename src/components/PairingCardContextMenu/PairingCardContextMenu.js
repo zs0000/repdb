@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import s from './PairingCardContextMenu.module.css'
+import Link from 'next/link'
 export default function PairingCardContextMenu({menuOpen, setMenuOpen, pair_id, menuRef}) {
     const handleOpen = (e) => {
         e.preventDefault()
@@ -23,13 +24,20 @@ export default function PairingCardContextMenu({menuOpen, setMenuOpen, pair_id, 
             <div className={s.clickarea}>
                 <div className={s.menu}>
                    <div className={s.menuitem}>
+                   <Link href={`/tree/${pair_id}`} >
                     View Tree
+                    </Link>
+
+                   </div>
+                    <div className={s.menuitem}>
+                    <Link href={`/pairings/${pair_id}`} >
+                    View Pairing
+                    </Link>
                     </div>
                     <div className={s.menuitem}>
-                        View Pairing
-                    </div>
-                    <div className={s.menuitem}>
-                        Add Children
+                    <Link href={`/add/child/${pair_id}`} >
+                    View Tree
+                    </Link>
                     </div>
                     <div className={s.menuitem}>
                         Delete Pairing

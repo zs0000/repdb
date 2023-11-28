@@ -5,10 +5,10 @@
     @apply w-full h-full flex flex-col justify-center items-center;
 }
 .topverticalconnector{
-    @apply px-[1px] h-[60%] w-[1px] bg-gray-300;
+    @apply px-[1px] h-[60%] w-[1px] bg-primary;
 }
 .bottomverticalconnector{
-    @apply px-[1px] h-[40%] w-[1px] bg-gray-300;
+    @apply px-[1px] h-[40%] w-[1px] bg-primary
 }
 
 .node{

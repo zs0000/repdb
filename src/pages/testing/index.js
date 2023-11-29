@@ -1,21 +1,51 @@
-import { UploadButton } from "@/utils/uploadthing";
+// Note: `useUploadThing` is IMPORTED FROM YOUR CODEBASE using the `generateReactHelpers` function
+import { FileWithPath } from "@uploadthing/react";
+import { useDropzone } from "@uploadthing/react/hooks";
+import { generateClientDropzoneAccept } from "uploadthing/client";
  
-export default function Home() {
+import { useUploadThing } from "@/utils/useUploadThing";
+import { useCallback, useState } from "react";
+ 
+export default function MultiUploader() {
+  const [files, setFiles] = useState([]);
+  const [file, setFile] = useState(null)
+  const onDrop = useCallback((acceptedFiles) => {
+    setFiles(acceptedFiles);
+  }, []);
+ 
+  const { startUpload, permittedFileInfo } = useUploadThing(
+    "imageUploader",
+    {
+      onStartUpload: () => {
+        alert("upload has begun");
+      },
+      onClientUploadComplete: () => {
+        alert("uploaded successfully!");
+      },
+      onUploadError: () => {
+        alert("error occurred while uploading");
+      },
+      onUploadBegin: () => {
+        alert("upload has begun");
+      },
+    },
+  );
+ 
+    const handleSelectImage = (e) => {
+      console.log(e.target.files[0])
+        setFile(e.target.files[0])
+        setFiles(...files, e.target.files[0])
+        alert(e.target.files[0])
+    }
+
+ 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <UploadButton
-        endpoint="imageUploader"
-        onClientUploadComplete={(res) => {
-          // Do something with the response
-          console.log("Files: ", res);
-          alert("Upload Completed");
-        }}
-        onUploadError={(error) => {
-          // Do something with the error.
-          console.log("Error: ", error);
-          alert(`ERROR! ${error.message}`);
-        }}
-      />
-    </main>
+    <div>
+      <input type='file' onChange={(e)=>handleSelectImage(e)}/>
+
+      <button onClick={()=>startUpload(files)}>
+        upload
+      </button>
+    </div>
   );
 }

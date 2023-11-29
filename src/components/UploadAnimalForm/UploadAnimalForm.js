@@ -8,6 +8,8 @@ import { supabase } from '@/lib/supabaseClient';
 
 import Cropper from 'react-easy-crop';
 import { UploadButton } from '@/utils/uploadthing';
+import Loader from '../Loader/Loader';
+
 
 export default function UploadAnimalForm({session}) {
   {/*States: Upload & Crop Image */}
@@ -25,7 +27,7 @@ export default function UploadAnimalForm({session}) {
   const [imageUrl, setImageUrl] = useState(null);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
-
+  const [isUploading, setIsUploading] = useState(false);
   {/*States: Animal Form Values */}
   const [formCanSubmit, setFormCanSubmit] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(0);
@@ -161,6 +163,7 @@ const current = new Date();
 
 
 
+
 {/*Functions: Search, Filter, and Select genes*/}
 const handleSearchChange = async(e) => {
   const newSearchTerm = e.target.value;
@@ -250,27 +253,8 @@ const previewFile = (file) => {
   };
 };
 
-  let { uploadToS3, files } = useS3Upload();
-
-  async function handleUploadToS3(){
-    try {
-   
-   
-    let { url } = await uploadToS3(fileForPreview);
-    let { height, width } = await getImageData(fileForPreview);
-    setWidth(width);
-    setHeight(height);
-
-    setImageUrl(url);
-    
-    console.log("Successfully uploaded to S3!", url);
-    return url
-    } catch (err) {
-      console.error(err.message)
-    }
-    
-  }
   
+
 {/*Functions:Form Submission, Image upload first, then database*/}
 
 const checkFormCanSubmit = () => {
@@ -278,7 +262,7 @@ const checkFormCanSubmit = () => {
     animalName.length > 0 &&
     animalType.length > 0 &&
     animalGender.length > 0 &&
-    croppedImage || usePreuploaded
+    imageUrl || usePreuploaded
   ) {
     setFormCanSubmit(true);
   } else {
@@ -291,28 +275,28 @@ useEffect(() => {
   checkFormCanSubmit();
 }, [animalName, animalType, animalGenes, animalGender, croppedImage]); // dependencies
   
-  const [readyToUpload, setReadyToUpload] = useState(false)
+  const [photoId, setPhotoId] = useState(null)
+  async function handleUploadImage(res){
 
-  
+    try{
+      if(!res){
+        console.log("null")
+        return
+      }
+      setImageUrl(res[0].url)
+      const {data, error} = await supabase
+      .from('photos')
+      .insert([{user_id:session.user.id, img_url:res[0].url}])
+      .select()
 
-  async function handleUploadPhotoUrlToDatabase(id) {
-    e.preventDefault();
-    try {
-      const { data, error } = await supabase
-        .from('photos')
-        .insert([{ user_id: session.user.id, animal_id: id, img_url: imageUrl }])
-        .single()
-
-
-      if (error) {
-        alert(error)
+      if(error){
+        alert("Error uploading photo, please refresh and try again.",error)
         console.log(error)
       }
-      if (data[0]?.img_url) {
-        alert("Successfully uploaded!")
-        router.push(`/dashboard`)
+      if(data){
+        console.log(data)
+        setPhotoId(data[0].photo_id)
       }
-
     } catch (error) {
       console.log(error);
     }
@@ -343,16 +327,13 @@ useEffect(() => {
           console.log(error)
         }
         if(data[0]?.animal_id){
-          let getS3ImageURL = await handleUploadToS3()
-          if(getS3ImageURL){
-            setPostingImage("uploading")
-            const uploadPhotoURLtoDatabase = await supabase.from('photos').insert([{user_id:data[0].animal_owned_by_user_id, animal_id:data[0].animal_id, img_url:getS3ImageURL}]).select()
-            if(uploadPhotoURLtoDatabase && uploadPhotoURLtoDatabase.status == 201){
-              setPostingImage("uploaded")
-              alert("Successfully uploaded!")
+          
+            const uploadPhotoURLtoDatabase = await supabase.from('photos').update([{ animal_id:data[0].animal_id}]).select().eq('photo_id',photoId)
+            if(uploadPhotoURLtoDatabase.status === 200){
+              alert("Upload Successful!")
               router.push(`/dashboard`)
-          }
-        }
+            }
+        
       }
       } else{
         alert("Please fill out all required fields.")
@@ -432,28 +413,23 @@ useEffect(() => {
 
 
           <div className=" w-full h-[40vh] md:h-[50vh] flex flex-col items-center bg-zinc-100">
-                    <div className={"w-full h-full flex justify-center items-center"}>
+                    <div className={"w-full h-full flex justify-center items-center relative"}>
                     
-                    { preview ?
-                    croppedImage ? 
-                    <Image src={croppedImage} alt="listing photo" width={500} height={500} className={"w-[100%] h-[100%] object-cover object-center"} />
-                    :
-                    <div className="relative w-full h-full">
-                      <Cropper
-                    image={preview || ''}
-                    crop={crop}
-                    zoom={zoom}
-                    aspect={4/3}
-                    onCropChange={setCrop}
-                    onCropComplete={onCropComplete}
-                    onZoomChange={setZoom}
-                  />
-                    </div>
+                    { isUploading ?
+                      imageUrl ? 
+                      <Image src={imageUrl} alt="Uploaded Image" fill style={{objectFit:'cover'}} />
+                    : <div className=' w-full h-full bg-gray-200 animate-pulse'>
+                      </div>
+               
                      : <BsCameraFill className={"w-[20vw] h-[20vh] text-gray-300 "} />}
                     </div>
-                    <span>
-                      {height == 0 && width == 0 ? "" : `${width} x ${height}`}
-                    </span>
+                    {imageUrl ? 
+                    <span >
+                      Image added to Your photos.
+                    </span>  
+                    :
+                    <></>
+                  }
                 </div>
           <div className="w-[100%]">
           <div>
@@ -493,7 +469,8 @@ useEffect(() => {
               setCroppingImage(false)
               showCroppedImage()
               handleHideUploadControls(e)
-              setReadyToUpload(true)
+              setIsReadyToUpload(true)
+             
              
             }} className='w-full py-1 bg-gray-100'>
               Confirm Crop
@@ -505,22 +482,19 @@ useEffect(() => {
             
           <UploadButton 
                       id='upload-button'
-                      
+                      className="block w-[30%] mx-2  mt-2 p-2"
                       endpoint="imageUploader"
-                      input={croppedImage}
-                      onBeforeUploadBegin={(file) => {
-                       setFileForPreview(file[0])
-                       previewFile(file[0])
+                      onBeforeUploadBegin={() => {
+                        setIsUploading(true)
                       }}
                       onClientUploadComplete={(res) => {
-                        // Do something with the response
-                        console.log("Files: ", res);
+                       
                         
-                        alert("Upload Completed");
+                        handleUploadImage(res)
+                        
                       }}
                       onUploadError={(error) => {
-                        // Do something with the error.
-                        alert(`ERROR! ${error.message}`);
+                        alert(`Error uploading photo, refresh the page and try again.`);
                       }}
                       />
             <button type='button' onClick={(e)=> {
@@ -536,11 +510,7 @@ useEffect(() => {
           </div>
           : <></>
           }
-        {files.map((file, index) => (
-          <div key={index}>
-            Upload progress: {file.progress}%
-          </div>
-        ))}
+        
       </div>
                     <div className="text-sm  tracking-tight my-2">
                         <span className="font-bold text-xs">
@@ -550,22 +520,8 @@ useEffect(() => {
                         
                     </div>
                         
-                    <input
-                    type="file"
-                    id="file_input"
-                    onChange={
-                        
-                            handleUploadToS3
-                        
-                    }
-                        
-                     
-                 
-                    
-                    className={"hidden"}
-
-                    />
-
+                  
+                   
                     
                 </div>
                 <div className={croppedImage ? "block" : "hidden"} id='upload-button-container' >

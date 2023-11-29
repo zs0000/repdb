@@ -5,6 +5,8 @@ import s from "./DashboardAnimalsComponent.module.css";
 import AnimalCard from "../AnimalCard/AnimalCard";
 import { supabase } from "@/lib/supabaseClient";
 import { useQueryClient } from "@tanstack/react-query";
+import AuthAnimalCard from "../AuthAnimalCard/AuthAnimalCard";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 
 const DropdownItem = ({ children, onClick }) => (
   <div className={s.dropdownItem}>
@@ -20,6 +22,9 @@ export default function DashboardAnimalsComponent({ session }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [actionState, setActionState] = useState(null);
   const [selectedAnimals, setSelectedAnimals] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [action, setAction] = useState(null);
+  const [actionItems, setActionItems] = useState(null);
   const { data, status } = useUserAnimalData(session.user.id);
 
   const dropdownRef = useRef();
@@ -186,6 +191,7 @@ export default function DashboardAnimalsComponent({ session }) {
 
   return (
     <div className={s.container}>
+      <ConfirmDeleteModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} action={action} actionItems={actionItems}/>
       <div className={s.actionscontainer}>
         
         <div className={s.searchbar}>
@@ -234,7 +240,13 @@ export default function DashboardAnimalsComponent({ session }) {
       </div>
       <div className={s.content}>
         {filteredAnimals.map((animal) => (
-          <AnimalCard 
+          <AuthAnimalCard
+            modalIsOpen={modalIsOpen}
+            setModalIsOpen={setModalIsOpen}
+            action={action}
+            setAction={setAction}
+            actionItems={actionItems}
+            setActionItems={setActionItems}
             handleSelectAnimal={handleSelectAnimal}
             selectedAnimals={selectedAnimals}
             actionState={actionState}

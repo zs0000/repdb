@@ -9,6 +9,7 @@ import { supabase } from '@/lib/supabaseClient';
 import Cropper from 'react-easy-crop';
 import { UploadButton } from '@/utils/uploadthing';
 import Loader from '../Loader/Loader';
+import { is } from '@react-spring/shared';
 
 
 export default function UploadAnimalForm({session}) {
@@ -19,6 +20,7 @@ export default function UploadAnimalForm({session}) {
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [rotation, setRotation] = useState(0)
   const [zoom, setZoom] = useState(1)
+  const [photoId, setPhotoId] = useState(null)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
   const [croppedImage, setCroppedImage] = useState(null)
   const [selectedImage, setSelectedImage] = useState(null)
@@ -262,7 +264,7 @@ const checkFormCanSubmit = () => {
     animalName.length > 0 &&
     animalType.length > 0 &&
     animalGender.length > 0 &&
-    imageUrl || usePreuploaded
+    imageUrl || photoId
   ) {
     setFormCanSubmit(true);
   } else {
@@ -273,9 +275,9 @@ const checkFormCanSubmit = () => {
 //useEffect to check if form can submit on every change
 useEffect(() => {
   checkFormCanSubmit();
-}, [animalName, animalType, animalGenes, animalGender, croppedImage]); // dependencies
+}, [animalName, animalType, animalGenes, animalGender, imageUrl, photoId]); // dependencies
   
-  const [photoId, setPhotoId] = useState(null)
+  
   async function handleUploadImage(res){
 
     try{
@@ -296,6 +298,7 @@ useEffect(() => {
       if(data){
         console.log(data)
         setPhotoId(data[0].photo_id)
+        checkFormCanSubmit()
       }
     } catch (error) {
       console.log(error);
@@ -489,7 +492,8 @@ useEffect(() => {
                       }}
                       onClientUploadComplete={(res) => {
                        
-                        
+                        setImageUrl(res[0].url)
+                        setIsUploading(true)
                         handleUploadImage(res)
                         
                       }}

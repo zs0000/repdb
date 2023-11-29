@@ -4,28 +4,22 @@ import { useProfileData } from '@/hooks/useProfileData'
 import Loader from '../Loader/Loader'
 import Image from 'next/image'
 import Link from 'next/link'
-import DashboardAnimalsComponent from '../DashboardAnimalsComponent/DashboardAnimalsComponent'
+
 import ProfileAnimals from '../ProfileAnimals/ProfileAnimals'
 
 export default function ProfileCard({username, session}) {
-console.log(session)
-  let userData = {}
-  const [isUser, setIsUser] = useState(false)
+
   const {data, status} = useProfileData(username)
   if(status === "loading") return <Loader/>
   if(status === "error") return <>error</>
-  console.log(data)
-  if(status === "success"){
-    userData.user = {}
-    userData.user.id = data[0].id
-  }
-  const handleIsUser = () => {
-    if(session?.user?.id === data[0].id){
-      return true
-    }
-
-    return false
-  }
+  if(data.length === 0) {
+    
+    return(
+    <div className={s.container}>
+      Ooops. Nothing here
+  </div>
+  )}
+  
   return (
     <div className={s.container}>
     <div className={s.bannercontainer}>

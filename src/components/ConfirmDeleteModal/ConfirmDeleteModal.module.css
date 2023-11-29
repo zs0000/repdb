@@ -1,0 +1,10 @@
+.container{
+    @apply w-full flex flex-col items-center  relative
+}
+.clickarea{
+    @apply absolute w-full flex justify-center items-center bg-black bg-opacity-25 h-screen;
+}
+
+.modal{
+    @apply bg-white p-4 rounded-lg shadow-xl h-[80%] w-[80%] flex flex-col justify-center items-center z-40;
+}

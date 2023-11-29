@@ -1,0 +1,70 @@
+
+.container{
+    @apply flex flex-col justify-start items-center w-full  h-[250px]  rounded-lg bg-white hover:cursor-pointer border border-gray-200 hover:shadow ;
+    
+}
+.imagecontainer {
+    @apply relative w-full;
+    height:150px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.photo {
+ @apply rounded-t-lg;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.infocontainer{
+    @apply p-2 antialiased;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.titlecontainer{
+    @apply flex flex-row justify-center items-center w-full ;
+}
+.name {
+    @apply text-xl tracking-tight font-bold  leading-none pr-1;
+}
+.gender {
+    @apply text-sm font-light text-gray-600 px-1;
+}
+.pairingconatiner {
+    @apply mt-2 text-xs font-light text-gray-400;
+}
+
+.topcontainer{
+    @apply w-full flex flex-col;
+}
+
+.gene{
+    @apply text-xs tracking-tight px-[6px] truncate py-[2px] bg-gray-200 rounded;
+}
+
+.genescontainer{
+    @apply p-2 w-full grid grid-cols-3 gap-1 truncate text-center;
+}
+
+.label{
+    @apply flex flex-row items-center w-full  mx-[2px] px-[2px] py-[1px] ;
+}
+
+.gecko{
+    @apply text-xs  tracking-tight  p-1 text-gray-600;
+}
+.snake{
+    @apply text-xs  tracking-tight text-gray-600 p-1;
+}
+
+.pairing{
+    @apply tracking-tight text-slate-400 mx-[2px];
+    font-size: 0.70rem/* 12px */;
+    line-height: 1rem/* 16px */;
+}

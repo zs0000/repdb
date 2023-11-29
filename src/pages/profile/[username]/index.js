@@ -4,7 +4,6 @@ import { useSessionData } from '@/hooks/useSessionData'
 import Sidebar from '@/components/Sidebar/Sidebar';
 import ProfileCard from '@/components/ProfileCard/ProfileCard';
 import { useRouter } from 'next/router';
-import DashboardAnimalsComponent from '@/components/DashboardAnimalsComponent/DashboardAnimalsComponent';
 import MobileBar from '@/components/MobileBar/MobileBar';
 
 export default function UserProfilePage() {

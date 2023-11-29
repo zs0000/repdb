@@ -10,7 +10,7 @@
 }
 
 .closedcontainer{
-    @apply w-[1rem] h-[1rem] right-0 absolute bg-accent hover:bg-white hover:cursor-pointer rounded-full;
+    @apply w-[1rem] h-[1rem] right-0 absolute hover:cursor-pointer ;
 }
 
 .menuitem{

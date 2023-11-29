@@ -1,51 +1,60 @@
-// Note: `useUploadThing` is IMPORTED FROM YOUR CODEBASE using the `generateReactHelpers` function
-import { FileWithPath } from "@uploadthing/react";
-import { useDropzone } from "@uploadthing/react/hooks";
-import { generateClientDropzoneAccept } from "uploadthing/client";
- 
-import { useUploadThing } from "@/utils/useUploadThing";
-import { useCallback, useState } from "react";
- 
-export default function MultiUploader() {
-  const [files, setFiles] = useState([]);
-  const [file, setFile] = useState(null)
-  const onDrop = useCallback((acceptedFiles) => {
-    setFiles(acceptedFiles);
-  }, []);
- 
-  const { startUpload, permittedFileInfo } = useUploadThing(
-    "imageUploader",
-    {
-      onStartUpload: () => {
-        alert("upload has begun");
-      },
-      onClientUploadComplete: () => {
-        alert("uploaded successfully!");
-      },
-      onUploadError: () => {
-        alert("error occurred while uploading");
-      },
-      onUploadBegin: () => {
-        alert("upload has begun");
-      },
-    },
-  );
- 
-    const handleSelectImage = (e) => {
-      console.log(e.target.files[0])
-        setFile(e.target.files[0])
-        setFiles(...files, e.target.files[0])
-        alert(e.target.files[0])
-    }
+import React from 'react';
 
- 
+const Layout = () => {
   return (
-    <div>
-      <input type='file' onChange={(e)=>handleSelectImage(e)}/>
-
-      <button onClick={()=>startUpload(files)}>
-        upload
-      </button>
+    <div className="flex flex-col md:flex-row p-4">
+      <SearchPanel />
+      <ProfilePanel />
+      <MatesList />
     </div>
   );
-}
+};
+
+const SearchPanel = () => {
+  return (
+    <div className="flex flex-col p-4 border-r">
+      <input
+        className="mb-2 p-2 border"
+        type="text"
+        placeholder="Name gender"
+      />
+      <button className="mb-2 p-2 bg-blue-500 text-white">SEARCH</button>
+      <input
+        className="p-2 border"
+        type="text"
+        placeholder="Traits"
+      />
+    </div>
+  );
+};
+
+const ProfilePanel = () => {
+  return (
+    <div className="flex flex-col items-center p-4 border-r">
+      <div className="rounded-full bg-gray-200 w-24 h-24 mb-4"></div>
+      <input
+        className="mb-2 p-2 border"
+        type="text"
+        placeholder="Name"
+      />
+      <input
+        className="p-2 border"
+        type="text"
+        placeholder="Traits"
+      />
+      <button className="mt-4 p-2 bg-blue-500 text-white">Mates +</button>
+    </div>
+  );
+};
+
+const MatesList = () => {
+  return (
+    <div className="flex-1 p-4 overflow-auto">
+      {/* List of mates would be mapped here */}
+      <div className="p-2 border-b">Mate 1</div>
+      {/* ... more mates */}
+    </div>
+  );
+};
+
+export default Layout;

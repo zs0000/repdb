@@ -3,6 +3,7 @@ import s from './AuthAnimalCardContextMenu.module.css'
 import Link from 'next/link'
 import ConfirmDeleteModal from '../ConfirmDeleteModal/ConfirmDeleteModal'
 import { supabase } from '@/lib/supabaseClient'
+import Dot from '@/icons/dot'
 export default function AuthAnimalCardContextMenu({isOpen, setIsOpen, animalCardMenuRef, animal_id, modalIsOpen, setModalIsOpen, actionItems, setActionItems, action, setAction, actionState}) {
    
     const [decided, setDecided] = useState(false)
@@ -48,7 +49,7 @@ export default function AuthAnimalCardContextMenu({isOpen, setIsOpen, animalCard
         return(
             <div className='relative flex justify-items-end w-full'>
                 <div className={s.closedcontainer} onClickCapture={(e) => handleOpen(e)}>
-               
+                <Dot/>
             </div>
             </div>
         )

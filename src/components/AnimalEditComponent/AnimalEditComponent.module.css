@@ -1,0 +1,15 @@
+.container{
+    @apply w-full flex flex-col items-center justify-center;
+}
+
+.topcontainer{
+    @apply w-full  grid grid-cols-1 md:grid-cols-2 h-[80%];
+}
+
+.infocontainer{
+    @apply w-full h-full flex flex-col items-center justify-center;
+}
+
+.photocontainer{
+    @apply w-full h-[250px] relative;
+}

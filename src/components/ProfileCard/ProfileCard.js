@@ -23,12 +23,12 @@ export default function ProfileCard({username, session}) {
   return (
     <div className={s.container}>
     <div className={s.bannercontainer}>
-      <Image className={s.banner} src={"https://res.cloudinary.com/repdb/image/upload/v1628106005/a92e26db0c422c38436dacfd1aacfad7_zhbvez.png"} alt="banner" layout="fill" />
+      <Image className={s.banner} src={"https://utfs.io/f/0314cb10-b034-43f7-9eee-910d43b2bf4d-fxr4f5.svg"} alt="banner" layout="fill" />
     </div>
     <div className={s.content}>
       <div className={s.topcontainer}>
         <div className={s.imagecontainer}>
-          <Image className={s.image} src={data[0].avatar_url} alt="profile picture" fill style={{objectPosition:'center', objectFit:'cover'}} />
+        <Image className={s.image} src={data[0].avatar_url ===null ? "https://utfs.io/f/e44ab1a3-4f58-4d15-84f9-efd0defb385f-a4drjd.jpg" : data[0].avatar_url} alt="profile picture" fill style={{objectPosition:'center', objectFit:'cover'}} />
         </div>
         <div className={s.namecontainer}>
           <div className={s.name}>{data[0].full_name}</div>
@@ -44,7 +44,7 @@ export default function ProfileCard({username, session}) {
     </div>
     : <></>}
       <div className={s.bottomcontainer}>
-        <div className={s.bio}>{data[0].bio}</div>
+        <div className={s.bio}>{data[0].bio.length ===0 ? "This user has not set their bio yet." : data[0].bio}</div>
       </div>
     </div>
     <div className={s.animalscontainer}>

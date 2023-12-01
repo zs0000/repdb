@@ -52,7 +52,7 @@ export default function EditProfileCard({user,userId, username}) {
     <div className={s.container}>
         <div className={s.content}>
         <div className={s.photocontainer}>
-        {user.avatar_url ==="" ? 
+        {!user.avatar_url? 
         <Image 
           alt='Users photo' 
           src="https://utfs.io/f/1f182e2a-3d7a-4a54-a6d8-303720dd82c5-yc0glm.jpg" 
@@ -86,7 +86,7 @@ export default function EditProfileCard({user,userId, username}) {
           </div>
           <div className={s.bio}>
             <span className={s.biotext}>
-            {bio ==="" ? "No bio added." : bio}
+            {!bio || bio === ""? "No bio added." : bio}
             </span>
           </div>
         </div>

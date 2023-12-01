@@ -23,7 +23,7 @@ export default function Login() {
         const { data, error } = await supabase.auth.signInWithOtp({
           email,
           options:{
-            redirectTo: 'http://localhost:3000/dashboard',
+            redirectTo: 'https://mygenelinks.com/dashboard',
             persistData: true
           } 
         },

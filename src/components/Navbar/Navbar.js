@@ -25,6 +25,10 @@ export default function Navbar({session}) {
     }
 
 
+    if(status === "loading") return <div>Loading...</div>
+    if(status === "error") return <div>Error...</div>
+  
+
    
   return (
     <div className={s.container}>
@@ -38,7 +42,7 @@ export default function Navbar({session}) {
 
         </div>
         <div className={s.rightcontainer}>
-            {session ? <div className={s.signedincontainer}>
+            {data.session !== null ? <div className={s.signedincontainer}>
               <Link href='/dashboard'>Dashboard</Link>
             </div> : <div className={s.signincontainer}>
             {isOpen === false ? <button className={s.button} onClick={()=> setIsOpen(true)}>Sign in</button> : <div className={s.signinopen}><svg

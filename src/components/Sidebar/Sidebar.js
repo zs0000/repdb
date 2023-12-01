@@ -16,6 +16,9 @@ export default function Sidebar({session}) {
     router.push('/')
   }
 
+  if(session?.user.username === undefined || session?.user.username === null || session?.user.username === ""){
+    router.push('/dashboard')
+  }
   return (
     <div className={s.container}>
             
@@ -72,7 +75,8 @@ export default function Sidebar({session}) {
                     </Link>
                 </div>
                 <div className={s.item}>
-                    <button onClick={()=>supabase.auth.signOut()} className={s.itemlink}>
+                    <button onClick={()=>{supabase.auth.signOut()
+                      router.push('/')}} className={s.itemlink}>
                       <AiOutlineLogout className={s.icon}/>
                       <span className={s.text}>
                     Sign out

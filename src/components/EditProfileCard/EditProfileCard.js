@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { getImageData, useS3Upload } from "next-s3-upload";
 import { useRouter } from 'next/router';
 import { supabase } from '@/lib/supabaseClient';
+import { UploadButton } from '@/utils/uploadthing';
 export default function EditProfileCard({user,userId}) {
   const router = useRouter()
   const [imageUrl, setImageUrl] = useState(null);
@@ -64,14 +65,13 @@ const previewFile = (file) => {
     try {
       setIsLoading(true);
       let uplObj={
-        avatar_url:""
+        avatar_url: preview,
       }
 
-      if(imageUrl === null || imageUrl === undefined){
-        let getS3ImageURL = await handleUploadToS3()
-        uplObj.avatar_url = getS3ImageURL
+      if(preview === null || preview === undefined){
+        alert('something went wrong, please refresh the page and try again.')
       }
-      if(uplObj.avatar_url === ""){
+      if(uplObj.avatar_url === "" || uplObj.avatar_url === null || uplObj.avatar_url === undefined){
       return alert('Please upload a profile picture')
       }
       
@@ -87,7 +87,7 @@ const previewFile = (file) => {
       }
       if(data){
         alert('Profile picture updated successfully');
-        router.push('/profile')
+        router.push('/dashboard')
       }
    
          
@@ -112,17 +112,11 @@ const previewFile = (file) => {
         />
       </div>
       <div className={s.inputcontainer}>
-        <button className={s.button} onClick={preview ? (e)=>handleSaveProfilePicture(e) : handleButtonClick}>
-          {preview ? 'Save Profile Picture' : 'Change Profile Picture'}
-        </button>
-        <input 
-          type="file" 
-          name="image" 
-          id="upload_input" 
-          className="hidden" 
-          onChange={handleImageChange} 
-       
-        />
+        {preview ? <button onClick={(e)=>handleSaveProfilePicture(e)}>Save profile picture</button> : <UploadButton endpoint="imageUploader"
+        onClientUploadComplete={(res) =>{
+          setPreview(res[0].url)
+        }}/>
+      }
       </div>
         <div className={s.infocontainer}>
           <div className={s.name}>

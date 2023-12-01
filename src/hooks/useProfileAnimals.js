@@ -15,6 +15,7 @@ async function getProfileAnimals(id){
             img_url
         )
     `).eq('animal_owned_by_user_id', id)
+    .eq('marked_for_deletion', false)
 
     if (error) throw error
     return data

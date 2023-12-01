@@ -9,28 +9,22 @@ import { getImageData, useS3Upload } from "next-s3-upload";
 import UploadAnimalForm from '@/components/UploadAnimalForm/UploadAnimalForm';
 import s from "./upload.module.css"
 import Sidebar from '@/components/Sidebar/Sidebar';
+import { useSessionData } from '@/hooks/useSessionData';
 export default function UploadPage() {
-    const [session, setSession] = useState(null)
-    const [fetching, setFetching] = useState(true)
-    const router = useRouter()
-  
-    const handleFetchSession = async () => {
-      const {data, error} = await supabase.auth.getSession()
-      if (data) {
-        setSession(data.session)
-      }
-      return data
-    }
-  
-    const {data, error, isLoading} = useQuery({queryKey:['sessiondata'], queryFn:handleFetchSession})
-  
-    if(!session || isLoading) return <div>Loading...</div>
-    if(session===null || session=== undefined) return router.push('/login')
+   const router = useRouter();
+
+   const {data, status} = useSessionData()
+
+   if(status === "loading") return <div>Loading...</div>
+    if(status === "error") return <div>Error</div>
+    if(!data.session) router.push("/login/")
+
+
   return (
-    <Layout session={session}>
-       
+    <Layout session={data.session}>
+        
        <div className={s.content}>
-        {session && <UploadAnimalForm session={session}/>}
+        {data?.session && <UploadAnimalForm session={data.session}/>}
         </div>
       
     </Layout>

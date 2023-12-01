@@ -86,7 +86,7 @@ export default function EditProfileCard({user,userId, username}) {
           </div>
           <div className={s.bio}>
             <span className={s.biotext}>
-            {!bio || bio === ""? "No bio added." : bio}
+            {!user.bio || user.bio === ""? "No bio added." : bio}
             </span>
           </div>
         </div>

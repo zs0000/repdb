@@ -17,8 +17,19 @@ async function getUsername(id){
 
 async function getSessionData() {
     const {data, error} = await supabase.auth.getSession()
-    const {username} = await getUsername(data.session.user.id)
+
+    if(error){
+        console.log(error)
+        return error
+    }
+    if(data === null || data === undefined)
+    {
+        return data
+    }
+    if(data?.length > 0){
+        const {username} = await getUsername(data.session.user.id)
     data.session.user.username = username
+    }
     return data
 }
 

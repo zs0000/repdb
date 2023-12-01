@@ -7,34 +7,32 @@ import { useRouter } from 'next/router'
 import { supabase } from '@/lib/supabaseClient'
 import Hero from '@/components/Hero/Hero'
 import Navbar from '@/components/Navbar/Navbar'
+import LandingInfo from '@/components/LandingInfo/LandingInfo'
+import { useSessionData } from '@/hooks/useSessionData'
 
 
 export default function Home() {
   const [session, setSession] = useState(null)
   const [fetching, setFetching] = useState(true)
   const router = useRouter()
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-    setFetching(false)
-  }, [])
-  if(fetching){
-    return<></>
+  const {data, status} = useSessionData();
+  if (status === 'loading'){
+    return <div>Loading...</div>
   }
+  if (status === 'error'){
+    console.log(data)
+    return <div>error occured</div>
+  }
+
   return (
     
       <div className={s.container}>
         <div className={s.navbar}>
-          <Navbar/>
+          <Navbar session={data.session}/>
           </div>
         <div className={s.content}>
           <Hero/>
-          {/* Sharing is easier than ever */}
+          <LandingInfo/>
           {/* Lineage tracking simplified */} 
           {/* Footer */}
         </div>

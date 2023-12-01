@@ -4,11 +4,14 @@ import SignInModal from "../SignInModal/SignInModal"
 import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { useSessionData } from "@/hooks/useSessionData";
 
 export default function Navbar({session}) {
     const [isOpen, setIsOpen] = useState(false);
     const signInRef = useRef(null);
     const router = useRouter();
+    
+    const {data, status} = useSessionData();
     const handleSignInOpen = () => {
       if (isOpen){
         setIsOpen(false)
@@ -20,6 +23,8 @@ export default function Navbar({session}) {
     const handleClickSvg = (e) => {
         setIsOpen(false)
     }
+
+
    
   return (
     <div className={s.container}>

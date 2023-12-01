@@ -26,7 +26,8 @@ async function getSessionData() {
     {
         return data
     }
-    if(data?.length > 0){
+    console.log(data)
+    if(data?.session){
         const {username} = await getUsername(data.session.user.id)
     data.session.user.username = username
     }

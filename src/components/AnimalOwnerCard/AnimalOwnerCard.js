@@ -14,7 +14,7 @@ export default function AnimalOwnerCard({id}) {
         <div className={s.content}>
             <div className={s.topcontainer}>
                 <div className={s.imagecontainer}>
-                    {data ? <Image className={s.image}  src={data[0].avatar_url} width={300} height={300} alt={`photo of ${data.username}`}/> : <></>}
+                    {data ? <Image className={s.image}  src={!data[0].avatar_url ? "https://utfs.io/f/1f182e2a-3d7a-4a54-a6d8-303720dd82c5-yc0glm.jpg" : data[0].avatar_url} width={300} height={300} alt={`photo of ${data.username}`}/> : <></>}
                 </div>
                 <div className={s.textcontainer}>
                     <Link href={`/profile/${data[0].username}`} className={s.name}>
@@ -29,7 +29,7 @@ export default function AnimalOwnerCard({id}) {
             <div className={s.biocontainer}>
                     <span className={s.bio}>
                         
-                        {data[0].bio}
+                        {data[0].bio === "" ? "This user has not set their bio yet." : data[0].bio}
                     </span>
                     </div>
             <div className={s.bottomcontainer}>

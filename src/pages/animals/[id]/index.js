@@ -15,12 +15,7 @@ export default function AnimalProfilePage() {
 
   if (status === 'loading') return <div className='w-full h-full min-h-screen'>Loading...</div>;
   if (status === 'error') return <div>Error user</div>;
-  if (data.session ===null || data.session === undefined) {
-    router.push('/404')
-    return (
-      <div>Undefined...</div>
-    )
-  }
+
   console.log(data)
   return (
     <Layout session={data.session}>

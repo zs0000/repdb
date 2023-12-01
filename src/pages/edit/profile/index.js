@@ -23,7 +23,7 @@ export default function EditProfilePage() {
     <Layout session={data.session}>
       
         <div className={s.content}>
-                <EditProfileComponent session={data.session}/>
+                <EditProfileComponent session={data.session} username={data.session.user.username} />
         </div>
 
     </Layout>

@@ -1,64 +1,13 @@
 import React, { useRef, useState } from 'react'
 import s from './EditProfileCard.module.css'
 import Image from 'next/image'
-import { getImageData, useS3Upload } from "next-s3-upload";
+
 import { useRouter } from 'next/router';
 import { supabase } from '@/lib/supabaseClient';
 import { UploadButton } from '@/utils/uploadthing';
-export default function EditProfileCard({user,userId}) {
+export default function EditProfileCard({user,userId, username}) {
   const router = useRouter()
-  const [imageUrl, setImageUrl] = useState(null);
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
-  const [fileForPreview, setFileForPreview] = useState(null);
-  const [preview, setPreview] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
-  const [error, setError] = useState(null);
-  const fileInputRef = useRef(null);
-
-  
-
-
-  
-const handleImageChange = e => {
-  const file = e.target.files[0];
-  if (!file) return;
-  setFileForPreview(e.target.files[0]);
-  console.log(file)
-  previewFile(file);
-};
-
-const previewFile = (file) => {
-  let reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onloadend = () => {
-      setPreview(reader.result);
-
-  };
-};
-
-  let { uploadToS3, files } = useS3Upload();
-  async function handleUploadToS3(){
-    try {
-    let { url } = await uploadToS3(fileForPreview);
-    let { height, width } = await getImageData(fileForPreview);
-    setWidth(width);
-    setHeight(height);
-
-    setImageUrl(url);
-    console.log(url, height, width)
-    return url
-
-    } catch (err) {
-      console.error(err.message)
-    }
-    
-  }
-
-  const handleButtonClick =()=> {
-    document.getElementById('upload_input').click();
-  }
+  const [preview, setPreview] = useState(null)
 
   const handleSaveProfilePicture = async (e) => {
     e.preventDefault();
@@ -87,12 +36,12 @@ const previewFile = (file) => {
       }
       if(data){
         alert('Profile picture updated successfully');
-        router.push('/dashboard')
+        router.push(`/profile/${username}`)
       }
    
          
     } catch (error) {
-      setError(error.message);
+      alert(error.message);
     }
     finally {
       setIsLoading(false);

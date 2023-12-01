@@ -5,6 +5,8 @@ import Layout from '@/components/Layout/Layout'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { supabase } from '@/lib/supabaseClient'
+import Hero from '@/components/Hero/Hero'
+import Navbar from '@/components/Navbar/Navbar'
 
 
 export default function Home() {
@@ -25,10 +27,18 @@ export default function Home() {
     return<></>
   }
   return (
-    <Layout session={session}>
+    
       <div className={s.container}>
-      
+        <div className={s.navbar}>
+          <Navbar/>
+          </div>
+        <div className={s.content}>
+          <Hero/>
+          {/* Sharing is easier than ever */}
+          {/* Lineage tracking simplified */} 
+          {/* Footer */}
+        </div>
       </div>
-    </Layout>
+  
   )
 }

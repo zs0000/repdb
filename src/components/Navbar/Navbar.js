@@ -3,6 +3,7 @@ import s from "./Navbar.module.css"
 import SignInModal from "../SignInModal/SignInModal"
 import { useRef, useState } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function Navbar({session}) {
     const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +26,7 @@ export default function Navbar({session}) {
         
         <div className={s.leftcontainer}>
             <Link href='/'>
-                <img className={s.logo} src="/logo.png" alt="logo" />
+                <Image alt="a logo" src={'https://utfs.io/f/1f182e2a-3d7a-4a54-a6d8-303720dd82c5-yc0glm.jpg'} width={60} height={60} className={s.photo} />
             </Link>
         </div>
         <div className={s.middlecontainer}>

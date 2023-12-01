@@ -1,5 +1,5 @@
 .container{
-    @apply h-[48px] border-b w-full flex items-center justify-between px-4;
+    @apply h-[68px] border-b bg-white w-full flex items-center justify-between px-4;
 }
 
 .leftcontainer{
@@ -10,12 +10,16 @@
     @apply md:w-[33.333%] ;
 }
 .rightcontainer{
-    @apply flex flex-row justify-evenly h-full md:w-[33.333%] w-[50%];
+    @apply  flex flex-row justify-evenly h-full md:w-[33.333%] w-[50%];
+ 
+}
 
+.photo{
+    @apply rounded-lg;
 }
 
 .signincontainer{
-    @apply flex flex-row w-[50%] h-full items-center ;
+    @apply flex flex-row h-full items-center ;
 }
 .signedincontainer{
     @apply flex flex-row w-full h-full items-center ;

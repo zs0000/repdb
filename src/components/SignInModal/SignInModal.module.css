@@ -10,5 +10,5 @@
 }
 
 .button {
-    @apply bg-blue-500 text-white rounded-r px-1 ;
+    @apply bg-primary text-white rounded-r p-2;
 }

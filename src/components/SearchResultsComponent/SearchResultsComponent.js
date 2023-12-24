@@ -21,7 +21,8 @@ export function SearchResultsComponent({params}) {
         <AnimalCard key={animal.id} animal={animal} />
       )) 
     :
-    <p>No results found.</p>}
+    <p>No results found.
+      </p>}
     </div>
 </div>
   );

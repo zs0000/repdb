@@ -8,6 +8,7 @@ import { useRouter } from "next/router"
 import Sidebar from "@/components/Sidebar/Sidebar"
 import { useState } from "react"
 import Onboarding from "@/components/Onboarding/Onboarding"
+import Head from "next/head"
 
 export default function Dashboard() {
   const router = useRouter()
@@ -26,6 +27,10 @@ export default function Dashboard() {
   return (
    <Layout session={data.session}>
     <div className={s.content}>
+      <Head>
+        <title>Dashboard - GeneLink</title>
+        <meta property='og:title' content='Dashboard - GeneLink.' key='title' />
+      </Head>
       
    {data.session && data.session?.user?.username ? 
    <Dash session={data.session} /> : <Onboarding session={data.session}/> }

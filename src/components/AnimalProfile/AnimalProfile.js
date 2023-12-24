@@ -6,6 +6,7 @@ import AnimalPairings from '../AnimalPairings/AnimalPairings';
 import AnimalOwnerCard from '../AnimalOwnerCard/AnimalOwnerCard';
 import Link from 'next/link';
 import AnimalFavoritesComponent from '../AnimalFavoritesComponent/AnimalFavoritesComponent';
+import Head from 'next/head';
 
 export default function AnimalProfile({id}) {
   const { data, status } = useAnimalData(id);
@@ -15,6 +16,7 @@ export default function AnimalProfile({id}) {
 
     return (
     <div className={s.container}>
+      
       <div className={s.content}>
         <div className={s.directorycontainer}>
           <div className={s.directory}>

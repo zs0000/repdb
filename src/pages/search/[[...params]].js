@@ -108,6 +108,7 @@ export default function Search(props) {
             ) : (
                 <div className={s.noresultscontainer}>
                     No results found.
+                    This is a beta feature that will not be included in production but feel free to test it. Currently testing, optimizing, etc.
                 </div>
             )}
             

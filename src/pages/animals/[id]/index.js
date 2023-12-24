@@ -7,6 +7,7 @@ import s from "./AnimalProfilePage.module.css"
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import Sidebar from '@/components/Sidebar/Sidebar'
+import Head from 'next/head'
 
 export default function AnimalProfilePage() {
   const router = useRouter()

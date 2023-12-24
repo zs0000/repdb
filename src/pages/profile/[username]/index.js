@@ -5,6 +5,7 @@ import Sidebar from '@/components/Sidebar/Sidebar';
 import ProfileCard from '@/components/ProfileCard/ProfileCard';
 import { useRouter } from 'next/router';
 import MobileBar from '@/components/MobileBar/MobileBar';
+import Head from 'next/head';
 
 export default function UserProfilePage() {
     const router = useRouter();
@@ -17,7 +18,6 @@ export default function UserProfilePage() {
    
   return (
     <Layout session={data.session}>
-        
             <div className={s.content}>
                 <div className={s.topcontainer}>
                     <ProfileCard session={data.session} username={username}/>
